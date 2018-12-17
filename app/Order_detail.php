@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class order_detail extends Model
+class Order_detail extends Model
 {
     use SoftDeletes;
     protected $fillable=[
