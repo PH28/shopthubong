@@ -11,6 +11,6 @@ class OptiongroupTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Option_group::class, 5)->create();
+        factory(App\OptionGroup::class, 5)->create();
     }
 }

@@ -24,8 +24,9 @@ class CreateUsersTable extends Migration
             $table->date('dob');
             $table->string('address',255);
             $table->string('phone',255);
-            $table->string('status',255);
+            $table->integer('status',255);
             $table->timestamps();
+            $table->rememberToken();
         });
     }
 

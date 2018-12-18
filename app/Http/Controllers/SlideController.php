@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\slide;
+use App\Slide;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
@@ -41,10 +41,10 @@ class SlideController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\slide  $slide
+     * @param  \App\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function show(slide $slide)
+    public function show(Slide $slide)
     {
         //
     }
@@ -52,10 +52,10 @@ class SlideController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\slide  $slide
+     * @param  \App\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function edit(slide $slide)
+    public function edit(Slide $slide)
     {
         //
     }
@@ -64,10 +64,10 @@ class SlideController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\slide  $slide
+     * @param  \App\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, slide $slide)
+    public function update(Request $request, Slide $slide)
     {
         //
     }
@@ -75,10 +75,10 @@ class SlideController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\slide  $slide
+     * @param  \App\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function destroy(slide $slide)
+    public function destroy(Slide $slide)
     {
         //
     }

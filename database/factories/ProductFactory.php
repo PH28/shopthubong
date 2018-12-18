@@ -11,6 +11,6 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'price'=>$faker->numberBetween($min = 50, $max = 500000),
         'quantity'=>$faker->numberBetween($min = 5, $max = 10),
         'kind'=>$faker->numberBetween($min = 0, $max = 1),
-        'category_id'=>$faker->numberBetween($min = 1, $max = 5),
+        'category_id'=>$faker->randomElement($category_id)
     ];
 });

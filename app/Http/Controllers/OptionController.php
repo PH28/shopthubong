@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\option;
+use App\Option;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
@@ -41,10 +41,10 @@ class OptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\option  $option
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function show(option $option)
+    public function show(Option $option)
     {
         //
     }
@@ -52,10 +52,10 @@ class OptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\option  $option
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function edit(option $option)
+    public function edit(Option $option)
     {
         //
     }
@@ -64,10 +64,10 @@ class OptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\option  $option
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, option $option)
+    public function update(Request $request, Option $option)
     {
         //
     }
@@ -75,10 +75,10 @@ class OptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\option  $option
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function destroy(option $option)
+    public function destroy(Option $option)
     {
         //
     }
