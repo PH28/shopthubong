@@ -1,46 +1,27 @@
 <?php
+route::get('admin/login','Admin\AuthController@showLoginForm');
+route::post('admin/login','Admin\AuthController@postLogin')->name('login');
+route::get('admin/logout','Admin\AuthController@logout')->name('logout');
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+// 
 
 
-
-// Route::get('/login', 'AdminLoginController@showLoginForm ');
-// Route::post('/login', 'AdminLoginController@login')->middleware('is.admin');
-// Route::group([ 'prefix' => 'admin'], function () {
-//     Route::get('/login', 'Auth\LoginController@showLoginForm');
-//     Route::post('login', 'Auth\LoginController@login')->middleware('is.admin');
-//     Route::post('logout', 'Auth\LoginController@logout');
-// });
-
-Route::group(['middleware' => ['web']], function() {
-
-// Login Routes...
-    Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
-    Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
-    Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
-   
-// Registration Routes...
-    Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
-    Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
-
-// Password Reset Routes...
-    Route::get('password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
-    Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
-    Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
-    Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
+Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
+	route::get('dashboard',function(){
+		return view('admin.layout.dashboard');
+	})->name('dashboard');
+	route::group(['prefix'=>'categories'],function(){
+		Route::get('/', 'CategoryController@index')->name('categories.index');
+		Route::get('create', 'CategoryController@create')->name('categories.create');
+		Route::get('{category}', 'CategoryController@show')->name('categories.show');
+		Route::post('/', 'CategoryController@store')->name('categories.store');
+		Route::get('{category}/edit', 'CategoryController@edit')->name('categories.edit');
+		Route::put('{category}', 'CategoryController@update')->name('categories.update');
+		Route::get('delete/{id}', 'CategoryController@destroy')->name('categories.destroy');
+	});
+	route::group(['prefix'=>'product'],function(){
+		route::get('list','ProductController@index');
+		route::get('edit','ProductController@edit');
+		route::get('create','ProductController@create');
+	});
 });
- Route::get('/home', 'HomeController@index')->name('home')->middleware('is.admin');;
-  Route::get('/userlogin', 'PageController@index');

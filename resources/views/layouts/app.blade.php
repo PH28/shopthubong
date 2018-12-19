@@ -64,6 +64,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <a href="{{ url('admin/login') }}" class="btn btn-danger btn-sm">Logout</a>
                                 </div>
                             </li>
                         @endguest
