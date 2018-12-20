@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,10 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:categories|min:8|max:32',
+            'name'=>'required|unique:products|min:8|max:32',
+            'category_id'=>'required',
+            'quantity'=>'required',
+            'price'=>'required',
             'description'=>'required',
         ];
     }
@@ -33,10 +36,13 @@ class CategoryRequest extends FormRequest
     {
      return [
          'name.unique' => 'Tên này đã có',
-         'name.required' => 'Chưa nhập tên danh sách',
+         'name.required' => 'Chưa nhập tên sản phẩm',
          'name.min' => 'Tên phải có ít nhất 8 kí tự',
          'name.max' => 'Tên chỉ được tối đa 32 kí tự',
-         'description.required' => 'Chưa nhập desciption',
+         'category_id.required'=>'Chưa chọn danh mục',
+         'quantity.required'=>'Chưa chọn danh mục',
+         'price.required'=>'Chưa chọn danh mục',
+         'description.required'=>'Chưa chọn danh mục',
      ];
     }
 }

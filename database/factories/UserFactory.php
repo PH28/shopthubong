@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use App\Role;
 $factory->define(App\User::class, function (Faker $faker) {
     $roleIds = Role::pluck('id');
-    $genders = array('Nam','Nữ','Khác');
+    $genders = array('1','2','3');
     return [
         //
         'role_id' => $faker -> randomElement($roleIds),
@@ -16,6 +16,6 @@ $factory->define(App\User::class, function (Faker $faker) {
 		'dob' => $faker ->date($format = 'Y-m-d', $max = 'now'),
 		'address' => $faker ->address,
 		'phone' => $faker ->phoneNumber,
-		'status' => $faker ->text,
+		'status' => $faker->numberBetween($min = 1, $max = 5),
     ];
 });

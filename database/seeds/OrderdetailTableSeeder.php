@@ -11,6 +11,6 @@ class OrderdetailTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Order_detail::class, 5)->create();
+        factory(App\OrderDetail::class, 5)->create();
     }
 }

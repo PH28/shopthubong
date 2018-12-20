@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProductoptionTableSeeder extends Seeder
+class SlideTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ProductoptionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory( App\ProductOption::class, 5)->create();
+        factory(App\Slide::class,5)->create();
     }
 }

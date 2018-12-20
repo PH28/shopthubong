@@ -20,8 +20,17 @@ Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 		Route::get('delete/{id}', 'CategoryController@destroy')->name('categories.destroy');
 	});
 	route::group(['prefix'=>'product'],function(){
-		route::get('list','ProductController@index');
-		route::get('edit','ProductController@edit');
-		route::get('create','ProductController@create');
+		Route::get('/', 'ProductController@index')->name('products.index');
+		Route::get('create', 'ProductController@create')->name('products.create');
+		Route::get('{product}', 'ProductController@show')->name('products.show');
+		Route::post('/', 'ProductController@store')->name('products.store');
+		Route::get('{product}/edit', 'ProductController@edit')->name('products.edit');
+		Route::put('{product}', 'ProductController@update')->name('products.update');
+		Route::get('delete/{id}', 'ProductController@destroy')->name('products.destroy');
+		Route::get('/{product}/review', 'ProductController@listReview')->name('products.review');
+	});
+	route::group(['prefix'=>'review'],function(){
+		
+		Route::get('delete/{id}', 'ReviewController@destroy')->name('reviews.destroy');
 	});
 });
