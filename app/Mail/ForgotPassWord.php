@@ -19,7 +19,7 @@ class ForgotPassWord extends Mailable
      protected $token;
     public function __construct($userpass)
     {
-      
+      $this->token = $token;
     }
 
     /**
@@ -30,7 +30,5 @@ class ForgotPassWord extends Mailable
     // modify function build
     public function build()
     {
-        
-        return $this->view('view.name');
     }
 }
