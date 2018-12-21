@@ -11,6 +11,10 @@ class Option extends Model
     ];
    public function OptionGroups()
    {
-       reuturn $this->belongsTo('App\OptionGroup');
+       return $this->belongsTo('App\OptionGroup');
    }
+    public function ProductOptions()
+    {
+       return $this->hasMany('App\ProductOption'); 
+    }
 }
