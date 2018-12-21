@@ -12,4 +12,8 @@ class ProductOption extends Model
     {
         return $this->belongsTo('App\Option');
     }
+    public function Product()
+    {
+        return $this->hasMany('App\Product');
+    }
 }
