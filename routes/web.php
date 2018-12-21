@@ -42,25 +42,12 @@ Route::group(['middleware' => ['web']], function() {
     Route::get('password/reset/{token}', ['as' => 'password.reset.token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
- Route::get('/home', 'HomeController@index')->name('home')->middleware('is.admin');;
-  Route::get('/userlogin', 'PageController@index');
-  //dong.pt add
-  Route::get('index',['as'=>'Trang-chu',
-    'uses'=>'PageController@getIndex'
-  ]);
-  // loai san pham
-Route::get('product-type',['as'=>'Product-type',
-    'uses'=>'PageController@getProductType'
-  ]);
-   // chi tiet san pham
-Route::get('product',['as'=>'Product',
-    'uses'=>'PageController@getProduct'
-  ]);
-    // trang lien he
-Route::get('contact',['as'=>'Contact',
-    'uses'=>'PageController@getContact'
-  ]);
-// trang gioi thieu
-Route::get('about',['as'=>'About',
-    'uses'=>'PageController@getAbout'
-  ]);
+
+Route::group(['namespace=>index'], function(){
+  Route::get('home','PageController@getIndex')->name('user.home');
+  Route::get('category','PageController@getCategory')->name('user.category');
+  Route::get('product','PageController@getProduct')->name('user.product');
+  Route::get('contact','PageController@getContact')->name('user.contact');
+  Route::get('about','PageController@getAbout')->name('user.about');
+});
+
