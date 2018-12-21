@@ -10,6 +10,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -41,25 +42,16 @@ class AuthController extends Controller
     {
         return view('admin.login');
     }
-    public function postLogin(Request $request)
+    public function postLogin(LoginRequest $request)
     {
-       $this->validate($request,[
-            'email'=>'required',
-            'password'=>'required|min:3|max:32'
-            ],[
-            'email.required'=>'Chưa nhập Email',
-            'password.required'=>'Chưa nhập Pass',
-            'password.min'=>'Không được dưới 3 kí tự',
-            'password.max'=>'Không được quá 32 kí tự',
-
-       ]);
+       
        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
        {
             return redirect()->route('categories.index');
        }
        else
        {
-            return redirect('admin/login')->with('thongbao','Dang nhap khong thanh cong');
+            return redirect('admin/login')->with('thongbao','Đăng nhập không thành công');
        }
     }
     public function logout()

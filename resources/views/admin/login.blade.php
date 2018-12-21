@@ -33,10 +33,23 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        @if(session('thongbao'))
+                         @if(session('thongbao'))
+                        <div class="alert alert-danger">
+                       
                             {{session('thongbao')}}
+                        
+                        </div>
                         @endif
-                        <form role="form" action="{{route('login')}}" method="POST">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form role="form" action="{{route('admin.login')}}" method="POST">
                             @csrf
                             <fieldset>
                                 <div class="form-group">
@@ -48,6 +61,9 @@
                                 <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
                         </form>
+                        <a class="btn btn-link" href="{{route('password.request')}}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
                     </div>
                 </div>
             </div>

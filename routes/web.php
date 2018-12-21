@@ -1,10 +1,13 @@
 <?php
 route::get('admin/login','Admin\AuthController@showLoginForm');
-route::post('admin/login','Admin\AuthController@postLogin')->name('login');
-route::get('admin/logout','Admin\AuthController@logout')->name('logout');
+route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
+route::get('admin/logout','Admin\AuthController@logout')->name('admin.logout');
 
-// 
-
+// Password
+Auth::routes();
+// route::get('password/reset/{token?}','Admin\PasswordController@showResetForm')->name('admin.resetpwform');
+// route::post('password/email', 'Admin\PasswordController@sendResetLinkEmail');
+// route::post('password/reset','Admin\PasworrdController@reset');
 
 Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 	route::get('dashboard',function(){
