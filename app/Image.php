@@ -8,4 +8,8 @@ class Image extends Model
      protected $fillable=[
     	'url','image','product_id'
     ];
+    public function product()
+    {
+    	return $this->belongsTo('App\Product');
+    }
 }

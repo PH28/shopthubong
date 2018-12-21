@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
+use App\Category;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CategoryRequest;
 class CategoryController extends Controller
 {
     /**
@@ -12,9 +12,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         //
+        $categories= Category::all();
+        return view('admin.category.list',compact('categories'));
     }
 
     /**
@@ -25,6 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+         return view('admin.category.create');
     }
 
     /**
@@ -33,18 +37,21 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         //
+        $data= $request->all();
+        $category= Category::create($data);
+        return redirect()->route('categories.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+    public function show(Category $category)
     {
         //
     }
@@ -52,34 +59,45 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit(Category $category)
     {
         //
+        $categoryIds= Category::pluck('name', 'id');
+        return view('admin.category.edit',compact('category','categoryIds'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         //
+
+       $data=$request->all();
+       $category->update($data);
+       return redirect()->route('categories.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+
+    public function destroy($id)
     {
         //
+        $category=Category::find($id);
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

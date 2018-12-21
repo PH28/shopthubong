@@ -1,12 +1,8 @@
 <?php
-
 namespace App;
-
-
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 class User extends Authenticatable
 {
     //
@@ -16,8 +12,11 @@ class User extends Authenticatable
         'dob','gender','phone','address','status'
     ];
     public function roles()
-	{
-  		return $this->belongsToMany('App\Role');
-	}
-
+    {
+        return $this->belongsToMany('App\Role');
+    }
+     public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
 }
