@@ -9,7 +9,7 @@ class Option extends Model
     protected $fillable=[
     	'name','option_group_id'
     ];
-   public function OptionGroup()
+   public function OptionGroups()
    {
        reuturn $this->belongsTo('App\OptionGroup');
    }
