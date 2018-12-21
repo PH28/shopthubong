@@ -40,8 +40,9 @@ Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 	});
 });
 
+
  
-  
+
   //dong.pt add
   Route::get('index',['as'=>'Trang-chu',
     'uses'=>'PageController@getIndex'
