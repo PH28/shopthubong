@@ -1,4 +1,5 @@
 <?php
+//Admin login
 route::get('admin/login','Admin\AuthController@showLoginForm');
 route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
 route::get('admin/logout','Admin\AuthController@logout')->name('admin.logout');
@@ -9,6 +10,7 @@ Auth::routes();
 // route::post('password/email', 'Admin\PasswordController@sendResetLinkEmail');
 // route::post('password/reset','Admin\PasworrdController@reset');
 
+//Manager
 Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 	route::get('dashboard',function(){
 		return view('admin.layout.dashboard');
@@ -37,3 +39,26 @@ Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 		Route::get('delete/{id}', 'ReviewController@destroy')->name('reviews.destroy');
 	});
 });
+
+ 
+  
+  //dong.pt add
+  Route::get('index',['as'=>'Trang-chu',
+    'uses'=>'PageController@getIndex'
+  ]);
+  // 
+Route::get('product-type',['as'=>'Product-type',
+    'uses'=>'PageController@getProductType'
+  ]);
+   //
+Route::get('product',['as'=>'Product',
+    'uses'=>'PageController@getProduct'
+  ]);
+    // 
+Route::get('contact',['as'=>'Contact',
+    'uses'=>'PageController@getContact'
+  ]);
+// 
+Route::get('about',['as'=>'About',
+    'uses'=>'PageController@getAbout'
+  ]);
