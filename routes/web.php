@@ -37,3 +37,26 @@ Route::group(['prefix'=>'admin','middleware'=>'is.admin'],function(){
 		Route::get('delete/{id}', 'ReviewController@destroy')->name('reviews.destroy');
 	});
 });
+
+ 
+  //dong.pt add
+  Route::get('index',['as'=>'Trang-chu',
+    'uses'=>'PageController@getIndex'
+  ]);
+  // 
+Route::get('product-type',['as'=>'Product-type',
+    'uses'=>'PageController@getProductType'
+  ]);
+   //
+Route::get('product',['as'=>'Product',
+    'uses'=>'PageController@getProduct'
+  ]);
+    // 
+Route::get('contact',['as'=>'Contact',
+    'uses'=>'PageController@getContact'
+  ]);
+// 
+Route::get('about',['as'=>'About',
+    'uses'=>'PageController@getAbout'
+  ]);
+
