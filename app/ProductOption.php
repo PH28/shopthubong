@@ -8,4 +8,12 @@ class ProductOption extends Model
       protected $fillable=[
     	'price_increase','product_id','option_id'
     ];
+    public function Options()
+    {
+        return $this->belongsTo('App\Option');
+    }
+    public function Product()
+    {
+        return $this->hasMany('App\Product');
+    }
 }

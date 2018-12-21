@@ -47,7 +47,8 @@ Route::group(['namespace=>index'], function(){
   Route::get('home','PageController@getIndex')->name('user.home');
   Route::get('category','PageController@getCategory')->name('user.category');
   Route::get('product','PageController@getProduct')->name('user.product');
-  Route::get('contact','PageController@getContact')->name('user.contact');
+  Route::get('contact','PageController@getContact')->name ('user.contact');
   Route::get('about','PageController@getAbout')->name('user.about');
 });
+
 
