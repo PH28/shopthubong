@@ -5,17 +5,22 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Category
-                            <small>Edit</small>
+                            <small>Add</small>
                         </h1>
                     </div>
+                  
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(session('status'))
-                        <div class="alert alert-danger">     
+                   
+                        <form action="{{route('categories.store')}}" method="POST">
+                             @if(session('status'))
+                        <div class="alert alert-danger">
+                       
                             {{session('status')}}
+                        
                         </div>
-                        @endif
-                        @if ($errors->any())
+                    @endif
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -23,37 +28,26 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
-                        <form action="{{route('categories.update',$category->id)}}" method="POST">
+                    @endif
                             @csrf
-                            @method('PUT')
                             <div class="form-group" >
-                                @if($category->parent_id != 0 )
                                 <label>Category Parent</label>
                                 <select class="form-control" name="parent_id">
-                                
-                                @foreach ($categoryIds as $key => $value)
-                                @if($key != 0)     
-                                   @if($key == $category->parent_id )
-                                  <option value="{{$key}}" selected="seleted">{{$value}}</option>
-                                  @else
+                                @foreach ($categoryIds as $key => $value)                            
                                   <option value="{{$key}}" >{{$value}}</option>
-                                  @endif
-                                @endif
                                 @endforeach
                                 </select>
-                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Category Name</label>
-                                <input class="form-control" name="name" value="{{$category->name}}" />
+                                <input class="form-control" name="name" placeholder="Please Enter Category Name" />
                             </div>
-           
                             <div class="form-group">
                                 <label>Category Description</label>
-                                <textarea class="form-control" rows="3" name="description">{{$category->description}}</textarea>
+                                <textarea class="form-control" rows="3" name="description" ></textarea>
                             </div>
-                            <button type="submit" class="btn btn-default">Category Edit</button>
+                            
+                            <button type="submit" class="btn btn-default">Category Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>
@@ -61,5 +55,5 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-</div>
-@endsection
+ </div>
+ @endsection

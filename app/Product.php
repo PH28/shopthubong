@@ -13,6 +13,10 @@ class Product extends Model
     {
     	return $this->hasMany('App\Image');
     }
+    public function orders()
+    {
+        return $this->hasMany('App\OrderDetail');
+    }
     public function reviews()
     {
     	return $this->hasMany('App\Review');

@@ -34,4 +34,4 @@
 
             @include('admin.layout.menu')
             <!-- /.navbar-static-side -->
-        </nav>
+</nav>

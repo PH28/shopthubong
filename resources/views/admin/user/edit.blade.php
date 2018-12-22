@@ -33,13 +33,11 @@
                                 <select class="form-control" name="parent_id">
                                 
                                 @foreach ($categoryIds as $key => $value)
-                                @if($key != 0)     
                                    @if($key == $category->parent_id )
                                   <option value="{{$key}}" selected="seleted">{{$value}}</option>
                                   @else
                                   <option value="{{$key}}" >{{$value}}</option>
                                   @endif
-                                @endif
                                 @endforeach
                                 </select>
                                 @endif
