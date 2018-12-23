@@ -11,7 +11,7 @@
                     <!-- /.col-lg-12 -->
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
-                            <tr align="center">
+                            <tr >
                                 <th>ID</th>
                                 <th>User Name</th>
                                 <th>Review Content</th>
@@ -22,7 +22,7 @@
                         </thead>
                         <tbody>
                             @foreach($reviews as $item)
-                            <tr class="odd gradeX" align="center">
+                            <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->user->fullname}}</td>
                                 <td>{{$item->review_text}}</td>

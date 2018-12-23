@@ -33,10 +33,10 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                         @if(session('thongbao'))
+                         @if(session('status'))
                         <div class="alert alert-danger">
                        
-                            {{session('thongbao')}}
+                            {{session('status')}}
                         
                         </div>
                         @endif

@@ -4,12 +4,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
+                        <h1 class="page-header">{{$product->name}} 
                             <small>Edit</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
+                        @if(session('status'))
+                        <div class="alert alert-danger">     
+                            {{session('status')}}
+                        </div>
+                    @endif
                          @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -34,7 +39,7 @@
                                 @endforeach
                                 </select>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label>Product Name</label>
                                 <input class="form-control" name="name" value="{{$product->name}}" />
                             </div>
@@ -44,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Product Price</label>
-                                <input class="form-control" name="price" value="{{$product->price}} "/>
+                                <input class="form-control" name="price" value="{{number_format($product->price)}} VND "/>
                             </div>
                             <div class="form-group">
                                 <label>Product Description</label>
@@ -52,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Product Kind</label>
-                                @if($product->kind==1)
+                                @if($product->kind == 1)
                                 <label class="radio-inline">
                                     <input name="kind" value="1" checked="" type="radio">New
                                 </label>

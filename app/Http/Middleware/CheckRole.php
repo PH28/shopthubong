@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-class AdminAuthenticate
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,14 +15,10 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()&&Auth::user()->role_id==1)
-        {
-           
-                return $next($request);
-            
+        if(Auth::check() && Auth::user()->role_id==1){
+            return $next($request);
         }
-        else
-            return redirect()->route('admin.logout');
+        return redirect()->route('welcome');
         
     }
 }

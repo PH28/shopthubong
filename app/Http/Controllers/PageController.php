@@ -13,9 +13,9 @@ class PageController extends Controller
     	
     	return view('page.home', compact('slide'));
     }
-    public function getCategory()
+    public function getProductType()
     {
-    	return view('page.category');
+    	return view('page.product_type');
     }
     public function getProduct()
     {

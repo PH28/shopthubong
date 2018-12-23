@@ -9,17 +9,13 @@ class Product extends Model
      protected $fillable=[
     	'name','description','price','quantity','kind','category_id'
     ];
-
-
-    public function orderDetails()
-    {
-    	return $this->hasMany('App\OrderDetail');
-    public function ProductOptions()
-    {
-        return $this->belongsTo('App\ProductOption');
     public function images()
     {
     	return $this->hasMany('App\Image');
+    }
+    public function orders()
+    {
+        return $this->hasMany('App\OrderDetail');
     }
     public function reviews()
     {
@@ -28,6 +24,5 @@ class Product extends Model
     public function category()
     {
     	return $this->belongsTo('App\Category');
-
     }
 }

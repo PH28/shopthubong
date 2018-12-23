@@ -11,18 +11,16 @@ class User extends Authenticatable
         'role_id', 'username','email','password','fullname',
         'dob','gender','phone','address','status'
     ];
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany('App\Order');
-
+    public function role()
+   {
+       return $this->belongsTo('App\Role');
+   }
      public function reviews()
     {
         return $this->hasMany('App\Review');
-
+    }
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }
