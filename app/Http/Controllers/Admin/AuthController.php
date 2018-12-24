@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Lang;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthController extends Controller
     use AuthenticatesUsers;
 
     protected $redirectTo = '/';
-
+    
     /**
      * Create a new controller instance.
      *
@@ -44,15 +45,14 @@ class AuthController extends Controller
     }
     public function postLogin(LoginRequest $request)
     {
-       
        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
        {
-            return redirect()->route('categories.index');
+            return redirect()->route('dashboard');
        }
        else
        {
-            return redirect('admin/login')->with('thongbao','Đăng nhập không thành công');
-       }
+            return redirect('admin/login')->with('status', ('Login fail'));
+        }
     }
     public function logout()
     {

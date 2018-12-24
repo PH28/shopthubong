@@ -11,6 +11,16 @@
                   
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
+                    @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
+                        </div>
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -21,12 +31,16 @@
                         </div>
                     @endif
                         <form action="{{route('categories.store')}}" method="POST">
+
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label>Category Parent</label>
                                 <select class="form-control" name="parent_id">
-                                    <option value="">Please Choose Category</option>
-                                    <option value="0">None</option>
+                                @foreach ($categoryIds as $key => $value) 
+                                @if($key != 0)                           
+                                  <option value="{{$key}}" >{{$value}}</option>
+                                @endif
+                                @endforeach
                                 </select>
                             </div>
                             <div class="form-group">

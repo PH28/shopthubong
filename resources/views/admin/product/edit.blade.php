@@ -4,12 +4,22 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
+                        <h1 class="page-header">{{$product->name}} 
                             <small>Edit</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
+                        @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
+                        </div>
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                          @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -19,7 +29,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{route('products.update',$product->id)}}" method="POST">
+                        <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group" >
@@ -34,7 +44,7 @@
                                 @endforeach
                                 </select>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label>Product Name</label>
                                 <input class="form-control" name="name" value="{{$product->name}}" />
                             </div>
@@ -44,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Product Price</label>
-                                <input class="form-control" name="price" value="{{$product->price}} "/>
+                                <input class="form-control" name="price" value="{{$product->price}}  "/>
                             </div>
                             <div class="form-group">
                                 <label>Product Description</label>
@@ -52,7 +62,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Product Kind</label>
-                                @if($product->kind==1)
+                                @if($product->kind == 1)
                                 <label class="radio-inline">
                                     <input name="kind" value="1" checked="" type="radio">New
                                 </label>
@@ -67,6 +77,10 @@
                                     <input name="kind" value="0" checked="" type="radio">Old
                                 </label>
                                 @endif
+                                <div class="form-group">
+                                            <label>Image</label>
+                                            <input type="file"  name="images[]" multiple>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-default">Product Edit</button>
                             <button type="reset" class="btn btn-default">Reset</button>

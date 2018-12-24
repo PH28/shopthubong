@@ -13,6 +13,10 @@ class Product extends Model
     {
     	return $this->hasMany('App\Image');
     }
+    public function orders()
+    {
+        return $this->hasMany('App\OrderDetail');
+    }
     public function reviews()
     {
     	return $this->hasMany('App\Review');
@@ -20,5 +24,8 @@ class Product extends Model
     public function category()
     {
     	return $this->belongsTo('App\Category');
+    }
+    public function getFirstImageAttribute() {
+        return $this->images()->first();
     }
 }

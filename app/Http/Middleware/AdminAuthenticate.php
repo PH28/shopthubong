@@ -22,7 +22,7 @@ class AdminAuthenticate
             
         }
         else
-            return redirect()->route('logout');
+            return redirect()->route('admin.logout');
         
     }
 }
