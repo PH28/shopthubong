@@ -25,4 +25,7 @@ class Product extends Model
     {
     	return $this->belongsTo('App\Category');
     }
+    public function getFirstImageAttribute() {
+        return $this->images()->first();
+    }
 }

@@ -11,9 +11,14 @@
                   
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(session('status'))
+                        @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
+                        </div>
+                        @endif
+                        @if(session('fail'))
                         <div class="alert alert-danger">     
-                            {{session('status')}}
+                            {{session('fail')}}
                         </div>
                         @endif
                         @if ($errors->any())

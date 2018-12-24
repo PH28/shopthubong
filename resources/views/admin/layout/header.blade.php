@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{route('dashboard')}}">Admin Area</a>
+                <a class="navbar-brand" href="{{route('admin.dashboard')}}">Admin Area</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -19,8 +19,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>{{ Auth::user()->username }}</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{{route('admin.logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

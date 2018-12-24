@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
@@ -17,7 +19,13 @@ class CategoryController extends Controller
         return view('admin.category.list',compact('categories'));
 
     }
-
+    public function dash(){
+        $user_C = User::all()->count();
+        $order_C = Order::all()->count();
+        $order_A = Order::where('status',0)->get()->count();
+        $order_U =  Order::where('status',1)->get()->count();
+        return view('admin.layout.dashboard',compact('user_C','order_C','order_A','order_U'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +40,7 @@ class CategoryController extends Controller
         	$categoryIds= Category::where('parent_id',0)->pluck('name', 'id');
          	return view('admin.category.create',compact('categoryIds'));
         } catch (\Exception $e) {
-             return back()->with('status',('Error'));
+            return back()->with('fail',$e->getMessage());
         }
     
          
@@ -50,9 +58,9 @@ class CategoryController extends Controller
         try {
         	$data= $request->all();
         	$category= Category::create($data);
-        	return back()->with('status', Lang::get('messages.success'));
+        	return back()->with('success',('Create success'));
         } catch (\Exception $e) {
-        	 return back()->with('status',('Error'));
+        	return back()->with('fail',$e->getMessage());
         }
         
     }
@@ -80,8 +88,8 @@ class CategoryController extends Controller
          try {
         $categoryIds= Category::where('parent_id',0)->pluck('name', 'id');
         return view('admin.category.edit',compact('category','categoryIds'));
-         } catch (\Exception $error) {
-             return back()->with('status',('Error'));
+         } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
         }
     }
 
@@ -98,9 +106,9 @@ class CategoryController extends Controller
        try {
         	$data=$request->all();
        		$category->update($data);
-        	return back()->with('status', Lang::get('messages.success'));
+        	 return back()->with('success',('Update success'));
         } catch (\Exception $e) {
-        	return back()->with('status', Lang::get('messages.fail'));
+        	return back()->with('fail',$e->getMessage());
         }
 
     }
@@ -121,11 +129,11 @@ class CategoryController extends Controller
         		if($category->products_count==0)
 		        	{
 		        	$category->delete();
-		        	return back()->with('status', Lang::get('category.success'));
+		        	 return back()->with('success',('Delete success'));
 		        	}   
-        	return back()->with('status', Lang::get('category.fail'));
+        	return back()->with('fail',('Delete failed'));
         } catch (\Exception $error) {
-        	 return back()->with('status',('Error'));
+        	   return back()->with('fail',$e->getMessage());
         }
     }
     public function listCate($id)
@@ -134,8 +142,7 @@ class CategoryController extends Controller
     	$cates=Category::with('childs')->where('id',$id)->first() ;
         return view('admin.category.listofcate',compact('cates'));
         } catch (\Exception $error) {
-             return back()->with('status',('Error'));
+             return back()->with('fail',$e->getMessage());
         }
     }
 }
-

@@ -29,7 +29,7 @@ class AuthController extends Controller
     use AuthenticatesUsers;
 
     protected $redirectTo = '/';
-
+    
     /**
      * Create a new controller instance.
      *
@@ -45,14 +45,13 @@ class AuthController extends Controller
     }
     public function postLogin(LoginRequest $request)
     {
-       
        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
        {
             return redirect()->route('dashboard');
        }
        else
        {
-            return redirect('admin/login')->with('status', Lang::get('messages.success'));
+            return redirect('admin/login')->with('status', ('Login fail'));
         }
     }
     public function logout()

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderDetail;
+use App\User;
 use Illuminate\Support\Facades\Lang;
 class OrderController extends Controller
 {
@@ -62,11 +63,11 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //
-         try {
-        
-        return view('admin.order.edit',compact('order'));
-         } catch (\Exception $error) {
-             return back()->with('status',('Error'));
+        try {
+        $userIds= User::pluck('fullname', 'id');
+        return view('admin.order.edit',compact('order','userIds'));
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
         }
     }
 
@@ -83,9 +84,9 @@ class OrderController extends Controller
          try {
             $data=$request->all();
             $order->update($data);
-            return back()->with('status', Lang::get('messages.success'));
+            return back()->with('success', ('Update success'));
         } catch (\Exception $e) {
-            return back()->with('status', Lang::get('messages.fail'));
+            return back()->with('fail',$e->getMessage());
         }
     }
 
@@ -104,22 +105,64 @@ class OrderController extends Controller
             if($order->orderdetails_count==0)
                {
                     $order->delete();
-                    return back()->with('status', Lang::get('delete.success'));
+                    return back()->with('success', ('Delete success'));
                     }   
-            return back()->with('status', Lang::get('delete.fail'));
-        } catch (\Exception $error) {
-             return back()->with('status',('Error'));
+            return back()->with('fail', ('Delete failed'));
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
         }
     }
 
     public function orderDetail($id)
     {
         //
+        try {
         $order=Order::with('orderdetails')->where('id',$id)->first() ;
         $total = 0;
         foreach ($order->orderdetails as $item) {
             $total += $item->quantity * $item->unit_price;
         }
         return view('admin.order.detail',compact('order','total'));
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
+        }
+    }
+
+
+    public function updateStatus($id,$status)
+    {
+        $productqty = 0;
+        $oderqty = 0 ;
+         try {
+            if ($status == 0) {
+                # code...
+                $order = Order::find($id);
+                $order->status = $status;
+                foreach ($order->orderdetails as $item) {
+                    $orderqty = $item->quantity;
+                    $productqty = $item->product->quantity;
+                    $item->product->quantity = $productqty - $orderqty;
+                    $item->product->save();
+                }
+                $order->save();
+                return back()->with('success', ('Update success'));
+            }
+            if ($status == 1) {
+                # code...
+                $order = Order::find($id);
+                $order->status = $status;
+                foreach ($order->orderdetails as $item) {
+                    $orderqty = $item->quantity;
+                    $productqty = $item->product->quantity;
+                    $item->product->quantity = $productqty + $orderqty;
+                    $item->product->save();
+                }
+                $order->save();
+                return back()->with('success',('Update success'));
+            }
+          
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
+        }
     }
 }
