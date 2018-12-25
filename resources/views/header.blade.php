@@ -90,16 +90,16 @@
 				<div class="visible-xs clearfix"></div>
 				<nav class="main-menu">
 					<ul class="l-inline ov">
-						<li><a href="index.html">Trang chủ</a></li>
+						<li><a href="{{route('pageusers.index')}}">Trang chủ</a></li>
 						<li><a href="#">Sản phẩm</a>
 							<ul class="sub-menu">
-								@foreach($category as $item)
-								<li><a href="product_type.html">{{$item->name}}</a></li>
+								@foreach($category as $item)	 
+								<li><a href="{{route('pageusers.category',$item->id)}}">{{$item->name}}</a></li>
 								@endforeach
 							</ul>
 						</li>
-						<li><a href="about.html">Giới thiệu</a></li>
-						<li><a href="contacts.html">Liên hệ</a></li>
+						<li><a href="{{route('pageusers.about')}}">Giới thiệu</a></li>
+						<li><a href="{{route('pageusers.contact')}}">Liên hệ</a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</nav>

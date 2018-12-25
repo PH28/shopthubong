@@ -61,14 +61,18 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	
 });
 
+ // Route::group(['namespace'=>'Userpage'], function()
+ // {
+	 Route::get('index','PageController@getIndex')->name('pageusers.index');
+  	// 
+	Route::get('category/{id}','PageController@getCategory')->name('pageusers.category');
+	  //
+	Route::get('product','PageController@getProduct')->name('pageusers.product');
+	  // 
+	Route::get('contact','PageController@getContact')->name('pageusers.contact');
+	// 
+	Route::get('about','PageController@getAbout')->name('pageusers.about');
 
- Route::get('index','PageController@getIndex');
-  // 
-Route::get('product-type','PageController@getProductType');
-   //
-Route::get('product','PageController@getProduct');
-    // 
-Route::get('contact','PageController@getContact');
-// 
-Route::get('about','PageController@getAbout');
+ //});
+
 

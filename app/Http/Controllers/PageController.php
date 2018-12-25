@@ -21,9 +21,10 @@ class PageController extends Controller
         //dd($product);
     	return view('page.home', compact('slide','product','product_remain'));
     }
-    public function getProductType()
+    public function getCategory($id)
     {
-    	return view('page.product_type');
+        $product_by_category = Product::with('images')->where('category_id', $id)->get();
+    	return view('page.category', compact('product_by_category'));
     }
     public function getProduct()
     {
