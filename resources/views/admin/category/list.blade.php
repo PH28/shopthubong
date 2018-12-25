@@ -36,7 +36,7 @@
                             <tr >
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Detail</th>
+                                <th>Sub category</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 

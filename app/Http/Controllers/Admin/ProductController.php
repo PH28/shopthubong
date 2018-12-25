@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categoryIds= Category::where('id','>','2')->pluck('name', 'id');
+        $categoryIds= Category::where('parent_id','!=','0')->pluck('name', 'id');
         return view('admin.product.create',compact('categoryIds'));
     }
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        $categoryIds= Category::where('id','>','2')->pluck('name', 'id');
+        $categoryIds= Category::where('parent_id','!=','0')->pluck('name', 'id');
         return view('admin.product.edit',compact('product','categoryIds'));
     }
 
