@@ -6,7 +6,7 @@
                     <div class="col-lg-12"> 
                         <h1 class="page-header"> Order No.{{$order->id}} 
                             <small>Detail</small>
-                            
+                            <small><i class="fa fa-pencil fa-fw"></i> <a href="{{route('orders.edit',$order->id)}}">Edit</a></small>
 
                         </h1>
                         
@@ -14,11 +14,16 @@
                     
                  <div class="col-lg-7" >
                     <!-- /.col-lg-12 -->
-                    @if(session('status'))
-                        <div class="alert alert-danger">     
-                            {{session('status')}}
+                     @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
                         </div>
-                    @endif
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                      @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -41,31 +46,26 @@
                                 <input class="form-control" name="quantity" value="{{$order->address_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Total</label>
-                                <input class="form-control" name="price" value="{{number_format($order->total)}} VND"/>
+                                <label>Status</label>
+                                 <select class="form-control" name="parent_id">
+                                  @if($order->status == 0 )
+                                  <option  selected="seleted" disabled >Approve</option>
+                                  @else
+                                  <option  selected="seleted" disabled >Unapprove</option>
+                                  @endif
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Payment</label>
                                  <select class="form-control" name="parent_id">
                                   @if($order->payment == 1 )
-                                  <option  selected="seleted" disabled="">ATM</option>
+                                  <option  selected="seleted" disabled >ATM</option>
                                   @else
-                                  <option  selected="seleted" disabled="">CoD</option>
+                                  <option  selected="seleted" disabled >CoD</option>
                                   @endif
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                 <select class="form-control" name="parent_id">
-                                  @if($order->payment == 0 )
-                                  <option  selected="seleted" disabled="">Unapprove</option>
-                                  @elseif($order->status == 1)
-                                  <option  selected="seleted" disabled="">Shipping</option>
-                                  @else
-                                  <option  selected="seleted" disabled="">Approve</option>
-                                  @endif
-                                </select>
-                            </div>
+                            
                             
                           
 
@@ -84,6 +84,7 @@
                         <thead>
                             <tr >
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
@@ -95,14 +96,16 @@
                             @foreach($order->orderdetails as $item)
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
+                                <td> <img src="{!! asset('images/'.$item->product->getFirstImageAttribute()->image) !!}" width="100"  height="80" alt=""></td>
                                 <td>{{$item->product->name}}</td>
                                 <td>{{$item->quantity}}</td>
                                 <th>{{number_format($item->unit_price)}} VND</th>
                             </tr>
                             @endforeach
-                            <tr style=" ">
+                            <tr >
                                 <th style="border-right: none">Total</th>
                                 <td style="border-right: none;"></th>
+                                <th style="border-right: none"></th>
                                 <th></th>
                                 <th>{{number_format($total)}} VND</th>
                                 

@@ -1,5 +1,6 @@
 <?php
 //Admin login
+
 Route::get('admin/login','Admin\AuthController@showLoginForm');
 Route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
 
@@ -12,11 +13,13 @@ Auth::routes();
 
 //Manager
 Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
-	Route::get('dashboard',function(){
-		return view('admin.layout.dashboard');
-	})->name('dashboard');
+	// Route::get('dashboard',function(){
+	// 	return view('admin.layout.dashboard');
+	// })->name('dashboard');
+	
 	//Category
 		Route::get('logout','Admin\AuthController@logout')->name('admin.logout');
+		Route::get('dashboard','Admin\CategoryController@dash')->name('admin.dashboard');
 		Route::get('/categories', 'Admin\CategoryController@index')->name('categories.index');
 		Route::get('categories/create', 'Admin\CategoryController@create')->name('categories.create');
 		Route::get('categories/{category}', 'Admin\CategoryController@show')->name('categories.show');
@@ -47,36 +50,25 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::put('orders/{order}', 'Admin\OrderController@update')->name('orders.update');
 		Route::get('orders/{id}/delete', 'Admin\OrderController@destroy')->name('orders.destroy');
 		Route::get('orders/{id}/orderdetail', 'Admin\OrderController@orderDetail')->name('orders.orderdetail');
-	//User
-	Route::get('user', 'Admin\UserController@index')->name('users.index');
-	Route::get('user/create', 'Admin\UserController@create')->name('users.create');
-	Route::post('user', 'Admin\UserController@store')->name('user.store');
-	Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('user.edit');
-	Route::put('user/{user}', 'Admin\UserController@update')->name('user.update');
-	Route::get('user/{user}/delete', 'Admin\UserController@destroy')->name('user.destroy');
+		Route::get('orders/{id}/status/{status}', 'Admin\OrderController@updateStatus')->name('orders.status');
 
+		Route::get('user', 'Admin\UserController@index')->name('users.index');
+		Route::get('user/create', 'Admin\UserController@create')->name('users.create');
+		Route::post('user', 'Admin\UserController@store')->name('users.store');
+		Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
+		Route::put('user/{user}', 'Admin\UserController@update')->name('users.update');
+		Route::get('user/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
+	
 });
 
 
- 
-
-  //dong.pt add
- Route::get('index',['as'=>'Trang-chu',
-    'uses'=>'PageController@getIndex'
-  ]);
+ Route::get('index','PageController@getIndex');
   // 
-Route::get('product-type',['as'=>'Product-type',
-    'uses'=>'PageController@getProductType'
-  ]);
+Route::get('product-type','PageController@getProductType');
    //
-Route::get('product',['as'=>'Product',
-    'uses'=>'PageController@getProduct'
-  ]);
+Route::get('product','PageController@getProduct');
     // 
-Route::get('contact',['as'=>'Contact',
-    'uses'=>'PageController@getContact'
-  ]);
+Route::get('contact','PageController@getContact');
 // 
-Route::get('about',['as'=>'About',
-    'uses'=>'PageController@getAbout'
-  ]);
+Route::get('about','PageController@getAbout');
+

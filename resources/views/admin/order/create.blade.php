@@ -13,13 +13,16 @@
                     <div class="col-lg-7" style="padding-bottom:120px">
                    
                         <form action="{{route('categories.store')}}" method="POST">
-                             @if(session('status'))
-                        <div class="alert alert-danger">
-                       
-                            {{session('status')}}
-                        
+                     @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
                         </div>
-                    @endif
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

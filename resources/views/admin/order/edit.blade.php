@@ -4,17 +4,22 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Order
+                        <h1 class="page-header">Order No.{{$order->id}}
                             <small>Edit</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(session('status'))
-                        <div class="alert alert-danger">     
-                            {{session('status')}}
+                         @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
                         </div>
-                    @endif
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                          @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -29,49 +34,26 @@
                             @method('PUT')
                             <div class="form-group" >
                                 <label>Customer Name</label>
-                                <input class="form-control" name="name" value="{{$order->user->fullname}}" />
+                                <select class="form-control" name="user_id">
+                                 @foreach ($userIds as $key => $value)
+                                @if($key != 0)     
+                                   @if($key == $order->user_id )
+                                  <option value="{{$key}}" selected="seleted">{{$value}}</option>
+                                  @else
+                                  <option value="{{$key}}" >{{$value}}</option>
+                                  @endif
+                                @endif
+
+                                @endforeach
+                                </select>
                         </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input class="form-control" name="name" value="{{$order->phone_order}}" />
+                                <input class="form-control" name="phone_order" value="{{$order->phone_order}}" />
                             </div>
                             <div class="form-group">
                                 <label>Address Order</label>
-                                <input class="form-control" name="quantity" value="{{$order->address_order}}" />
-                            </div>
-                            <div class="form-group">
-                                <label>Total</label>
-                                <input class="form-control" name="price" value="{{number_format($order->total)}} VND"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Payment</label>
-                                 <select class="form-control" name="parent_id">
-                                  @if($order->payment == 1 )
-                                  <option  selected="seleted">ATM</option>
-                                  <option>CoD</option>
-                                  @else
-                                  <option  selected="seleted" disabled="">CoD</option>
-                                  <option >ATM</option>
-                                  @endif
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                 <select class="form-control" name="parent_id">
-                                  @if($order->payment == 0 )
-                                  <option  selected="seleted" >Unapprove</option>
-                                  <option >Shipping</option>
-                                  <option >Approve </option>
-                                  @elseif($order->status == 1)
-                                  <option   >Unapprove</option>
-                                  <option selected="seleted">Shipping</option>
-                                  <option >Approve </option>
-                                  @else
-                                  <option >Unapprove</option>
-                                  <option >Shipping</option>
-                                  <option selected="seleted">Approve </option>
-                                  @endif
-                                </select>
+                                <input class="form-control" name="address_order" value="{{$order->address_order}}" />
                             </div>
                             <button type="submit" class="btn btn-default">Order Edit</button>
                             <button type="reset" class="btn btn-default">Reset</button>

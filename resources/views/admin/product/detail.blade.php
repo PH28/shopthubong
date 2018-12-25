@@ -14,11 +14,16 @@
                     
                  <div class="col-lg-7" >
                     <!-- /.col-lg-12 -->
-                    @if(session('status'))
-                        <div class="alert alert-danger">     
-                            {{session('status')}}
+                    @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
                         </div>
-                    @endif
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                      @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -109,8 +114,8 @@
                                 @else
                                 <td>Ẩn</td>  
                                 @endif
-                                
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('reviews.destroy',$item->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa!')"> Delete</a></td>
+                                <td align="center"><a href="{{route('reviews.destroy',$item->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa!')"><button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o "></i>
+                                </button></a></td>
                                 
                             </tr>
                             @endforeach

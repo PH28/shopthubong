@@ -11,13 +11,16 @@
                   
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                    @if(session('status'))
-                        <div class="alert alert-danger">
-                       
-                            {{session('status')}}
-                        
+                     @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
                         </div>
-                    @endif
+                        @endif
+                        @if(session('fail'))
+                        <div class="alert alert-danger">     
+                            {{session('fail')}}
+                        </div>
+                        @endif
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -27,7 +30,7 @@
                             </ul>
                         </div>
                     @endif
-                        <form action="{{route('user.store')}}" method="POST">
+                        <form action="{{route('users.store')}}" method="POST">
                             @csrf
                             <div class="form-group" >
                                 <label>Role Id</label>
@@ -48,12 +51,15 @@
                             <div class="form-group">
                                 <label>Gender</label>
                                 <select class="form-control" name="gender">
-                                    <option value="0"> 1 </option>
-                                     <option value="1"> 2 </option>
-                                      <option value="2"> 3 </option>
+                                    <option value="0"> Khác </option>
+                                     <option value="1"> Nam</option>
+                                      <option value="2"> Nữ </option>
                                 </select>
                             </div>
-                            
+                            <div class="form-group">
+                                <label>Date of birth</label>
+                                <input class="form-control" type="date" name="dob"  required />
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input class="form-control" name="email" placeholder="Please Enter Email" required />
@@ -68,13 +74,13 @@
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <input class="form-control" name="status" placeholder="Please Enter status" required />
+                                <select class="form-control" name="status">
+                                    <option value="0"> Active </option>
+                                     <option value="1"> Not active</option>
+                                </select>
                             </div>
                             <input type="hidden" name="password" value="$2y$10$TKh8H1.">
-                             <div class="form-group">
-                                <label>Date of birth</label>
-                                <input class="form-control" name="dob"  required />
-                            </div>
+                             
                             <button type="submit" class="btn btn-default">User Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>

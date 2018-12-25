@@ -9,9 +9,14 @@
                         </h1>
                     </div>
                     <div class="col-lg-7" >
-                        @if(session('status'))
+                        @if(session('success'))
+                        <div class="alert alert-success">     
+                            {{session('success')}}
+                        </div>
+                        @endif
+                        @if(session('fail'))
                         <div class="alert alert-danger">     
-                            {{session('status')}}
+                            {{session('fail')}}
                         </div>
                         @endif
                         @if ($errors->any())
@@ -31,7 +36,7 @@
                             <tr >
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Category Parent</th>
+                                <th>Detail</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 
@@ -43,10 +48,14 @@
                             @if($item->id != 0)
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
-                                <td class="center"><i class="fa fa-th-list   fa-fw"></i><a href="{{route('categories.listCate',$item->id)}}">{{$item->name}}</a></td>
-                                <td>{{$item->parent_id}}</td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('categories.edit',$item->id)}}">Edit</a></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('categories.destroy',$item->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa!')"> Delete</a></td>
+                                <td >{{$item->name}}</td>
+                                <td align="center"><a href="{{route('categories.listCate',$item->id)}}"><button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye">
+                                </i></button></a></td>
+                                <td align="center"><a href="{{route('categories.edit',$item->id)}}"><button type="button" class="btn btn-success btn-circle"><i class="fa fa-pencil "></i>
+                                </button></a></td>
+                                <td align="center"><a href="{{route('categories.destroy',$item->id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa!')"><button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash-o "></i>
+                                </button></a></td>
+                                
                             </tr>
                             @endif
                             @endforeach

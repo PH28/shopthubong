@@ -21,8 +21,8 @@ class ProductController extends Controller
     {
         //
 
-        $products= Product::all();
-       
+        
+        $products=Product::all();
         return view('admin.product.list',compact('products'));
     }
 
@@ -47,10 +47,12 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         //
-        $array = [];
-        $data = $request->all();
+        
         try {
+
+             $data = $request->all();
             if ($request->hasFile('images')) {
+                $array = [];
                 $files = $request->file('images');
                 foreach($files as $file) {
                     $name = $file->getClientOriginalName();
@@ -71,10 +73,10 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('status', Lang::get('category.success'));
+            return back()->with('success',('Create success'));
         } 
         catch (\Exception $e) {
-            return back()->with('status',('Error'));
+            return back()->with('fail',$e->getMessage());
         }
 
     }
@@ -124,15 +126,40 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+       
+           
         try {
-
-       $data=$request->all();
-       $product->update($data);
-       return redirect()->route('products.index');
-       }
+            $array=[];
+            $data = $request->except('image');
+            if ($request->hasFile('images')) {
+                $array = [];
+                $files = $request->file('images');
+                foreach($files as $file) {
+                    $name = $file->getClientOriginalName();
+                    $image = str_random(4)."_".$name;
+                    $destinationPath = public_path('/images');
+                    while(file_exists(public_path('/images').$image)){
+                         $image = str_random(4)."_".$name;
+                    }
+                    $file->move($destinationPath, $image);
+                    array_push($array, $image);
+                }
+            }
+            $product->update($data);
+            foreach ($array as $item) {
+                        Image::create([
+                            'product_id' => $product->id,
+                            'image' => $item,
+                            'url' => $item
+                        ]);
+            }
+            return back()->with('success',('Update success'));
+        } 
         catch (\Exception $e) {
-            return back()->with('status',('Error'));
+            return back()->with('fail',$e->getMessage());
         }
+
+       
     }
 
     /**
@@ -149,12 +176,12 @@ class ProductController extends Controller
             if($product->orders_count==0)
              {
                     $product->delete();
-                    return back()->with('status', Lang::get('delete.success'));
+                     return back()->with('success',('Delete success'));
             }   
-            return back()->with('status', Lang::get('delete.fail'));
+             return back()->with('fail',('Delete failed'));
         }
         catch (\Exception $e) {
-            return back()->with('status',('Error'));
+            return back()->with('fail',$e->getMessage());
         }
     }
 

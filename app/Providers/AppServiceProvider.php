@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('header',function($view){
             $category = Category::all();
+            unset($category[0]); 
             $view->with('category',$category);
         });
     }
