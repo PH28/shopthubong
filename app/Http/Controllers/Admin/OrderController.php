@@ -8,6 +8,8 @@ use App\Order;
 use App\OrderDetail;
 use App\User;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 class OrderController extends Controller
 {
     /**
@@ -145,7 +147,9 @@ class OrderController extends Controller
                     $item->product->save();
                 }
                 $order->save();
+                Mail::to($order->email_order)->send(new OrderMail($order));
                 return back()->with('success', ('Update success'));
+                
             }
             if ($status == 1) {
                 # code...
