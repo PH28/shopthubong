@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Slide;
 use App\Product;
 use App\Category;
+use App\Image;
 class PageController extends Controller
 {
     public function getIndex() // get trang chu
@@ -31,9 +32,12 @@ class PageController extends Controller
         $show_category = Category::where('id',$id)->first();
     	return view('page.category', compact('product_by_category','product_order','category', 'show_category'));
     }
-    public function getProduct()
+    public function getProduct(Request $request)
     {
-    	return view('page.product');
+        $product = Product::where('id',$request->id)->first();
+        $showImage = Image::where('product_id',$request->id)->first();
+        $product_related = Product::with('images')->where('category_id', $request->id)->paginate(2); // product have same category
+    	return view('page.product', compact('product','showImage', 'product_related'));
     }
     public function getContact()
     {

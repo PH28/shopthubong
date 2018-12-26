@@ -41,7 +41,7 @@
 									<div class="single-item">
 										<div class="single-item-header">
 											@foreach($item->images as $value)
-											<a href="product.html"><img src="source/image/product/{{$value->image}}" width="270" height="320" alt=""></a>
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" width="270" height="320" alt=""></a>
 											@endforeach
 										</div>
 										<div class="single-item-body">
@@ -76,7 +76,7 @@
 									<div class="single-item">
 										<div class="single-item-header">
 											@foreach($item->images as $value)
-											<a href="product.html"><img src="source/image/product/{{$value->image}}" width="270" height="320" alt=""></a>
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" width="270" height="320" alt=""></a>
 											@endforeach
 										</div>
 										<div class="single-item-body">

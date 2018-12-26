@@ -3,11 +3,11 @@
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
-				<h6 class="inner-title">Product</h6>
+				<h6 class="inner-title">{{$product->name}}</h6>
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Product</span>
+					<a href="{{route('pageusers.index')}}">Trang chủ</a> / <span>Thông tin chi tiết sản phẩm</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -21,13 +21,14 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="source/assets/dest/images/products/6.jpg" alt="">
+							
+							<img src="source/image/product/{{$showImage->image}}" alt="">						
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
-								<p class="single-item-title">Sample Woman Top</p>
+								<p class="single-item-title"><h2>{{$product->name}}</h2></p>
 								<p class="single-item-price">
-									<span>$34.55</span>
+									<span>{{number_format($product->price)}} VND</span>
 								</p>
 							</div>
 
@@ -35,30 +36,15 @@
 							<div class="space20">&nbsp;</div>
 
 							<div class="single-item-desc">
-								<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+								<p>{{$product->description}}</p>
 							</div>
 							<div class="space20">&nbsp;</div>
 
-							<p>Options:</p>
+							<p>Số lượng:</p>
 							<div class="single-item-options">
-								<select class="wc-select" name="size">
-									<option>Size</option>
-									<option value="XS">XS</option>
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L">L</option>
-									<option value="XL">XL</option>
-								</select>
+								
 								<select class="wc-select" name="color">
-									<option>Color</option>
-									<option value="Red">Red</option>
-									<option value="Green">Green</option>
-									<option value="Yellow">Yellow</option>
-									<option value="Black">Black</option>
-									<option value="White">White</option>
-								</select>
-								<select class="wc-select" name="color">
-									<option>Qty</option>
+									<option>Số lượng</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -74,13 +60,12 @@
 					<div class="space40">&nbsp;</div>
 					<div class="woocommerce-tabs">
 						<ul class="tabs">
-							<li><a href="#tab-description">Description</a></li>
+							<li><a href="#tab-description">Mô tả</a></li>
 							<li><a href="#tab-reviews">Reviews (0)</a></li>
 						</ul>
 
 						<div class="panel" id="tab-description">
-							<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-							<p>Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequaturuis autem vel eum iure reprehenderit qui in ea voluptate velit es quam nihil molestiae consequr, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? </p>
+							<p>{{$product->description}} </p>
 						</div>
 						<div class="panel" id="tab-reviews">
 							<p>No Reviews</p>
@@ -88,66 +73,38 @@
 					</div>
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
-						<h4>Related Products</h4>
-
+						<h4>Các sản phẩm liên quan</h4>
+						<hr>
 						<div class="row">
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="single-item-header">
-										<a href="product.html"><img src="source/assets/dest/images/products/4.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span>$34.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="single-item-header">
-										<a href="product.html"><img src="source/assets/dest/images/products/5.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span>$34.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
+							@if(count($product_related))
+								@foreach($product_related as $item)
+								<div class="col-sm-4">
+									<div class="single-item">
+										<div class="single-item-header">
+											@foreach($item->images as $value)
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" height="150px" alt=""></a>
+											@endforeach
+										</div>
+										<div class="single-item-body">
+											<p class="single-item-title">{{$item->name}}</p>
+											<p class="single-item-price">
+												<span>{{number_format($item->price)}} VND</span>
+											</p>
+										</div>
+										<div class="single-item-caption">
+											<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<div class="clearfix"></div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
-
-									<div class="single-item-header">
-										<a href="#"><img src="/source/assets/dest/images/products/6.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span class="flash-del">$34.55</span>
-											<span class="flash-sale">$33.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="#"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
+								@endforeach
+							@else
+							<p>Không có sản phẩm liên quan được tìm thấy</p>
+							@endif
+						</div>
+						<div class="row">
+							{{$product_related->links()}}
 						</div>
 					</div> <!-- .beta-products-list -->
 				</div>

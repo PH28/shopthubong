@@ -67,7 +67,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
   	// 
 	Route::get('category/{id}','PageController@getCategory')->name('pageusers.category');
 	  //
-	Route::get('product','PageController@getProduct')->name('pageusers.product');
+	Route::get('product/{id}','PageController@getProduct')->name('pageusers.product');
 	  // 
 	Route::get('contact','PageController@getContact')->name('pageusers.contact');
 	// 
