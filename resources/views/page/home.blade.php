@@ -50,7 +50,7 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{$item->name}}</p>
 											<p class="single-item-price">
-												<span>{{$item->price}} VND</span>
+												<span>{{number_format($item->price)}} VND</span>
 											</p>
 										</div>
 										<div class="single-item-caption">
@@ -85,7 +85,7 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{$item->name}}</p>
 											<p class="single-item-price">
-												<span>{{$item->price}} VND</span>
+												<span>{{number_format($item->price)}} VND</span>
 											</p>
 										</div>
 										<div class="single-item-caption">
