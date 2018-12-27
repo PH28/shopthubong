@@ -73,7 +73,7 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('success',('Create success'));
+            return back()->with('success',('Tạo sản phẩm mới thành công'));
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
@@ -153,7 +153,7 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('success',('Update success'));
+            return back()->with('success',('Cập nhật sản phẩm thành công'));
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
@@ -176,9 +176,9 @@ class ProductController extends Controller
             if($product->orders_count==0)
              {
                     $product->delete();
-                     return back()->with('success',('Delete success'));
+                     return back()->with('success',('Xóa sản phẩm thành công'));
             }   
-             return back()->with('fail',('Delete failed'));
+             return back()->with('fail',('Xóa thất bại vì sản phẩm đang được đặt'));
         }
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());

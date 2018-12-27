@@ -58,7 +58,7 @@ class CategoryController extends Controller
         try {
         	$data= $request->all();
         	$category= Category::create($data);
-        	return back()->with('success',('Create success'));
+        	return back()->with('success',('Tạo danh mục mới thành công'));
         } catch (\Exception $e) {
         	return back()->with('fail',$e->getMessage());
         }
@@ -106,7 +106,7 @@ class CategoryController extends Controller
        try {
         	$data=$request->all();
        		$category->update($data);
-        	 return back()->with('success',('Update success'));
+        	 return back()->with('success',('Cập nhật danh mục thành công'));
         } catch (\Exception $e) {
         	return back()->with('fail',$e->getMessage());
         }
@@ -126,12 +126,15 @@ class CategoryController extends Controller
     	$category=Category::withCount('childs','products')->where('id',$id)->first() ;
         try {
         	if($category->childs_count==0)
+            {
         		if($category->products_count==0)
 		        	{
 		        	$category->delete();
-		        	 return back()->with('success',('Delete success'));
+		        	 return back()->with('success',('Xóa danh mục thành công'));
 		        	}   
-        	return back()->with('fail',('Delete failed'));
+                return back()->with('fail',('Xóa thất bại vì danh mục này có sản phẩm đang được bán'));
+            }
+        	return back()->with('fail',('Xoá thất bại vì còn danh mục này có danh mục con'));
         } catch (\Exception $error) {
         	   return back()->with('fail',$e->getMessage());
         }

@@ -2502,6 +2502,7 @@ fieldset[disabled] .checkbox label {
   line-height: 1.5;
   border-radius: 3px;
 }
+
 select.input-sm,
 select.form-group-sm .form-control {
   height: 30px;

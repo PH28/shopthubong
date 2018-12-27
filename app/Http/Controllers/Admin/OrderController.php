@@ -86,7 +86,7 @@ class OrderController extends Controller
          try {
             $data=$request->all();
             $order->update($data);
-            return back()->with('success', ('Update success'));
+            return back()->with('success', ('Cập nhật thông tin khách thành công'));
         } catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
         }
@@ -107,9 +107,9 @@ class OrderController extends Controller
             if($order->orderdetails_count==0)
                {
                     $order->delete();
-                    return back()->with('success', ('Delete success'));
+                    return back()->with('success', ('Xóa đơn hàng thành công'));
                     }   
-            return back()->with('fail', ('Delete failed'));
+            return back()->with('fail', ('Xóa đơn hàng thất bại vì đơn hàng đang được xử lý'));
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -138,7 +138,8 @@ class OrderController extends Controller
          try {
             if ($status == 0) {
                 # code...
-                $order = Order::find($id);
+                $order = Order::withCount('orderdetails')->where('id',$id)->first() ;
+                if($order->orderdetails_count > 0){
                 $order->status = $status;
                 foreach ($order->orderdetails as $item) {
                     $orderqty = $item->quantity;
@@ -148,7 +149,9 @@ class OrderController extends Controller
                 }
                 $order->save();
                 Mail::to($order->email_order)->send(new OrderMail($order));
-                return back()->with('success', ('Update success'));
+                return back()->with('success', ('Cập nhật trạng thái thành công'));
+                }
+                return back()->with('fail', ('Cập nhật trạng thái thất bại vì đơn hàng không có sản phẩm nào được mua'));
                 
             }
             if ($status == 1) {

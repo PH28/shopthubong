@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     /**
@@ -33,12 +34,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         try {
             $data= $request->all();
             $user= User::create($data);
-            return back()->with('success',('Create success'));
+            return back()->with('success',('Tạo người dùng thành công'));
          } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -76,7 +77,7 @@ class UserController extends Controller
         try{
               $data = $request->all();
               $user->update($data);
-              return back()->with('success',('Update success'));
+              return back()->with('success',('Cập nhật người dùng thành công'));
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -91,13 +92,16 @@ class UserController extends Controller
     {
         $user=User::withCount('orders')->where('id',$id)->first() ;
         try{
-             if($user->orders_count==0)
+            if($user->role_id == 2)
+             {
+             if($user->orders_count== 0)
                {
                     $user->delete();
-                    return back()->with('success', ('Delete success'));
+                    return back()->with('success', ('Xoá người dùng thành công'));
                     }   
-       
-           return back()->with('fail', ('Delete failed'));             
+                    return back()->with('fail', ('Xóa thất bại vì người dùng này đang đặt hàng'));  
+            }
+           return back()->with('fail', ('Không thể xóa Admin'));             
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
