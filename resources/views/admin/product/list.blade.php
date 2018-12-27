@@ -34,7 +34,7 @@
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>img</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
@@ -49,9 +49,13 @@
                             @foreach($products as $item)
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
+                                @if(!empty($item->getFirstImageAttribute()->image))
                                 <td>
                                     <img src="{!! asset('images/'.$item->getFirstImageAttribute()->image) !!}" width="100"  height="80" alt="">
                                 </td>
+                                @else
+                                  <td>  <img src="" width="100"  height="80" alt=""> </td>
+                                @endif
                                 <td class="center">{{$item->name}}</td>
                                 <td>{{$item->quantity}}</td>
                                 <td>{{number_format($item->price)}} VND</td>

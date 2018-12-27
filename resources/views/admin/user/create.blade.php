@@ -21,64 +21,68 @@
                             {{session('fail')}}
                         </div>
                         @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                   
                         <form action="{{route('users.store')}}" method="POST">
                             @csrf
-                            <div class="form-group" >
-                                <label>Role Id</label>
+                            <div class="form-group required" >
+                                <label for="">Role Id </label>
                                 <select class="form-control" name="role_id">
                                 @foreach ($role_id as $key => $value)                            
                                   <option value="{{$key}}" >{{$value}}</option>
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>User Name</label>
-                                <input class="form-control" name="username" placeholder="Please Enter User Name"  required />
+                            <div class="form-group required">
+                                <label for="">User Name </label>
+                                <input class="form-control" name="username" placeholder="Please Enter User Name"   />
                             </div>
-                            <div class="form-group">
-                                <label>Full Name</label>
-                                <input class="form-control" name="fullname" placeholder="Please Enter Full Name" required/>
+                            @if($errors->has('username'))
+                                        <p class="text-danger">{{$errors->first('username')}}</p>
+                                @endif
+                            <div class="form-group required">
+                                <label for="">Full Name </label>
+                                <input class="form-control" name="fullname" placeholder="Please Enter Full Name" />
                             </div>
-                            <div class="form-group">
-                                <label>Gender</label>
+                            @if($errors->has('fullname'))
+                                        <p class="text-danger">{{$errors->first('fullname')}}</p>
+                                @endif
+                            <div class="form-group required">
+                                <label for="">Gender </label>
                                 <select class="form-control" name="gender">
                                     <option value="0"> Khác </option>
                                      <option value="1"> Nam</option>
                                       <option value="2"> Nữ </option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Date of birth</label>
-                                <input class="form-control" type="date" name="dob"  required />
+                            <div class="form-group required">
+                                <label for="">Date of birth </label>
+                                <input class="form-control" type="date" name="dob"   />
                             </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input class="form-control" name="email" placeholder="Please Enter Email" required />
+                            @if($errors->has('dob'))
+                                        <p class="text-danger">{{$errors->first('dob')}}</p>
+                                @endif
+                            <div class="form-group required">
+                                <label for="">Email </label>
+                                <input class="form-control" name="email" placeholder="Please Enter Email"  />
                             </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <input class="form-control" name="address" placeholder="Please Enter adress" required />
+                            @if($errors->has('email'))
+                                        <p class="text-danger">{{$errors->first('email')}}</p>
+                                @endif
+                            <div class="form-group required">
+                                <label for="">Address </label>
+                                <input class="form-control" name="address" placeholder="Please Enter adress"  />
                             </div>
-                            <div class="form-group">
-                                <label> Phone</label>
-                                <input class="form-control" name="phone" placeholder="Please Enter phone" required/>
+                            @if($errors->has('address'))
+                                        <p class="text-danger">{{$errors->first('address')}}</p>
+                                @endif
+                            <div class="form-group required">
+                                <label for="">Phone </label>
+                                <input class="form-control" name="phone" placeholder="Please Enter phone" />
                             </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="0"> Active </option>
-                                     <option value="1"> Not active</option>
-                                </select>
-                            </div>
+                            @if($errors->has('phone'))
+                                        <p class="text-danger">{{$errors->first('phone')}}</p>
+                            @endif
+                            <input type="hidden" name="status" value="1">
                             <input type="hidden" name="password" value="$2y$10$TKh8H1.">
                              
                             <button type="submit" class="btn btn-default">User Add</button>

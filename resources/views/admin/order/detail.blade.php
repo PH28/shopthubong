@@ -46,6 +46,10 @@
                                 <input class="form-control" name="quantity" value="{{$order->address_order}}" />
                             </div>
                             <div class="form-group">
+                                <label>Email Order</label>
+                                <input class="form-control" name="quantity" value="{{$order->email_order}}" />
+                            </div>
+                            <div class="form-group">
                                 <label>Status</label>
                                  <select class="form-control" name="parent_id">
                                   @if($order->status == 0 )
@@ -96,7 +100,13 @@
                             @foreach($order->orderdetails as $item)
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
-                                <td> <img src="{!! asset('images/'.$item->product->getFirstImageAttribute()->image) !!}" width="100"  height="80" alt=""></td>
+                                @if(!empty($item->product->getFirstImageAttribute()->image))
+                                <td>
+                                    <img src="{!! asset('images/'.$item->product->getFirstImageAttribute()->image) !!}" width="100"  height="80" alt="">
+                                </td>
+                                @else
+                                  <td>  <img src="" width="100"  height="80" alt=""> </td>
+                                @endif
                                 <td>{{$item->product->name}}</td>
                                 <td>{{$item->quantity}}</td>
                                 <th>{{number_format($item->unit_price)}} VND</th>

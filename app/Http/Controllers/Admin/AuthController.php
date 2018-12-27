@@ -51,7 +51,7 @@ class AuthController extends Controller
        }
        else
        {
-            return redirect('admin/login')->with('status', ('Login fail'));
+            return redirect('admin/login')->with('status', ('Đăng nhập thất bại'));
         }
     }
     public function logout()

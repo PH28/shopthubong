@@ -21,20 +21,11 @@
                             {{session('fail')}}
                         </div>
                         @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group" >
+                            <div class="form-group required" >
 
-                                <label>Category </label>
+                                <label for="">Category </label>
                                 <select class="form-control" name="category_id">
                                 @foreach ($categoryIds as $key => $value)
                                  
@@ -43,21 +34,33 @@
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Product Name</label>
+                            <div class="form-group required">
+                                <label for="">Product Name </label>
                                 <input class="form-control" name="name" placeholder="Please Enter Product Name" />
+                                 @if($errors->has('name'))
+                                        <p class="text-danger">{{$errors->first('name')}}</p>
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label>Product Quantity</label>
+                            <div class="form-group required">
+                                <label for="">Product Quantity </label>
                                 <input class="form-control" name="quantity" placeholder="Please Enter Product Quantity" />
+                                 @if($errors->has('quantity'))
+                                        <p class="text-danger">{{$errors->first('quantity')}}</p>
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label>Product Price</label>
+                            <div class="form-group required">
+                                <label for="">Product Price </label>
                                 <input class="form-control" name="price" placeholder="Please Enter Product Price" />
+                                 @if($errors->has('price'))
+                                        <p class="text-danger">{{$errors->first('price')}}</p>
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label>Product Description</label>
+                            <div class="form-group required">
+                                <label for="">Product Description </label>
                                 <textarea class="form-control" rows="3" name="description" ></textarea>
+                                 @if($errors->has('description'))
+                                        <p class="text-danger">{{$errors->first('description')}}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Product Kind</label>
