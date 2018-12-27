@@ -54,14 +54,17 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-cart pull-left" href="{{route('pageusers.addcart', $item->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="product.html">Chi tiết <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
 								</div>
 								@endforeach
 							</div>
+							<div class="row">
+										{{$product->links()}}
+									</div>
 						</div> <!-- .beta-products-list -->
 
 						<div class="space50">&nbsp;</div>

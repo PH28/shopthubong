@@ -7,20 +7,20 @@ use App\Slide;
 use App\Product;
 use App\Category;
 use App\Image;
+use App\Cart;
+use Session;
 class PageController extends Controller
 {
     public function getIndex() // get trang chu
     {
     	$slide = Slide::all(); // get all;
-        $product = Product::with('images')->where('kind',1)->get();
-        $product_remain = Product::with('images')->where('kind',0)->get();
-        // foreach ($product as $item) {
-        //     foreach ($item->images as $value) {
-        //         echo $value->image."<hr>";
-
-        //     }
-        // }
-        //dd($product);
+        $product = Product::with('images')->where('kind',1)->paginate(3);
+        // $product = Product::with(['images'=>function($query)
+        //     {
+        //        return $query->limit(1); 
+        //     }])->where('kind',1)->get();
+        $product_remain = Product::with('images')->where('kind',0)->paginate(3);
+        
     	return view('page.home', compact('slide','product','product_remain'));
     }
     public function getCategory($id) // $id of category
@@ -46,5 +46,15 @@ class PageController extends Controller
     public function getAbout()
     {
     	return view('page.about');
+    }
+    public function getAddtocart(Request $request,$id)
+    {
+         $product =Product::where('id',$id)->first();
+        
+         $oldCart=Session('cart')?Session::get('cart'):null;
+         $cart = new Cart($oldCart); // khoi tao gio hang
+         $cart->add($product,$id); // them vao gio hang
+         $request->session()->put('cart', $cart);// put  gio hang vao session cart
+         return redirect()->back();
     }
 }
