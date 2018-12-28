@@ -14,11 +14,7 @@ class PageController extends Controller
     public function getIndex() // get trang chu
     {
     	$slide = Slide::all(); // get all;
-        $product = Product::with('images')->where('kind',1)->paginate(3);
-        // $product = Product::with(['images'=>function($query)
-        //     {
-        //        return $query->limit(1); 
-        //     }])->where('kind',1)->get();
+        $product = Product::with('images')->where('kind',1)->paginate(4);
         $product_remain = Product::with('images')->where('kind',0)->paginate(3);
         
     	return view('page.home', compact('slide','product','product_remain'));
@@ -35,7 +31,6 @@ class PageController extends Controller
     public function getProduct(Request $request)
     {
         $product = Product::where('id',$request->id)->first();
-        $showImage = Image::where('product_id',$request->id)->first();
         $product_related = Product::with('images')->where('category_id', $request->id)->paginate(2); // product have same category
     	return view('page.product', compact('product','showImage', 'product_related'));
     }

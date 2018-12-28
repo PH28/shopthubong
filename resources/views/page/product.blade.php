@@ -22,7 +22,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							
-							<img src="source/image/product/{{$showImage->image}}" alt="">						
+							<img src="source/image/product/{{$product->getFirstImageAttribute()->image}}" alt="">						
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
@@ -51,7 +51,7 @@
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
-								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+								<a class="add-to-cart" href="{{route('pageusers.addcart', $product->id)}}"><i class="fa fa-shopping-cart"></i></a>
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -81,9 +81,9 @@
 								<div class="col-sm-4">
 									<div class="single-item">
 										<div class="single-item-header">
-											@foreach($item->images as $value)
-											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" height="150px" alt=""></a>
-											@endforeach
+											
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$item->getFirstImageAttribute()->image}}" height="150px" alt=""></a>
+											
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{$item->name}}</p>
@@ -92,7 +92,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="{{route('pageusers.addcart', $item->id)}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
