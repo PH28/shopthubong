@@ -56,7 +56,7 @@
                                 <td>{{number_format($item->total)}} VND</td>
                                 <td><div class="dropdown">
                                  @if($item->status == 0)
-                                <button class="btn btn-flat btn-info  dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:100px">
+                                <button class="btn btn-flat btn-info  dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:100px" disabled>
                                       Approve                       
                                     <span class="caret"></span>
                                 </button>
@@ -67,10 +67,8 @@
                                 </button>
                                 @endif
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                   @if($item->status == 0)
-                                   <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'1']) }}">Unpprove</a></li>
-                                   @else
-                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'0']) }}" ">Approve</a></li>
+                                   @if($item->status == 1)
+                                   <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'0']) }}">Approve</a></li>
                                    @endif
                                 </ul>
                                 </div></td>

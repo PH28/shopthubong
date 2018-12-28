@@ -21,35 +21,35 @@
                             {{session('fail')}}
                         </div>
                         @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
                         <form action="{{route('categories.store')}}" method="POST">
 
                             @csrf
-                            <div class="form-group" >
-                                <label>Category Parent</label>
+                            <div class="form-group required"  >
+                                <label for="">Category Parent </label>
                                 <select class="form-control" name="parent_id">
+                                    <option value="0" >Danh mục gốc</option>
                                 @foreach ($categoryIds as $key => $value) 
+
                                 @if($key != 0)                           
                                   <option value="{{$key}}" >{{$value}}</option>
                                 @endif
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Category Name</label>
+                            <div class="form-group required">
+                                <label for="">Category Name </label>
                                 <input class="form-control" name="name" placeholder="Please Enter Category Name" />
+                                @if($errors->has('name'))
+                                        <p class="text-danger">{{$errors->first('name')}}</p>
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label>Category Description</label>
+                            <div class="form-group required">
+                                <label>Category Description </label>
                                 <textarea class="form-control" rows="3" name="description" ></textarea>
+                                @if($errors->has('description'))
+                                        <p class="text-danger">{{$errors->first('description')}}</p>
+                                @endif
                             </div>
                             
                             <button type="submit" class="btn btn-default">Category Add</button>

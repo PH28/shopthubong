@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categoryIds= Category::where('id','>','2')->pluck('name', 'id');
+        $categoryIds= Category::where('parent_id','!=','0')->pluck('name', 'id');
         return view('admin.product.create',compact('categoryIds'));
     }
 
@@ -73,7 +73,7 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('success',('Create success'));
+            return back()->with('success',('Tạo sản phẩm mới thành công'));
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        $categoryIds= Category::where('id','>','2')->pluck('name', 'id');
+        $categoryIds= Category::where('parent_id','!=','0')->pluck('name', 'id');
         return view('admin.product.edit',compact('product','categoryIds'));
     }
 
@@ -153,7 +153,7 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('success',('Update success'));
+            return back()->with('success',('Cập nhật sản phẩm thành công'));
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
@@ -176,9 +176,9 @@ class ProductController extends Controller
             if($product->orders_count==0)
              {
                     $product->delete();
-                     return back()->with('success',('Delete success'));
+                     return back()->with('success',('Xóa sản phẩm thành công'));
             }   
-             return back()->with('fail',('Delete failed'));
+             return back()->with('fail',('Xóa thất bại vì sản phẩm đang được đặt'));
         }
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
