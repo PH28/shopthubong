@@ -43,9 +43,9 @@
 								<div class="col-sm-3">
 									<div class="single-item">
 										<div class="single-item-header">
-											@foreach($item->images as $value)
-											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" alt="" width="270" height="320"></a>
-											@endforeach
+											
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$item->getFirstImageAttribute()->image}}" alt="" width="270" height="320"></a>
+											
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{$item->name}}</p>

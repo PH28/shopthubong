@@ -40,7 +40,7 @@
 									@foreach($product_cart as $product)
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/1.png" alt=""></a>
+										<a class="pull-left" href="#"><img src="source/image/product/#}}" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">{{$product['item']['name']}}</span>
 											
