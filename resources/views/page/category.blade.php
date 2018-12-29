@@ -67,11 +67,11 @@
 						<div class="beta-products-list">
 							<h4>Sản phẩm khác</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{count($product_order) }} sản phẩm</p>
+								<p class="pull-left">Tìm thấy {{count($product_other) }} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 							<div class="row">
-								@foreach($product_order as $item)
+								@foreach($product_other as $item)
 								<div class="col-sm-4">
 									<div class="single-item">
 										<div class="single-item-header">
@@ -96,7 +96,7 @@
 							
 							</div>
 							<div class="row">
-									{{$product_order->links()}}
+									{{$product_other->links()}}
 								</div>
 							<div class="space40">&nbsp;</div>
 							
