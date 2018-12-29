@@ -22,8 +22,8 @@ class CategoryController extends Controller
     public function dash(){
         $user_C = User::all()->count();
         $order_C = Order::all()->count();
-        $order_A = Order::where('status',0)->get()->count();
-        $order_U =  Order::where('status',1)->get()->count();
+        $order_A = Order::where('status',Order::APPROVE)->get()->count();
+        $order_U =  Order::where('status',Order::CANCEL)->get()->count();
         return view('admin.layout.dashboard',compact('user_C','order_C','order_A','order_U'));
     }
     /**
