@@ -9,6 +9,8 @@ class User extends Authenticatable
     use Notifiable;
     const ADMIN =  2;
     const USER = 1 ;
+    const ACTIVE = 1 ;
+    const NOTACTIVE = 2 ;
     protected $fillable = [
         'role_id', 'username','email','password','fullname',
         'dob','gender','phone','address','status'

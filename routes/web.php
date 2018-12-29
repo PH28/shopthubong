@@ -76,4 +76,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
  //});
 	Route::get('add-to-cart/{id}', 'PageController@getAddtocart')->name('pageusers.addcart');
 
+	Route::get('user/login', 'User\LoginController@getLogin')->name('user.showlogin');
+	Route::post('user/login', 'User\LoginController@postLogin')->name('user.login');
+	Route::get('user/register', 'User\LoginController@getRegister')->name('user.showregister');
+	Route::post('user/register', 'User\LoginController@postRegister')->name('user.register');
+	Route::get('user/{token}', 'User\LoginController@checkVerify');
+
 

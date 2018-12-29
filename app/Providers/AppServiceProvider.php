@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Category;
 use App\Cart;
 use Session;
-
+use App\User;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items, 'totalPrice'=>$cart->totalPrice, 'totalQty'=>$cart->totalQty]);
             }
         });
+        
     }
 
     /**
