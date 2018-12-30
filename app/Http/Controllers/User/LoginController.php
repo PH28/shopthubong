@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Role;
 use App\User;
+use App\Http\Requests\RegisterRequest;
 class LoginController extends Controller
 {
     //
     public function getLogin()
     {
-    	return view('');
+    	return view('page.login');
     }
 
     public function postLogin(Request $request)
@@ -21,31 +22,44 @@ class LoginController extends Controller
     	$password = $request['password'];
         // dd(Auth::attempt(['email' => $email, 'password' => $password]));
     	if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            $request->session()->flash('success', 'Đăng nhập thành công!');
-    		return redirect()->route('pageusers.index');
+            
+            if( Auth::user()->status == User::NOTACTIVE)
+
+            {  
+               
+        		return redirect()->route('pageusers.index')->with('fail', 'Vui lòng xác thực email');;
+            }
+            if(Auth::user()->status == User::ACTIVE)
+
+            {
+
+                return redirect()->route('pageusers.index')->with('success', 'Đăng nhập thành công');;
+
+            }
+
     	} else {
-            $request->session()->flash('fail', 'Đăng nhập thất bại!');
-    		return redirect()->route('pageusers.showlogin');
+
+             return back()->with('fail', ('Đăng nhập thất bại'));
     	}
     }
 
     public function getRegister(){
-        return view('');
+        return view('page.signup');
     }
 
-    public function postRegister(Request $request)
+    public function postRegister(RegisterRequest $request)
     {
 
         $data = [
             'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'yourname' => $request->fullname,
+            'fullname' => $request->fullname,
             'phone' => $request->phone, 
             'address' => $request->address,
-            'role_id' => User::USER;
+            'role_id' => User::USER,
             'gender' => $request->gender,
-            'dob' => $request->dob
+            'dob' => $request->dob,
             'status' => User::NOTACTIVE
         ];
         User::create($data);
@@ -53,7 +67,7 @@ class LoginController extends Controller
         return redirect()->route('pageusers.index');
     }
 
-    public function getRegister($token){
+    public function getVerify($token){
         $user = User::where('verify_token', $token)->first();
         
         $user->status = User::ACTIVE;
@@ -61,5 +75,10 @@ class LoginController extends Controller
 
         return redirect()->route('pageusers.index');
 
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('pageusers.index');
     }
 }

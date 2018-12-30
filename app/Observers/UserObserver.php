@@ -3,7 +3,8 @@
 namespace App\Observers;
 
 use App\User;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserRegister;
 class UserObserver
 {
     /**
@@ -24,6 +25,13 @@ class UserObserver
      * @param  \App\User  $user
      * @return void
      */
+
+    public function created(User $user)
+    {
+        //
+        
+        Mail::to($user->email)->send(new UserRegister($user));
+    }
     public function updated(User $user)
     {
         //

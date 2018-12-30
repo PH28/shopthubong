@@ -23,11 +23,12 @@ class Cart
 				$giohang = $this->items[$id];
 			}
 		}
+		
 		$giohang['qty']++;
-		$giohang['price'] = $item->unit_price * $giohang['qty'];
+		$giohang['price'] = $item->price * $giohang['qty'];
 		$this->items[$id] = $giohang;
 		$this->totalQty++;
-		$this->totalPrice += $item->unit_price;
+		$this->totalPrice += $item->price;
 	}
 	//xóa 1
 	public function reduceByOne($id){

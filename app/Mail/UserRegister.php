@@ -20,7 +20,7 @@ class UserRegister extends Mailable
     public function __construct($user)
     {
         //
-        $this->$user = $user;
+        $this->user = $user;
     }
 
     /**
@@ -30,6 +30,6 @@ class UserRegister extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('admin.mail.userregister');
     }
 }

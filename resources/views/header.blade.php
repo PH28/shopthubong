@@ -9,10 +9,15 @@
 				</div>
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
-						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-						<li><a href="#">Đăng kí</a></li>
-						<li><a href="#">Đăng nhập</a></li>
+						@if(Auth::check()) 
+						<li><a href="" title="">Xin chào, {{ Auth::user()->fullname }}</a></li>
+						 <li><a href="{{route('pageusers.logout')}}">Logout</a></li>        
+						 @else
+						<li><a href="{{route('pageusers.showregister')}}">Đăng kí</a></li>
+						<li><a href="{{route('pageusers.showlogin')}}">Đăng nhập</a></li>
+						@endif  
 					</ul>
+
 				</div>
 				<div class="clearfix"></div>
 			</div> <!-- .container -->
@@ -40,7 +45,7 @@
 									@foreach($product_cart as $product)
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/1.png" alt=""></a>
+										<a class="pull-left" href="#"><img src="source/image/product/#}}" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">{{$product['item']['name']}}</span>
 											

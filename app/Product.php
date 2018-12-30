@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    const NEW_PRODUCT =1;
+    const OLD_PRODUCT=0;
      protected $fillable=[
     	'name','description','price','quantity','kind','category_id'
     ];
+
     public function images()
     {
     	return $this->hasMany('App\Image');

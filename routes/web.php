@@ -63,23 +63,21 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 
  // Route::group(['namespace'=>'Userpage'], function()
  // {
-	 Route::get('index','PageController@getIndex')->name('pageusers.index');
-  	// 
+	Route::get('index','PageController@getIndex')->name('pageusers.index');
 	Route::get('category/{id}','PageController@getCategory')->name('pageusers.category');
-	  //
 	Route::get('product/{id}','PageController@getProduct')->name('pageusers.product');
-	  // 
 	Route::get('contact','PageController@getContact')->name('pageusers.contact');
-	// 
 	Route::get('about','PageController@getAbout')->name('pageusers.about');
+	Route::get('add-to-cart/{id}', 'PageController@getAddtocart')->name('pageusers.addcart');
+	Route::get('user/login','PageController@getFormLogin')->name('pageusers.login');
+	Route::get('user/signup','PageController@getFormSignup')->name('pageusers.signup');
 
  //});
-	Route::get('add-to-cart/{id}', 'PageController@getAddtocart')->name('pageusers.addcart');
 
-	Route::get('user/login', 'User\LoginController@getLogin')->name('user.showlogin');
-	Route::post('user/login', 'User\LoginController@postLogin')->name('user.login');
-	Route::get('user/register', 'User\LoginController@getRegister')->name('user.showregister');
-	Route::post('user/register', 'User\LoginController@postRegister')->name('user.register');
-	Route::get('user/{token}', 'User\LoginController@checkVerify');
-
+	Route::get('user/login', 'User\LoginController@getLogin')->name('pageusers.showlogin');
+	Route::post('user/login', 'User\LoginController@postLogin')->name('pageusers.login');
+	Route::get('user/register', 'User\LoginController@getRegister')->name('pageusers.showregister');
+	Route::post('user/register', 'User\LoginController@postRegister')->name('pageusers.register');
+	Route::get('user/{token}', 'User\LoginController@getVerify');
+	Route::get('logout','User\LoginController@logout')->name('pageusers.logout');
 

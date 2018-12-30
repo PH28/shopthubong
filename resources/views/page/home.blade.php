@@ -1,6 +1,19 @@
 @extends('master')
 @section('content')
-
+  @if(session('success'))
+                        <div class="alert alert-success">
+                       
+                            {{session('success')}}
+                        
+                        </div>
+                        @endif
+                     @if(session('fail'))
+                        <div class="alert alert-danger">
+                       
+                            {{session('fail')}}
+                        
+                        </div>
+                        @endif
 <div class="fullwidthbanner-container">
 			<div class="fullwidthbanner">
 						<div class="bannercontainer" >
@@ -43,9 +56,9 @@
 								<div class="col-sm-3">
 									<div class="single-item">
 										<div class="single-item-header">
-											@foreach($item->images as $value)
-											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$value->image}}" alt="" width="270" height="320"></a>
-											@endforeach
+											
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$item->getFirstImageAttribute()->image}}" alt="" width="270" height="320"></a>
+											
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{$item->name}}</p>
@@ -92,7 +105,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="{{route('pageusers.addcart', $item->id)}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
