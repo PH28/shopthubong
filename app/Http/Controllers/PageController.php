@@ -52,6 +52,10 @@ class PageController extends Controller
          $request->session()->put('cart', $cart);// put  gio hang vao session cart
          return redirect()->back();
     }
+    public function getCatDetail()
+    {
+        return view('page.cart');
+    }
     public function getFormLogin()
     {
         return view('page.login');

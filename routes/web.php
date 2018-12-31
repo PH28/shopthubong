@@ -71,6 +71,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('add-to-cart/{id}', 'PageController@getAddtocart')->name('pageusers.addcart');
 	Route::get('user/login','PageController@getFormLogin')->name('pageusers.login');
 	Route::get('user/signup','PageController@getFormSignup')->name('pageusers.signup');
+	Route::get('user/viewCartdetail','PageController@getCatDetail')->name('pageusers.cartdetail');
 
  //});
 
