@@ -100,10 +100,6 @@
 								@endforeach
 							</div>
 							<hr>
-							<h1 style="text-align: center;">Chi tiết giỏ hàng</h1>
-							
-							<span id="cart_details"></span>
-
 							<div class="space40">&nbsp;</div>
 							
 						</div> <!-- .beta-products-list -->

@@ -50,16 +50,6 @@
 								</div>
 								@endforeach
 								
-
-								<div class="cart-caption">
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{Session('cart')->totalPrice}}</span></div>
-									<div class="clearfix"></div>
-
-									<div class="center">
-										<div class="space10">&nbsp;</div>
-										<a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
 							</div>
 						</div> <!-- .cart -->
 						@endif

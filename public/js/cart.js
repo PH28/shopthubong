@@ -48,7 +48,7 @@ var cart = []; // array
 		});
 		function removeUnit(id)
 	 		{
-	 			if(confirm("Bạn có muốn xóa sản phẩm khỏi giỏ hàng"))
+	 			if(confirm("Bạn có muốn xóa sản phẩm khỏi giỏ hàng?"))
 	 			{
 	 				for(var i=0; i<cart.length; i++)
 	 				{
@@ -96,7 +96,7 @@ var cart = []; // array
 	            {
 	            	totalMoney += cart[i].price * cart[i].quantity;
 	                html +='<tr id="table-cart">'
-	                    + '<td>'+cart[i].name+'</td>'
+	                    + '<td><p>'+cart[i].name+'</p></td>'
 	                    + '<td><img src="'+ cart[i].image+'" width=50 height=50> </td>'
 	                    + '<td> <input type="number" onchange="changeUnitQuantity(this,'+ cart[i].id+')" name="" min=1 max=20 step =1 value="'+cart[i].quantity+'"</td>'
 	                    + '<td>'+cart[i].price+'</td>'
@@ -106,7 +106,7 @@ var cart = []; // array
 	                     + '<button name="delete" onclick="removeUnit('+ cart[i].id +')" class="btn btn-danger btn-xs delete" id="'+i+"\">Remove</button></td>"
 	                + '</tr>'
 	            }
-	            html+= '<td colspan="6"> <h3> Tổng tiền: </h3>' +  totalMoney + ' VND </td>'
+	            html+= '<td colspan="6"> <h3> Tổng tiền: </h3><h4>' +  totalMoney + ' VND </h4></td>'
 			}
 			else{
 				html += 
@@ -118,7 +118,6 @@ var cart = []; // array
 				
 			}
 			$('#cart_details').html(html);
+
 		}
-		$('.cart_details').on('click', function(){
-		  alert('dong')
-		})
+		
