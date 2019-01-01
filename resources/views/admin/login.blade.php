@@ -33,21 +33,19 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                         @if(session('status'))
+                         @if(session('success'))
                         <div class="alert alert-danger">
                        
-                            {{session('status')}}
+                            {{session('success')}}
                         
                         </div>
                         @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                     @if(session('fail'))
+                        <div class="alert alert-danger">
+                       
+                            {{session('fail')}}
+                        
+                        </div>
                         @endif
                         <form role="form" action="{{route('admin.login')}}" method="POST">
                             @csrf
