@@ -30,6 +30,11 @@ class AuthController extends Controller
 
     protected $redirectTo = '/';
     
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+       
+    }
     /**
      * Create a new controller instance.
      *
@@ -45,7 +50,7 @@ class AuthController extends Controller
     }
     public function postLogin(LoginRequest $request)
     {
-       if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
+       if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],'role_id' == User::ADMIN))
        {
             return redirect()->route('admin.dashboard');
        }
@@ -59,11 +64,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('admin/login');
     }
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-       
-    }
+    
 
 }
 

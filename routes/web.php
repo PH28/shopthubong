@@ -75,4 +75,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 
  //});
 
+	Route::get('user/login', 'User\LoginController@getLogin')->name('pageusers.showlogin');
+	Route::post('user/login', 'User\LoginController@postLogin')->name('pageusers.login');
+	Route::get('user/register', 'User\LoginController@getRegister')->name('pageusers.showregister');
+	Route::post('user/register', 'User\LoginController@postRegister')->name('pageusers.register');
+	Route::get('user/{token}', 'User\LoginController@getVerify');
+	Route::get('logout','User\LoginController@logout')->name('pageusers.logout');
 

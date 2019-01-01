@@ -66,8 +66,8 @@ class OrderController extends Controller
     {
         //
         try {
-        $userIds= User::pluck('fullname', 'id');
-        return view('admin.order.edit',compact('order','userIds'));
+       
+        return view('admin.order.edit',compact('order'));
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -136,7 +136,7 @@ class OrderController extends Controller
         $productqty = 0;
         $oderqty = 0 ;
          try {
-            if ($status == 0) {
+            if ($status == Order::APPROVE) {
                 # code...
                 $order = Order::withCount('orderdetails')->where('id',$id)->first() ;
                 if($order->orderdetails_count > 0){
@@ -154,7 +154,7 @@ class OrderController extends Controller
                 return back()->with('fail', ('Cập nhật trạng thái thất bại vì đơn hàng không có sản phẩm nào được mua'));
                 
             }
-            if ($status == 1) {
+            if ($status == Order::CANCEL) {
                 # code...
                 $order = Order::find($id);
                 $order->status = $status;

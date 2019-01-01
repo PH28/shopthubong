@@ -93,7 +93,7 @@ class UserController extends Controller
         $user=User::withCount('orders')->where('id',$id)->first() ;
         try{
 
-            if($user->role_id == 2)
+            if($user->role_id == User::ADMIN)
              {
              if($user->orders_count== 0)
 
