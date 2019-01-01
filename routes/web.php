@@ -68,10 +68,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('product/{id}','PageController@getProduct')->name('pageusers.product');
 	Route::get('contact','PageController@getContact')->name('pageusers.contact');
 	Route::get('about','PageController@getAbout')->name('pageusers.about');
-	Route::get('add-to-cart/{id}', 'PageController@getAddtocart')->name('pageusers.addcart');
-	Route::get('user/login','PageController@getFormLogin')->name('pageusers.login');
-	Route::get('user/signup','PageController@getFormSignup')->name('pageusers.signup');
 	Route::get('user/viewCartdetail','PageController@getCatDetail')->name('pageusers.cartdetail');
+	Route::get('checkout','PageController@getCheckout')->name('pageusers.checkout');
 
  //});
 

@@ -64,4 +64,8 @@ class PageController extends Controller
     {
         return view('page.signup');
     }
+    public function getCheckout()
+    {
+        return view('page.checkout');
+    }
 }

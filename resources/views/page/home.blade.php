@@ -67,7 +67,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{route('pageusers.addcart', $item->id)}}" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-image="{{$item->getFirstImageAttribute()->image}}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="#" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}" data-image="{{$item->getFirstImageAttribute()->image}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary cart_detail" href="{{route('pageusers.cartdetail')}}">Chi tiết <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -104,7 +104,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{route('pageusers.addcart', $item->id)}}" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="#" data-id="{{$item->id}}" data-name="{{$item->name}}" data-price="{{$item->price}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{route('pageusers.cartdetail')}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
