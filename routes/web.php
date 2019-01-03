@@ -69,7 +69,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('contact','PageController@getContact')->name('pageusers.contact');
 	Route::get('about','PageController@getAbout')->name('pageusers.about');
 	Route::get('user/viewCartdetail','PageController@getCatDetail')->name('pageusers.cartdetail');
-	Route::get('checkout','PageController@getCheckout')->name('pageusers.checkout');
+	Route::get('checkout/get','PageController@getCheckout')->name('pageusers.getcheckout');
+	Route::POST('checkout/post','PageController@postCheckout')->name('pageusers.postcheckout');
 
  //});
 

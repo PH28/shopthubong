@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\User\LoginController;
 use App\Slide;
 use App\Product;
 use App\Category;
 use App\Image;
 use App\Cart;
+use App\User;
+use App\Order;
 use Session;
 class PageController extends Controller
 {
+
     public function getIndex() // get trang chu
     {
     	$slide = Slide::all(); // get all;
@@ -42,15 +47,34 @@ class PageController extends Controller
     {
     	return view('page.about');
     }
-    public function getAddtocart(Request $request,$id)
+    public function getCheckout()
     {
-         $product =Product::where('id',$id)->first();
-        
-         $oldCart=Session('cart')?Session::get('cart'):null;
-         $cart = new Cart($oldCart); // khoi tao gio hang
-         $cart->add($product,$id); // them vao gio hang
-         $request->session()->put('cart', $cart);// put  gio hang vao session cart
-         return redirect()->back();
+        return view('page.checkout');
+    }
+    public function postCheckout(Request $request)
+    {
+        $user = new User();
+        $list_user = User::all();
+        $order = new Order();
+        $order->date_order = $request->date_order;
+        $order->address_order =$request->address_order;
+        $order->phone_order = $request->phone_order;
+        $order->email_order = $request->email_order;
+        $order->total = 10000;
+        $order->payment=1;
+        $order->status =1;
+        $order->user_id=1;
+        //$order->save();
+       if(LoginController::getInstance()->checkUserlogin())
+       {
+        // da login    
+         }
+       else
+       {
+        // chua login
+      }
+    
+     
     }
     public function getCatDetail()
     {
@@ -64,8 +88,5 @@ class PageController extends Controller
     {
         return view('page.signup');
     }
-    public function getCheckout()
-    {
-        return view('page.checkout');
-    }
+  
 }

@@ -17,7 +17,8 @@
 	<div class="container">
 		<div id="content">
 			
-			<form action="#" method="post" class="beta-form-checkout">
+			<form action="{{route('pageusers.postcheckout')}}" method="post" class="beta-form-checkout">
+				@csrf
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Đặt hàng</h4>
@@ -33,21 +34,26 @@
 							<input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
 										
 						</div>
+						
+						<div class="form-block">
+							<label for="email">Ngày đặt hàng*</label>
+							<input type="text" id="date" required name="date_order">
+						</div>
 
 						<div class="form-block">
 							<label for="email">Email*</label>
-							<input type="email" id="email" required placeholder="expample@gmail.com">
+							<input type="email" name="email_order" required placeholder="expample@gmail.com">
 						</div>
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ*</label>
-							<input type="text" id="adress" placeholder="Street Address" required>
+							<input type="text" name="address_order" placeholder="Street Address" required>
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại*</label>
-							<input type="text" id="phone" required>
+							<input type="text" name="phone_order" required>
 						</div>
 						
 						<div class="form-block">
@@ -67,7 +73,7 @@
 											<div class="media-body">
 												<p class="font-large">Men's Belt</p>
 												<span class="color-gray your-order-info">Color: Red</span>
-												<span class="color-gray your-order-info">Size: M</span>
+												
 												<span class="color-gray your-order-info">Qty: 1</span>
 											</div>
 										</div>
@@ -107,7 +113,7 @@
 								</ul>
 							</div>
 
-							<div class="text-center"><a class="beta-btn primary" href="#">Đặt hàng <i class="fa fa-chevron-right"></i></a></div>
+							<button type="submit" class="beta-btn primary" >Đặt hàng <i class="fa fa-chevron-right"></i></button>
 						</div> <!-- .your-order -->
 					</div>
 				</div>

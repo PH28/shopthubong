@@ -10,7 +10,27 @@ use App\User;
 use App\Http\Requests\RegisterRequest;
 class LoginController extends Controller
 {
-    //
+    private $userLogin;
+     
+    private static $instance = null;
+   
+     function __construct()
+    {
+       $userLogin = false;
+    }
+
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new LoginController();
+        }
+       return self::$instance;
+    } 
+    public function checkUserlogin()
+    {
+        return $this->userLogin;
+    }
+
     public function getLogin()
     {
     	return view('page.login');
@@ -32,7 +52,7 @@ class LoginController extends Controller
             if(Auth::user()->status == User::ACTIVE)
 
             {
-
+                $userLogin = true;
                 return redirect()->route('pageusers.index')->with('success', 'Đăng nhập thành công');;
 
             }
@@ -79,6 +99,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+        $userLogin = false;
         return redirect()->route('pageusers.index');
     }
 }
