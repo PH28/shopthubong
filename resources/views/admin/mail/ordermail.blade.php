@@ -1,4 +1,5 @@
 <h1>Xin chào {{ $order->user->fullname }}</h1>
+@if($status == 0)
 <h1>Danh sách đơn hàng bạn đã đặt :</h1>
 <table >
                         <thead>
@@ -24,3 +25,6 @@
                         </tbody>
 </table>
 <p>Total: {{ number_format($order->total)  }} VND</p>
+@else 
+<h1>Đơn hàng của bạn đã được hủy !</h1>
+@endif

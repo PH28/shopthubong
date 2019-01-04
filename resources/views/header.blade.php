@@ -1,5 +1,15 @@
 <div id="header">
 		<div class="header-top">
+			 @if(session('success'))
+						 <div class="alert alert-success">
+                            {{session('success')}}
+                        </div>
+             @endif
+             @if(session('fail'))
+                        <div class="alert alert-danger">
+                            {{session('fail')}}
+                        </div>
+             @endif
 			<div class="container">
 				<div class="pull-left auto-width-left">
 					<ul class="top-menu menu-beta l-inline">

@@ -1,5 +1,7 @@
 @extends('master')
 @section('content')
+	
+	<link href="{{ URL::asset('css/review.css') }}" rel="stylesheet">
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
@@ -22,7 +24,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							
-							<img src="source/image/product/{{$product->getFirstImageAttribute()->image}}" alt="">						
+							<img src="images/{{$product->getFirstImageAttribute()->image}}" alt="">						
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
@@ -44,7 +46,7 @@
 							<div class="single-item-options">
 								
 								<select class="wc-select" name="color">
-									<option>Số lượng</option>
+									
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -61,14 +63,39 @@
 					<div class="woocommerce-tabs">
 						<ul class="tabs">
 							<li><a href="#tab-description">Mô tả</a></li>
-							<li><a href="#tab-reviews">Reviews (0)</a></li>
+							<li><a href="#tab-reviews">Reviews ({{$product->reviews_count}})</a></li>
 						</ul>
 
 						<div class="panel" id="tab-description">
 							<p>{{$product->description}} </p>
 						</div>
 						<div class="panel" id="tab-reviews">
-							<p>No Reviews</p>
+							<div class="comments">
+				                
+				                @if(Auth::check())
+				                <form action="{{route('pageusers.review',$product->id)}}" method="POST">
+				                	@csrf
+				                <textarea placeholder="Share your thoughts..." rows="3" name="review_text" class="comment-content"  maxlength="200"></textarea>
+				                <div class="insert-text">
+				                    <div class="comment-as">
+
+				                            <span>
+				                                 <button type="submit" class="btn btn-default">Submit</button>
+				                            </span>
+				                      
+				                    </div>
+				                </div>
+				            	</form>
+				            	@endif
+				                <div class="list-comments">
+				                	@foreach($product->reviews as $item)
+				                    <div>
+				                        <p><span class="username">{{$item->user->fullname}}</span> | {{$item->created_at}}</p>
+				                        <p>{{$item->review_text}}</p>
+				                    </div>
+				                    @endforeach
+				                </div>
+				            </div>
 						</div>
 					</div>
 					<div class="space50">&nbsp;</div>

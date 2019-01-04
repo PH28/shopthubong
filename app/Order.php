@@ -8,8 +8,8 @@ class Order extends Model
 {
 
     const APPROVE = 0;
-    const CANCEL = 1;
-
+    const UNAPPROVE = 1;
+    const CANCEL = 2;
     protected $fillable=[
     	'date_order','address_order','phone_order','email_order','total','payment','status','user_id'
     ];

@@ -1,19 +1,6 @@
 @extends('master')
 @section('content')
-  @if(session('success'))
-                        <div class="alert alert-success">
-                       
-                            {{session('success')}}
-                        
-                        </div>
-                        @endif
-                     @if(session('fail'))
-                        <div class="alert alert-danger">
-                       
-                            {{session('fail')}}
-                        
-                        </div>
-                        @endif
+ 
 <div class="fullwidthbanner-container">
 			<div class="fullwidthbanner">
 						<div class="bannercontainer" >
@@ -57,7 +44,7 @@
 									<div class="single-item">
 										<div class="single-item-header">
 											
-											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$item->getFirstImageAttribute()->image}}" alt="" width="270" height="320"></a>
+											<a href="{{route('pageusers.product',$item->id)}}"><img src="images/{{$item->getFirstImageAttribute()->image}}" alt="" width="270" height="320"></a>
 											
 										</div>
 										<div class="single-item-body">
@@ -75,9 +62,9 @@
 								</div>
 								@endforeach
 							</div>
-							<div class="row">
+							<div class="row" align="center">
 										{{$product->links()}}
-									</div>
+							</div>
 						</div> <!-- .beta-products-list -->
 
 						<div class="space50">&nbsp;</div>
