@@ -7,8 +7,8 @@ class User extends Authenticatable
 {
     //
     use Notifiable;
-    const ADMIN =  1;
-    const USER = 2 ;
+    const ADMIN =  2;
+    const USER = 1 ;
     const ACTIVE = 1 ;
     const NOTACTIVE = 2 ;
     protected $fillable = [

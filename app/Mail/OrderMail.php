@@ -17,11 +17,10 @@ class OrderMail extends Mailable
      * @return void
      */
     public $order;
-    public $status;
-    public function __construct($order,$status)
+    public function __construct($order)
     {
+        //
         $this->order = $order;
-        $this->status = $status;
     }
 
     /**

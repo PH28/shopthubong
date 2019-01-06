@@ -61,7 +61,7 @@
                                 <td>{{$item->role->name}}</td>
                                 <td>{{$item->email}}</td>
                                 
-                                @if($item->status == 1)
+                                @if($item->status == 0)
                                 <td>Active</td>
                                 @else
                                 <td>Not active</td>

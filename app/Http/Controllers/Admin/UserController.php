@@ -39,7 +39,7 @@ class UserController extends Controller
         try {
             $data= $request->all();
             $user= User::create($data);
-            return redirect()->route('users.show',$user->id)->with('success',('Tạo người dùng thành công'));
+            return back()->with('success',('Tạo người dùng thành công'));
          } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -53,8 +53,6 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        $listUser = User::where('id',$id)->get();
-         return view('admin.user.show', compact('listUser'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -95,7 +93,7 @@ class UserController extends Controller
         $user=User::withCount('orders')->where('id',$id)->first() ;
         try{
 
-            if($user->role_id == User::USER)
+            if($user->role_id == User::ADMIN)
              {
              if($user->orders_count== 0)
 
