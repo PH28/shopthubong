@@ -1,7 +1,7 @@
 <?php
 //Admin login
 
-Route::get('admin/login','Admin\AuthController@showLoginForm');
+Route::get('admin/login','Admin\AuthController@showLoginForm')->name('admin.showlogin');
 Route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
 
 
@@ -26,7 +26,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::post('categories', 'Admin\CategoryController@store')->name('categories.store');
 		Route::get('categories/{category}/edit', 'Admin\CategoryController@edit')->name('categories.edit');
 		Route::put('categories/{category}', 'Admin\CategoryController@update')->name('categories.update');
-		Route::get('categories/{id}/delete', 'Admin\CategoryController@destroy')->name('categories.destroy');
+		Route::delete('categories/{category}/delete', 'Admin\CategoryController@destroy')->name('categories.destroy');
 		Route::get('categories/{id}/listCate', 'Admin\CategoryController@listCate')->name('categories.listCate');
 		Route::get('categories/{id}/show', 'Admin\CategoryController@show')->name('categories.show');
 	
