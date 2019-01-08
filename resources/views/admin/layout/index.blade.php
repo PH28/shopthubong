@@ -13,7 +13,7 @@
 
     <!-- MetisMenu CSS -->
     <link href="admin_asset/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <!-- Custom CSS -->
     <link href="admin_asset/dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -24,7 +24,10 @@
     <link href="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>

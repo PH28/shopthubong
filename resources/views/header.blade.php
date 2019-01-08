@@ -1,5 +1,15 @@
 <div id="header">
 		<div class="header-top">
+			 @if(session('success'))
+						 <div class="alert alert-success">
+                            {{session('success')}}
+                        </div>
+             @endif
+             @if(session('fail'))
+                        <div class="alert alert-danger">
+                            {{session('fail')}}
+                        </div>
+             @endif
 			<div class="container">
 				<div class="pull-left auto-width-left">
 					<ul class="top-menu menu-beta l-inline">
@@ -37,12 +47,27 @@
 					</div>
 
 					<div class="beta-comp">
-						
+						@if(Session::has('cart'))
 						<div class="cart">
-							<a class="beta-btn primary" href="{{route('pageusers.cartdetail')}}">Xem giỏ hàng <i class="fa fa-chevron-right"></i></a>
-							
+							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (@if(Session::has('cart')) {{Session('cart')->totalQty}} @else Trống @endif) <i class="fa fa-chevron-down"></i></div>
+							<div class="beta-dropdown cart-body">
+								
+									@foreach($product_cart as $product)
+								<div class="cart-item">
+									<div class="media">
+										<a class="pull-left" href="#"><img src="source/image/product/#}}" alt=""></a>
+										<div class="media-body">
+											<span class="cart-item-title">{{$product['item']['name']}}</span>
+											
+											<span class="cart-item-amount">{{$product['qty']}}*<span>{{$product['item']['price']}}</span></span>
+										</div>
+									</div>
+								</div>
+								@endforeach
+								
+							</div>
 						</div> <!-- .cart -->
-					
+						@endif
 					</div>
 				</div>
 				<div class="clearfix"></div>

@@ -14,16 +14,16 @@ class CategoryController extends Controller
 {
    public function index()
     {
-
+        $categoryIds= Category::where('parent_id',0)->pluck('name', 'id');
         $categories= Category::all();
-        return view('admin.category.list',compact('categories'));
+        return view('admin.category.list',compact('categories','categoryIds'));
 
     }
     public function dash(){
         $user_C = User::all()->count();
         $order_C = Order::all()->count();
         $order_A = Order::where('status',Order::APPROVE)->get()->count();
-        $order_U =  Order::where('status',Order::CANCEL)->get()->count();
+        $order_U =  Order::where('status',Order::UNAPPROVE)->get()->count();
         return view('admin.layout.dashboard',compact('user_C','order_C','order_A','order_U'));
     }
     /**
@@ -36,12 +36,12 @@ class CategoryController extends Controller
         //
         
         // Validate the value...
-        try {
-        	$categoryIds= Category::where('parent_id',0)->pluck('name', 'id');
-         	return view('admin.category.create',compact('categoryIds'));
-        } catch (\Exception $e) {
-            return back()->with('fail',$e->getMessage());
-        }
+        // try {
+        // 	$categoryIds= Category::where('parent_id',0)->pluck('name', 'id');
+        //  	return view('admin.category.create',compact('categoryIds'));
+        // } catch (\Exception $e) {
+        //     return back()->with('fail',$e->getMessage());
+        // }
     
          
     }
@@ -56,9 +56,14 @@ class CategoryController extends Controller
     {
         //
         try {
-        	$data= $request->all();
-        	$category= Category::create($data);
-        	return back()->with('success',('Tạo danh mục mới thành công'));
+             $category=Category::create($request->all());
+            return response()->json([
+                'data'=>$category,
+                'message'=>'Tạo danh mục thành công'
+            ],200);
+        	// $data= $request->all();
+        	// $category= Category::create($data);
+        	// return redirect()->route('categories.show',$category->id)->with('success',('Tạo danh mục mới thành công'));
         } catch (\Exception $e) {
         	return back()->with('fail',$e->getMessage());
         }
@@ -71,9 +76,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
+
+        $categories = Category::where('id',$id)->get();
+        return view('admin.category.show',compact('categories'));
     }
 
     /**
@@ -130,14 +138,31 @@ class CategoryController extends Controller
         		if($category->products_count==0)
 		        	{
 		        	$category->delete();
-		        	 return back()->with('success',('Xóa danh mục thành công'));
+                     return response()->json([
+                        'response'=>'0',
+                        'message'=>'Xóa danh mục thành công'
+                    ],200);
+		        	 // return back()->with('success',('Xóa danh mục thành công'));
+
 		        	}   
-                return back()->with('fail',('Xóa thất bại vì danh mục này có sản phẩm đang được bán'));
+                    return response()->json([
+                        'response'=>'1',
+                        'message'=>'Xóa thất bại vì danh mục này có sản phẩm đang được bán'
+                    ],200);
+                //return back()->with('fail',('Xóa thất bại vì danh mục này có sản phẩm đang được bán'));
             }
-        	return back()->with('fail',('Xoá thất bại vì còn danh mục này có danh mục con'));
+            return response()->json([
+                    'response'=>'2',
+                    'message'=>'Xoá thất bại vì còn danh mục này có danh mục con',
+                    ],200);
+        	//return back()->with('fail',('Xoá thất bại vì còn danh mục này có danh mục con'));
         } catch (\Exception $error) {
-        	   return back()->with('fail',$e->getMessage());
+        	   // return back()->with('fail',$e->getMessage());
+               return response()->json([
+                    'message'=>$e->getMessage(),
+                    ],200);
         }
+
     }
     public function listCate($id)
     {

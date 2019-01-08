@@ -36,28 +36,28 @@
                             </div>
                             <div class="form-group required">
                                 <label for="">Product Name </label>
-                                <input class="form-control" name="name" placeholder="Please Enter Product Name" />
+                                <input class="form-control" name="name" placeholder="Please Enter Product Name" value="{{ old('name') }}" />
                                  @if($errors->has('name'))
                                         <p class="text-danger">{{$errors->first('name')}}</p>
                                 @endif
                             </div>
-                            <div class="form-group required">
+                            <div class="form-group required"> 
                                 <label for="">Product Quantity </label>
-                                <input class="form-control" name="quantity" placeholder="Please Enter Product Quantity" />
+                                <input class="form-control" name="quantity" placeholder="Please Enter Product Quantity" value="{{ old('quantity') }}" />
                                  @if($errors->has('quantity'))
                                         <p class="text-danger">{{$errors->first('quantity')}}</p>
                                 @endif
                             </div>
                             <div class="form-group required">
                                 <label for="">Product Price </label>
-                                <input class="form-control" name="price" placeholder="Please Enter Product Price" />
+                                <input class="form-control" name="price" placeholder="Please Enter Product Price" value="{{ old('price')}}" />
                                  @if($errors->has('price'))
                                         <p class="text-danger">{{$errors->first('price')}}</p>
                                 @endif
                             </div>
                             <div class="form-group required">
                                 <label for="">Product Description </label>
-                                <textarea class="form-control" rows="3" name="description" ></textarea>
+                                <textarea class="form-control" rows="3" name="description" >{{ old('description') }}</textarea>
                                  @if($errors->has('description'))
                                         <p class="text-danger">{{$errors->first('description')}}</p>
                                 @endif
