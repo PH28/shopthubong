@@ -28,7 +28,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::put('categories/{category}', 'Admin\CategoryController@update')->name('categories.update');
 		Route::delete('categories/{category}/delete', 'Admin\CategoryController@destroy')->name('categories.destroy');
 		Route::get('categories/{id}/listCate', 'Admin\CategoryController@listCate')->name('categories.listCate');
-		Route::get('categories/{id}/show', 'Admin\CategoryController@show')->name('categories.show');
 	
 	//Product
 		Route::get('products', 'Admin\ProductController@index')->name('products.index');
@@ -40,7 +39,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('products/{id}/delete', 'Admin\ProductController@destroy')->name('products.destroy');
 		Route::get('products/{product}/review', 'Admin\ProductController@listReview')->name('products.review');
 		Route::get('products/{id}/detail', 'Admin\ProductController@detailProduct')->name('products.detail');
-		Route::get('products/{id}/show', 'Admin\ProductController@show')->name('products.show');
 	//Review
 		Route::get('reviews/{id}/delete', 'Admin\ReviewController@destroy')->name('reviews.destroy');
 	//Order orders
@@ -60,7 +58,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
 		Route::put('user/{user}', 'Admin\UserController@update')->name('users.update');
 		Route::get('user/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
-		Route::get('user/{id}/show', 'Admin\UserController@show')->name('users.show');
 	
 });
 
@@ -81,8 +78,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::post('user/login', 'User\LoginController@postLogin')->name('pageusers.login');
 	Route::get('user/register', 'User\LoginController@getRegister')->name('pageusers.showregister');
 	Route::post('user/register', 'User\LoginController@postRegister')->name('pageusers.register');
-	Route::get('user/{token}', 'User\LoginController@getVerify')->name('pageusers.verify');
+	Route::get('user/{token}', 'User\LoginController@getVerify');
 	Route::get('logout','User\LoginController@logout')->name('pageusers.logout');
-
-	Route::post('product/{id}/review', 'ReviewController@store')->name('pageusers.review');
 

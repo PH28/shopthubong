@@ -1,7 +1,6 @@
 @extends('master')
 @section('content')
-	
-	<link href="{{ URL::asset('css/review.css') }}" rel="stylesheet">
+	<script src="source/assets/dest/js/imagezoom.js"></script>
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
@@ -17,197 +16,100 @@
 	</div>
 
 	<div class="container">
-		<div id="content">
-			<div class="row">
-				<div class="col-sm-9">
-
-					<div class="row">
-						<div class="col-sm-4">
-							
-							<img src="images/{{$product->getFirstImageAttribute()->image}}" alt="">						
-						</div>
-						<div class="col-sm-8">
-							<div class="single-item-body">
-								<p class="single-item-title"><h2>{{$product->name}}</h2></p>
-								<p class="single-item-price">
-									<span>{{number_format($product->price)}} VND</span>
-								</p>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="space20">&nbsp;</div>
-
-							<div class="single-item-desc">
-								<p>{{$product->description}}</p>
-							</div>
-							<div class="space20">&nbsp;</div>
-
-							<p>Số lượng:</p>
-							<div class="single-item-options">
-								
-								<select class="wc-select" name="color">
-									
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-								<a class="add-to-cart" href=""><i class="fa fa-shopping-cart"></i></a>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="space40">&nbsp;</div>
-					<div class="woocommerce-tabs">
-						<ul class="tabs">
-							<li><a href="#tab-description">Mô tả</a></li>
-							<li><a href="#tab-reviews">Reviews ({{$product->reviews_count}})</a></li>
-						</ul>
-
-						<div class="panel" id="tab-description">
-							<p>{{$product->description}} </p>
-						</div>
-						<div class="panel" id="tab-reviews">
-							<div class="comments">
-				                
-				                @if(Auth::check())
-				                <form action="{{route('pageusers.review',$product->id)}}" method="POST">
-				                	@csrf
-				                <textarea placeholder="Share your thoughts..." rows="3" name="review_text" class="comment-content"  maxlength="200"></textarea>
-				                <div class="insert-text">
-				                    <div class="comment-as">
-
-				                            <span>
-				                                 <button type="submit" class="btn btn-default">Submit</button>
-				                            </span>
-				                      
-				                    </div>
-				                </div>
-				            	</form>
-				            	@endif
-				                <div class="list-comments">
-				                	@foreach($product->reviews as $item)
-				                    <div>
-				                        <p><span class="username">{{$item->user->fullname}}</span> | {{$item->created_at}}</p>
-				                        <p>{{$item->review_text}}</p>
-				                    </div>
-				                    @endforeach
-				                </div>
-				            </div>
-						</div>
-					</div>
-					<div class="space50">&nbsp;</div>
-					<div class="beta-products-list">
-						<h4>Các sản phẩm liên quan</h4>
-						<hr>
-						<div class="row">
-							@if(count($product_related))
-								@foreach($product_related as $item)
-								<div class="col-sm-4">
-									<div class="single-item">
-										<div class="single-item-header">
-											
-											<a href="{{route('pageusers.product',$item->id)}}"><img src="source/image/product/{{$item->getFirstImageAttribute()->image}}" height="150px" alt=""></a>
-											
-										</div>
-										<div class="single-item-body">
-											<p class="single-item-title">{{$item->name}}</p>
-											<p class="single-item-price">
-												<span>{{number_format($item->price)}} VND</span>
-											</p>
-										</div>
-										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href=""><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								@endforeach
-							@else
-							<p>Không có sản phẩm liên quan được tìm thấy</p>
-							@endif
-						</div>
-						<div class="row">
-							{{$product_related->links()}}
-						</div>
-					</div> <!-- .beta-products-list -->
-				</div>
-				<div class="col-sm-3 aside">
-					<div class="widget">
-						<h3 class="widget-title">Best Sellers</h3>
-						<div class="widget-body">
-							<div class="beta-sales beta-lists">
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/1.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> <!-- best sellers widget -->
-					<div class="widget">
-						<h3 class="widget-title">New Products</h3>
-						<div class="widget-body">
-							<div class="beta-sales beta-lists">
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/1.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> <!-- best sellers widget -->
-				</div>
-			</div>
-		</div> <!-- #content -->
+		 <section class="banner-bottom py-lg-5 py-3">
+         <div class="container">
+            <div class="inner-sec-shop pt-lg-4 pt-3">
+               <div class="row">
+                  <div class="col-lg-4 single-right-left ">
+                     <div class="grid images_3_of_2">
+                        <div class="flexslider1">
+                           <ul class="slides">
+                              <li data-thumb="source/image/product/{{$product->getFirstImageAttribute()->image}}">
+                                 <div class="thumb-image"> <img src="source/image/product/{{$product->getFirstImageAttribute()->image}}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                              </li>
+                              
+                           </ul>
+                           <div class="clearfix"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                     <h3>{{$product->name}}</h3>
+                     <p><span class="item_price">{{number_format($product->price)}} VND</span>
+                        
+                     </p>
+                     <div class="rating1">
+                        <ul class="stars">
+                           <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                           <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                        </ul>
+                     </div>
+                
+                     <div class="color-quality">
+                        <div class="color-quality-right">
+                           <h5>Size :</h5>
+                           <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                              <option value="null">S </option>
+                              <option value="null">M </option>
+                              <option value="null">L </option>
+                              <option value="null">XL </option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="occasional">
+          
+                     <a class="add-to-cart" href=""><i class="fa fa-shopping-cart"></i></a> <span style="background-color: #3A5C83; font-size: 150%; color: white;"> Thêm vào giỏ hàng</span>
+                   
+                  </div>
+                  <div class="clearfix"> </div>
+                  <!--/tabs-->
+                  <div class="responsive_tabs">
+                     <div id="horizontalTab">
+               
+                        <div class="resp-tabs-container">
+                           <!--/tab_one-->
+                           <div class="tab1">
+                              <div class="single_page">
+                                 <h6>Mô Tả Sản Phẩm</h6>
+                                 <p>{{$product->description}}
+                                 </p>
+                                 
+                              </div>
+                           </div>
+                           <!--//tab_one-->
+                           <div class="tab2">
+                              <div class="single_page">
+                                 <div class="bootstrap-tab-text-grids">
+                                   
+                                    <div class="add-review">
+                                       <h4>add a review</h4>
+                                       <form action="#" method="post">
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                <input type="text" name="Name" required="" placeholder="Nhập tên">
+                                             </div>
+                                             <div class="col-md-6">
+                                                <input type="email" name="Email" required="" placeholder="Nhập địa chỉ email">
+                                             </div>
+                                          </div>
+                                          <textarea name="Message" required="" placeholder="Nhận xét của bạn..."></textarea>
+                                          <input type="submit" value="SEND">
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <!--//tabs-->
+               </div>
+            </div>
+         </div>
+      </section>
 	</div> <!-- .container -->
 @endsection

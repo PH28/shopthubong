@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $user_C = User::all()->count();
         $order_C = Order::all()->count();
         $order_A = Order::where('status',Order::APPROVE)->get()->count();
-        $order_U =  Order::where('status',Order::UNAPPROVE)->get()->count();
+        $order_U =  Order::where('status',Order::CANCEL)->get()->count();
         return view('admin.layout.dashboard',compact('user_C','order_C','order_A','order_U'));
     }
     /**
@@ -56,6 +56,7 @@ class CategoryController extends Controller
     {
         //
         try {
+
              $category=Category::create($request->all());
             return response()->json([
                 'data'=>$category,
@@ -64,6 +65,7 @@ class CategoryController extends Controller
         	// $data= $request->all();
         	// $category= Category::create($data);
         	// return redirect()->route('categories.show',$category->id)->with('success',('Tạo danh mục mới thành công'));
+
         } catch (\Exception $e) {
         	return back()->with('fail',$e->getMessage());
         }
@@ -76,12 +78,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
-
-        $categories = Category::where('id',$id)->get();
-        return view('admin.category.show',compact('categories'));
     }
 
     /**
