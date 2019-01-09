@@ -13,27 +13,16 @@ use App\Cart;
 use App\User;
 use App\Order;
 use Session;
-use Illuminate\Support\Facades\Auth;
-
 class PageController extends Controller
 {
 
-    public function __construct()
-    {
-
-        $slide = Slide::all();
-        view()->share('slide', $slide);
-
-
-    }
-
     public function getIndex() // get trang chu
     {
-    	 // get all;
+    	$slide = Slide::all(); // get all;
         $product = Product::with('images')->where('kind',Product::NEW_PRODUCT)->paginate(4);
         $product_remain                 = Product::with('images')->where('kind',Product::OLD_PRODUCT)->paginate(3);
         
-    	return view('page.home', compact('product','product_remain'));
+    	return view('page.home', compact('slide','product','product_remain'));
     }
     public function getCategory($id) // $id of category
     {
@@ -46,7 +35,7 @@ class PageController extends Controller
     }
     public function getProduct(Request $request)
     {
-        $product = Product::withCount('reviews')->where('id',$request->id)->first();
+        $product = Product::where('id',$request->id)->first();
         $product_related = Product::with('images')->where('category_id', $request->id)->paginate(2); // product have same category
     	return view('page.product', compact('product','showImage', 'product_related'));
     }

@@ -108,4 +108,11 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index');
     }
+
+    public function checkqtt($id)
+    {
+        $product = Product::find($id);
+        $data = $product->quantity;
+        echo json_encode($data);
+    }
 }

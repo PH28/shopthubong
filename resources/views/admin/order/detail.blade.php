@@ -97,6 +97,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @foreach($order->orderdetails as $item)
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>

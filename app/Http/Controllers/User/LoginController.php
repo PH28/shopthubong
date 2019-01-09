@@ -47,13 +47,13 @@ class LoginController extends Controller
 
             {  
                
-        		return redirect()->route('pageusers.index')->with('fail', 'Vui lòng xác thực email');;
+        		return redirect()->route('home.index')->with('fail', 'Vui lòng xác thực email');;
             }
             if(Auth::user()->status == User::ACTIVE)
 
             {
                 $userLogin = true;
-                return redirect()->route('pageusers.index')->with('success', 'Đăng nhập thành công');;
+                return redirect()->route('home.index')->with('success', 'Đăng nhập thành công');;
 
             }
 
@@ -100,6 +100,6 @@ class LoginController extends Controller
     {
         Auth::logout();
         $userLogin = false;
-        return redirect()->route('pageusers.index');
+        return redirect()->route('home.index');
     }
 }

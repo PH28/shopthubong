@@ -52,7 +52,7 @@ class ProductController extends Controller
             $array = [];
              $data = $request->all();
             if ($request->hasFile('images')) {
-                
+                $array = [];
                 $files = $request->file('images');
                 foreach($files as $file) {
                     $name = $file->getClientOriginalName();
@@ -73,7 +73,7 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return redirect()->route('products.show',$product->id)->with('success',('Tạo sản phẩm mới thành công'));
+            return back()->with('success',('Tạo sản phẩm mới thành công'));
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());
@@ -91,11 +91,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
         //
-        $products = Product::where('id',$id)->get();
-        return view('admin.product.show',compact('products'));
     }
 
     /**
@@ -131,10 +129,10 @@ class ProductController extends Controller
        
            
         try {
-            $array=[];
+            $array = [];
             $data = $request->except('image');
             if ($request->hasFile('images')) {
-                $array = [];
+                
                 $files = $request->file('images');
                 foreach($files as $file) {
                     $name = $file->getClientOriginalName();

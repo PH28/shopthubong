@@ -15,13 +15,13 @@
                         <tbody>
                             @foreach($order->orderdetails as $item)
                             <tr>
-                            	<td>{{ $item->id }}</td>
-								<td>{{ $item->product->name }}</td>
-								<td>{{ $item->quantity }}</p>
-								<td>{{ number_format($item->unit_price)  }} VND</td>
-								<td>{{ number_format($item->quantity * $item->unit_price)  }} VND</td>
-							</tr>
-							@endforeach
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->product->name }}</td>
+                                <td>{{ $item->quantity }}</p>
+                                <td>{{ number_format($item->unit_price)  }} VND</td>
+                                <td>{{ number_format($item->quantity * $item->unit_price)  }} VND</td>
+                            </tr>
+                            @endforeach
                         </tbody>
 </table>
 <p>Total: {{ number_format($order->total)  }} VND</p>

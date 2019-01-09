@@ -56,6 +56,7 @@ class CategoryController extends Controller
     {
         //
         try {
+
              $category=Category::create($request->all());
             return response()->json([
                 'data'=>$category,
@@ -64,6 +65,7 @@ class CategoryController extends Controller
         	// $data= $request->all();
         	// $category= Category::create($data);
         	// return redirect()->route('categories.show',$category->id)->with('success',('Tạo danh mục mới thành công'));
+
         } catch (\Exception $e) {
         	return back()->with('fail',$e->getMessage());
         }
@@ -76,12 +78,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
-
-        $categories = Category::where('id',$id)->get();
-        return view('admin.category.show',compact('categories'));
     }
 
     /**

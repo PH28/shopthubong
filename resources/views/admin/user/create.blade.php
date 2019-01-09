@@ -1,3 +1,4 @@
+
 @extends('admin.layout.index')
 @section('content')
 <div id="page-wrapper">
@@ -94,4 +95,4 @@
             </div>
             <!-- /.container-fluid -->
  </div>
- @endsection
+@endsection

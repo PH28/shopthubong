@@ -29,7 +29,11 @@ class AppServiceProvider extends ServiceProvider
                 $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items, 'totalPrice'=>$cart->totalPrice, 'totalQty'=>$cart->totalQty]);
             }
         });
-        
+        view()->composer('user.partials.header',function($view){
+            $categories = Category::where('parent_id','0')->get();
+            unset($categories[0]); 
+            $view->with('categories',$categories);
+        });
     }
 
     /**

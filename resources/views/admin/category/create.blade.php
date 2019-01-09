@@ -39,14 +39,14 @@
                             </div>
                             <div class="form-group required">
                                 <label for="">Category Name </label>
-                                <input class="form-control" name="name" placeholder="Please Enter Category Name" value="{{ old('name') }}" />
+                                <input class="form-control" name="name" placeholder="Please Enter Category Name" />
                                 @if($errors->has('name'))
                                         <p class="text-danger">{{$errors->first('name')}}</p>
                                 @endif
                             </div>
                             <div class="form-group required">
                                 <label>Category Description </label>
-                                <textarea class="form-control" rows="3" name="description" value="">{{ old('description') }}</textarea>
+                                <textarea class="form-control" rows="3" name="description" ></textarea>
                                 @if($errors->has('description'))
                                         <p class="text-danger">{{$errors->first('description')}}</p>
                                 @endif

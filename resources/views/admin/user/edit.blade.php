@@ -75,9 +75,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="1"> Active </option>
-                                     <option value="2"> Not active</option>
+                                <select class="form-control" name="statusr">
+                                    <option value="0"> Active </option>
+                                     <option value="1"> Not active</option>
                                 </select>
                             </div>
                             <input type="hidden" name="password" value="$2y$10$TKh8H1.">

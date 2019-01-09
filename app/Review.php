@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Review extends Model
 {
-    const APPROVE = 0;
-    const UNAPPROVE = 1;
-
+    
       protected $fillable=[
-    	'review_text','status','user_id', 'product_id'
+    	'review_text','status','option_id','user_id', 'product_id'
     ];
     public function product()
     {
