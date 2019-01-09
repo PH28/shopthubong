@@ -48,11 +48,7 @@
                      <div class="color-quality">
                         <div class="color-quality-right">
                             <h5>Quantity :</h5>
-                              <div class="quantity-select">
-                                 <div class="entry value-minus">&nbsp;</div>
-                                 <div class="entry value"><span id="quantity">1</span></div>
-                                 <div class="entry value-plus active">&nbsp;</div>
-                            </div>
+                              <input type="number"  name="" min=1 max=20 step =1 value="1">
                         </div>
                      </div>
                      <div class="occasional">
@@ -60,7 +56,7 @@
                      </div>
                      <div class="occasion-cart">
                         <div class="toys single-item hvr-outline-out">
-                               <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">
+                               <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-image="{{$image->image}}" data-quantity = 1>
                                           <i class="fas fa-cart-plus"></i>
                                </button>
                         </div>
@@ -278,7 +274,11 @@
          	$().UItoTop({
          		easingType: 'easeOutQuart'
          	});
-         
+            $('.color-quality-right').on('click', function(){
+               var quantity = $('input[type=number]').val();
+               $('.add-cart').attr('data-quantity', quantity);
+            })
+            
          });
       </script>
       <!-- //here ends scrolling icon -->
