@@ -49,7 +49,7 @@ class ProductController extends Controller
         //
         
         try {
-
+            $array = [];
              $data = $request->all();
             if ($request->hasFile('images')) {
                 $array = [];
@@ -129,10 +129,10 @@ class ProductController extends Controller
        
            
         try {
-            $array=[];
+            $array = [];
             $data = $request->except('image');
             if ($request->hasFile('images')) {
-                $array = [];
+                
                 $files = $request->file('images');
                 foreach($files as $file) {
                     $name = $file->getClientOriginalName();

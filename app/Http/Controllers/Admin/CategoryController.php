@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $user_C = User::all()->count();
         $order_C = Order::all()->count();
         $order_A = Order::where('status',Order::APPROVE)->get()->count();
-        $order_U =  Order::where('status',Order::CANCEL)->get()->count();
+        $order_U =  Order::where('status',Order::UNAPPROVE)->get()->count();
         return view('admin.layout.dashboard',compact('user_C','order_C','order_A','order_U'));
     }
     /**

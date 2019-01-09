@@ -144,28 +144,37 @@ class OrderController extends Controller
                 foreach ($order->orderdetails as $item) {
                     $orderqty = $item->quantity;
                     $productqty = $item->product->quantity;
-                    $item->product->quantity = $productqty - $orderqty;
-                    $item->product->save();
+                    if($orderqty <= $productqty){
+                        $item->product->quantity = $productqty - $orderqty;
+                        $item->product->save();
+                    }
+                    else{
+                        return back()->with('fail', ('Cập nhật trạng thái thất bại vì sản phẩm hết hàng'));
+                    }
+
                 }
                 $order->save();
-                Mail::to($order->email_order)->send(new OrderMail($order));
-                return back()->with('success', ('Cập nhật trạng thái thành công'));
+                 Mail::to($order->email_order)->send(new OrderMail($order,$status));
+                return back()->with('success', ('Đơn hàng đã được duyệt'));
                 }
                 return back()->with('fail', ('Cập nhật trạng thái thất bại vì đơn hàng không có sản phẩm nào được mua'));
+                    }
                 
-            }
+            
+             if ($status == Order::UNAPPROVE) {
+                # code...
+                $order = Order::find($id);
+                $order->status = $status;
+                $order->save();
+                return back()->with('success',('Update success'));
+                }
             if ($status == Order::CANCEL) {
                 # code...
                 $order = Order::find($id);
                 $order->status = $status;
-                foreach ($order->orderdetails as $item) {
-                    $orderqty = $item->quantity;
-                    $productqty = $item->product->quantity;
-                    $item->product->quantity = $productqty + $orderqty;
-                    $item->product->save();
-                }
                 $order->save();
-                return back()->with('success',('Update success'));
+                Mail::to($order->email_order)->send(new OrderMail($order,$status));
+                return back()->with('success',('Đã hủy đơn hàng'));
             }
           
         } catch (\Exception $e) {

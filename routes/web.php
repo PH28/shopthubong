@@ -63,21 +63,32 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 
  // Route::group(['namespace'=>'Userpage'], function()
  // {
-	Route::get('index','PageController@getIndex')->name('pageusers.index');
-	Route::get('category/{id}','PageController@getCategory')->name('pageusers.category');
-	Route::get('product/{id}','PageController@getProduct')->name('pageusers.product');
-	Route::get('contact','PageController@getContact')->name('pageusers.contact');
-	Route::get('about','PageController@getAbout')->name('pageusers.about');
-	Route::get('user/viewCartdetail','PageController@getCatDetail')->name('pageusers.cartdetail');
-	Route::get('checkout/get','PageController@getCheckout')->name('pageusers.getcheckout');
-	Route::POST('checkout/post','PageController@postCheckout')->name('pageusers.postcheckout');
+	// Route::get('index','PageController@getIndex')->name('pageusers.index');
+	// Route::get('category/{id}','PageController@getCategory')->name('pageusers.category');
+	// Route::get('product/{id}','PageController@getProduct')->name('pageusers.product');
+	// Route::get('contact','PageController@getContact')->name('pageusers.contact');
+	// Route::get('about','PageController@getAbout')->name('pageusers.about');
+	// Route::get('user/viewCartdetail','PageController@getCatDetail')->name('pageusers.cartdetail');
+	// Route::get('checkout/get','PageController@getCheckout')->name('pageusers.getcheckout');
+	// Route::POST('checkout/post','PageController@postCheckout')->name('pageusers.postcheckout');
 
  //});
 
-	Route::get('user/login', 'User\LoginController@getLogin')->name('pageusers.showlogin');
-	Route::post('user/login', 'User\LoginController@postLogin')->name('pageusers.login');
-	Route::get('user/register', 'User\LoginController@getRegister')->name('pageusers.showregister');
-	Route::post('user/register', 'User\LoginController@postRegister')->name('pageusers.register');
-	Route::get('user/{token}', 'User\LoginController@getVerify');
-	Route::get('logout','User\LoginController@logout')->name('pageusers.logout');
+	Route::get('user/login', 'User\LoginController@getLogin')->name('users.showlogin');
+	Route::post('user/login', 'User\LoginController@postLogin')->name('users.login');
+	Route::get('user/register', 'User\LoginController@getRegister')->name('users.showregister');
+	Route::post('user/register', 'User\LoginController@postRegister')->name('users.register');
+	Route::get('user/{token}', 'User\LoginController@getVerify')->name('users.verify');
+	Route::get('logout','User\LoginController@logout')->name('users.logout');
 
+	Route::get('/', 'IndexController@index')->name('home.index');
+	Route::get('/shop', 'IndexController@showAllProduct')->name('home.shop');
+	Route::get('product/{id}/','IndexController@getProduct')->name('home.product');
+	Route::get('category/{id}/','IndexController@getProductOfCategory')->name('home.category');
+	Route::get('product/check/{id}','ProductController@checkqtt')->name('home.checkqtt');
+	Route::get('checkout/', 'IndexController@checkOut')->name('home.checkout');
+
+	Route::group(['prefix'=>'user','middleware'=>['is.login']],function(){
+		Route::get('{id}/cart/', 'IndexController@cart')->name('users.cart');
+		Route::post('order', 'IndexController@orderdetail')->name('users.orderdetail');	
+	});
