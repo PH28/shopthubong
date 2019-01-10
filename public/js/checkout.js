@@ -15,7 +15,9 @@ function printorder(data) {
 		totalc += val.subtotal;
 		checkhtml += '<tr>'
 			+ '<td>' + val.name + '</td>'
-			+ '<td>' + val.price + '</td>'
+
+			+ '<td> <img src="'+ val.image+'" width=40 height=40></td>'
+			+ '<td> ' + val.price + '</td>'
 			+ "<td id=\"soluong\">" + "<input type=\"number\" name=\"quantity\" class=\"soluong\" data_qtt=\""+val.qtt+"\" id=\""+val.id+"\" value=\""+val.qtt+"\">" + '</td>'
 			+ '<td id="subtotal">' + val.subtotal + '</td>'
 			+ '<td>' + '<button name="delete" class="btn btn-danger btn-xs remove" id="'+index+"\">Remove</button></td>"

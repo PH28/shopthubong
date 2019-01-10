@@ -138,7 +138,9 @@
             });
          
 
+
             $(document).on('click','td .btn-delete', function() {
+
                   var id = $(this).data('id');
                   var _this = $(this);
                   console.log(id);

@@ -51,7 +51,7 @@
                            @endif 
                            <li class="toyscart toyscart2 cart cart box_1">
                                
-                                <span class="fas fa-cart-arrow-down" id="cart-popover" data-toggle="popover"  data-placement="bottom" title="Shopping Cart"></span>
+                                <span class="fas fa-cart-arrow-down badge" id="cart-popover" data-toggle="popover"  data-placement="bottom" title="Shopping Cart"></span>
 
                                  <div id="popover_content_wrapper" style="display: none">
                                    <span id="cart_details"></span>

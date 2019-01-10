@@ -21,6 +21,8 @@
       <thead>
          <tr>
             <th>Name</th>
+
+            <th>Image</th>
             <th>Price</th>
             <th>Số lượng</th>
             <th>Sub Total</th>

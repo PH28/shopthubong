@@ -67,7 +67,8 @@
                                        </div>
                                     </div>
                                     <div class="toys single-item hvr-outline-out">
-                                          <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">
+
+                                          <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-image="{{$product->getFirstImageAttribute()->image}}">
                                           <i class="fas fa-cart-plus"></i>
                                           </button>
                                     </div>
@@ -161,6 +162,10 @@
             });
          
          });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 995682e630023edadb12cbbc1d2a02f476b9a12f
       </script>
       <!-- //here ends scrolling icon -->
       <!--bootstrap working-->
