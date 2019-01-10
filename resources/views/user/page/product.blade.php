@@ -277,15 +277,13 @@
          	$().UItoTop({
          		easingType: 'easeOutQuart'
          	});
-<<<<<<< HEAD
-         
-=======
+
             $('.color-quality-right').on('click', function(){
                var quantity = $('input[type=number]').val();
                $('.add-cart').attr('data-quantity', quantity);
             })
             
->>>>>>> 995682e630023edadb12cbbc1d2a02f476b9a12f
+
          });
       </script>
       <!-- //here ends scrolling icon -->

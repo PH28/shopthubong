@@ -162,10 +162,6 @@
             });
          
          });
-<<<<<<< HEAD
-=======
-
->>>>>>> 995682e630023edadb12cbbc1d2a02f476b9a12f
       </script>
       <!-- //here ends scrolling icon -->
       <!--bootstrap working-->

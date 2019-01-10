@@ -61,21 +61,18 @@ function print_shopping(data = "") {
     var htmltotal = '';
     var itemc = 0;
     var total = 0.00;
-<<<<<<< HEAD
-    html = '<div class="table-responsive" id="order_table"><table class="table table-bordered table-striped"><tr><th width="40%">Product Name</th><th width="10%">Quantity</th><th width="20%">Price</th><th width="15%">SubTotal</th><th width="5%">Action</th></tr>';
-=======
+
     html = '<div class="table-responsive" id="order_table"><table class="table table-bordered table-striped"><tr><th width="40%">Product Name</th><th width="40%">Image</th><th width="10%">Quantity</th><th width="20%">Price</th><th width="15%">SubTotal</th><th width="5%">Action</th></tr>';
->>>>>>> 995682e630023edadb12cbbc1d2a02f476b9a12f
+
         if (data != null) {
             $.each(data, function(index, val) {
                 itemc++;
                 total += val.subtotal;
                 html +='<tr id="table-cart">'
                     + '<td>'+val.name+'</td>'
-<<<<<<< HEAD
-=======
+
                     + '<td> <img src="'+ val.image+'" width=40 height=40></td>'
->>>>>>> 995682e630023edadb12cbbc1d2a02f476b9a12f
+
                     + '<td>'+val.qtt+'</td>'
                     + '<td>'+val.price+'</td>'
                     + '<td>'+val.subtotal * val.qtt+'</td>'
