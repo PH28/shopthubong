@@ -14,8 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
+      $role_id = Role::pluck('name','id');  
       $listUser = User::all();
-      return view('admin.user.list', compact('listUser'));   
+      return view('admin.user.list', compact('listUser','role_id'));   
     }
     /**
      * Show the form for creating a new resource.
@@ -38,8 +39,14 @@ class UserController extends Controller
     {
         try {
             $data= $request->all();
+            $data['status'] = User::NOTACTIVE;
+            $data['password'] = '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
             $user= User::create($data);
-            return back()->with('success',('Tạo người dùng thành công'));
+            return response()->json([
+                'data'=>$user,
+                'role' => $user->role->name,
+                'message'=>'Tạo người dùng thành công'
+            ],200);
          } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());
         }
@@ -99,12 +106,21 @@ class UserController extends Controller
 
                {
                     $user->delete();
-                    return back()->with('success', ('Xoá người dùng thành công'));
-                    }   
-
-                    return back()->with('fail', ('Xóa thất bại vì người dùng này đang đặt hàng'));  
+                    return response()->json([
+                    'response'=>'0',
+                    'message'=>'Xoá người dùng thành công',
+                    ],200);
+                   
+                 }   
+                    return response()->json([
+                    'response'=>'1',
+                    'message'=>'Xóa thất bại vì người dùng này đang đặt hàng',
+                    ],200); 
             }
-           return back()->with('fail', ('Không thể xóa Admin'));             
+            return response()->json([
+                    'response'=>'2',
+                    'message'=>'Không thể xóa Admin',
+                    ],200);       
 
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());

@@ -36,7 +36,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::post('products/product', 'Admin\ProductController@store')->name('products.store');
 		Route::get('products/{product}/edit', 'Admin\ProductController@edit')->name('products.edit');
 		Route::put('products/{product}', 'Admin\ProductController@update')->name('products.update');
-		Route::get('products/{id}/delete', 'Admin\ProductController@destroy')->name('products.destroy');
+		Route::delete('products/{id}/delete', 'Admin\ProductController@destroy')->name('products.destroy');
 		Route::get('products/{product}/review', 'Admin\ProductController@listReview')->name('products.review');
 		Route::get('products/{id}/detail', 'Admin\ProductController@detailProduct')->name('products.detail');
 	//Review
@@ -52,12 +52,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('orders/{id}/orderdetail', 'Admin\OrderController@orderDetail')->name('orders.orderdetail');
 		Route::get('orders/{id}/status/{status}', 'Admin\OrderController@updateStatus')->name('orders.status');
 
-		Route::get('user', 'Admin\UserController@index')->name('users.index');
-		Route::get('user/create', 'Admin\UserController@create')->name('users.create');
-		Route::post('user', 'Admin\UserController@store')->name('users.store');
-		Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
-		Route::put('user/{user}', 'Admin\UserController@update')->name('users.update');
-		Route::get('user/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
+		Route::get('users', 'Admin\UserController@index')->name('users.index');
+		Route::get('users/create', 'Admin\UserController@create')->name('users.create');
+		Route::post('users', 'Admin\UserController@store')->name('users.store');
+		Route::get('users/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
+		Route::put('users/{user}', 'Admin\UserController@update')->name('users.update');
+		Route::delete('users/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
 	
 });
 

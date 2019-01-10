@@ -41,9 +41,6 @@
                                 <li>
                                     <a href="{{route('users.index')}}">List User</a>
                                 </li>
-                                <li>
-                                    <a href="{{route('users.create')}}">Add User</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -21,9 +21,9 @@ class ProductController extends Controller
     {
         //
 
-        
+        $categoryIds= Category::where('parent_id','!=','0')->pluck('name', 'id');
         $products=Product::all();
-        return view('admin.product.list',compact('products'));
+        return view('admin.product.list',compact('products','categoryIds'));
     }
 
     /**
@@ -175,13 +175,22 @@ class ProductController extends Controller
         try {
             if($product->orders_count==0)
              {
+
                     $product->delete();
-                     return back()->with('success',('Xóa sản phẩm thành công'));
+                      return response()->json([
+                        'response'=>'0',
+                        'message'=>'Xóa sản phẩm thành công'
+                    ],200);
             }   
-             return back()->with('fail',('Xóa thất bại vì sản phẩm đang được đặt'));
+             return response()->json([
+                        'response'=>'1',
+                        'message'=>'Xóa thất bại vì sản phẩm đang được đặt hàng'
+                    ],200);
         }
         catch (\Exception $e) {
-            return back()->with('fail',$e->getMessage());
+            return response()->json([
+                    'message'=>$e->getMessage(),
+                    ],200);
         }
     }
 

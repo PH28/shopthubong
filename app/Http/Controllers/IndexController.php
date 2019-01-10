@@ -11,6 +11,7 @@ use App\Cart;
 use App\User;
 use App\Order;
 use App\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
@@ -55,11 +56,12 @@ class IndexController extends Controller
 
     public function orderdetail(Request $request)
     {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
         if(!empty($request->cart))
         {
         $data_order = [
             'user_id' => $request->id,
-            'date_order' => '2018/1/1',
+            'date_order' => $dt->toDateString(),
             'email_order' => $request->email,
             'phone_order' => $request->phone,
             'address_order' => $request->address,
