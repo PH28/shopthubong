@@ -48,7 +48,7 @@
                      <div class="color-quality">
                         <div class="color-quality-right">
                             <h5>Quantity :</h5>
-                              <input type="number"  name="" min=1 max=20 step =1 value="1">
+                              <input type="number" class="qtt" name="" min=1 max=20 step="1" value="1" onchange="Changeproduct(this)" >
                         </div>
                      </div>
                      <div class="occasional">
@@ -56,7 +56,7 @@
                      </div>
                      <div class="occasion-cart">
                         <div class="toys single-item hvr-outline-out">
-                               <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-image="{{$image->image}}" data-quantity = 1>
+                               <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-image="{{$image->image}}" data-quantity = 1 product-quantity="{{$product->quantity}}">
                                           <i class="fas fa-cart-plus"></i>
                                </button>
                         </div>
@@ -275,11 +275,52 @@
          		easingType: 'easeOutQuart'
          	});
             $('.color-quality-right').on('click', function(){
-               var quantity = $('input[type=number]').val();
+               var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
+               var soluong = $('.add-cart').attr('product-quantity');
+
+               console.log("Dong: quantity is: " + quantity);
+               console.log("Dong: product_quantity" + soluong);               
+               if( quantity > soluong)
+               {
+                  alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
+                  $('.qtt').val(soluong);
+               }
+
                $('.add-cart').attr('data-quantity', quantity);
-            })
+            });
+            //  $('.color-quality-right').on('change', function(){
+            //    var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
+            //    var soluong = $('.add-cart').attr('product-quantity');
+
+            //    console.log("Dong: quantity is: " + quantity);
+            //    console.log("Dong: product_quantity" + soluong);               
+            //    if( quantity > soluong)
+            //    {
+            //       //alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
+            //       //$('.qtt').val(soluong);
+            //       alert("call vao");
+            //    }
+             
+            //    $('.add-cart').attr('data-quantity', quantity);
+            //  //  alert("chane");
+ 
+            // })
+
             
          });
+          function Changeproduct(e)
+            {
+               console.log("change product");
+               var quantity = e.value;
+               var soluong = $('.add-cart').attr('product-quantity');
+               if( quantity > soluong)
+               {
+                  alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
+                  $('.qtt').val(soluong);
+               }
+
+               $('.add-cart').attr('data-quantity', quantity);
+            }
       </script>
       <!-- //here ends scrolling icon -->
       <!-- //smooth-scrolling-of-move-up -->

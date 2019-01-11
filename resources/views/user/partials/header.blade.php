@@ -32,8 +32,8 @@
                      <h1><a class="navbar-brand" href="{{route('home.index')}}">Toys-Shop</a></h1>
                   </div>
                   <div class="col-lg-5 col-md-6 search-right">
-                     <form class="form-inline my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                     <form class="form-inline my-lg-0" action="{{route('home.search')}}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchKey">
                         <button class="btn" type="submit">Search</button>
                      </form>
                   </div>
