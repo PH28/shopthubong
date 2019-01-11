@@ -41,6 +41,7 @@
       <link href="user_asset/css/style.css" rel='stylesheet' type='text/css' media="all">
       <!--//stylesheets-->
       <link rel="stylesheet" type="text/css" href="user_asset/css/checkout.css">
+      <link rel="stylesheet" type="text/css" href="css/custom.css">
       <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
       <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
       <meta name="csrf-token" content="{{ csrf_token() }}">

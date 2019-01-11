@@ -11,7 +11,7 @@ use App\Cart;
 use App\User;
 use App\Order;
 use App\OrderDetail;
-
+use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -49,6 +49,11 @@ class IndexController extends Controller
     {
         $user = Auth::user();
         return view('user.page.checkout2', compact('user'));
+    }
+
+    public function message()
+    {
+        return view('user.page.message');
     }
 
     public function checkOut()
@@ -90,9 +95,9 @@ class IndexController extends Controller
         }
         $order->total = $total;
         $order->save();
+        Session::flash('success', 'Đặt hàng thành công');
         return response()->json([
-                'response' => '0',
-                'message'=>'Tạo đơn hàng thành công'
+                'response' => '0'
             ],200);
         }
 
@@ -100,5 +105,13 @@ class IndexController extends Controller
                 'response' => '1',
                 'message'=>'Giỏ hàng không có sản phẩm'
             ],200);
+    }
+
+    public function listOrder($id)
+    {   
+        $orders = Order::where('user_id',$id)->orderBy('id','desc')->paginate(5);
+        $ordersc = Order::where('user_id',$id)->get();
+        $count = count($ordersc);
+        return view('user.page.checkorder', compact('orders','count'));
     }
 }

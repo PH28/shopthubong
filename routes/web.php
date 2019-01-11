@@ -87,8 +87,14 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('category/{id}/','IndexController@getProductOfCategory')->name('home.category');
 	Route::get('product/check/{id}','ProductController@checkqtt')->name('home.checkqtt');
 	Route::get('checkout/', 'IndexController@checkOut')->name('home.checkout');
+	Route::get('message/', 'IndexController@message')->name('home.message');
 
 	Route::group(['prefix'=>'user','middleware'=>['is.login']],function(){
+		Route::get('{id}/list-order/', 'IndexController@listOrder')->name('users.listorder');
 		Route::get('{id}/cart/', 'IndexController@cart')->name('users.cart');
 		Route::post('order', 'IndexController@orderdetail')->name('users.orderdetail');	
+	});
+
+	Route::get('checkorder',function(){
+		return view('user.page.message');
 	});

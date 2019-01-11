@@ -47,9 +47,10 @@
 					<span>Thông tin giỏ hàng</span>
 				</div>
 				<div id="table">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped timetable_sub">
 						<thead>
 							<th>Name</th>
+              <th>Image</th>
               <th>Price</th>
               <th>Số lượng</th>
               <th>Sub Total</th>
@@ -159,8 +160,7 @@
                       if(data.response == 0){
                           cart = [];
                           localStorage.setItem('cart',JSON.stringify(cart));
-                          window.location.href = "{{route('home.index')}}";
-                          alert(data.message);
+                          window.location.href = "{{route('home.message')}}";
                       }
                       if(data.response == 1){
                          alert(data.message);
