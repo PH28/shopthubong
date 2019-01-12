@@ -1,5 +1,4 @@
-
-         <div class="header-bar">
+<div class="header-bar">
             <div class="info-top-grid">
                <div class="info-contact-agile">
                   <ul>
@@ -133,4 +132,3 @@
             </div>
          </div>
       </div>
-      

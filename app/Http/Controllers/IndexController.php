@@ -96,7 +96,7 @@ class IndexController extends Controller
     public function searchProduct(Request $request)
     {
         $new_products = Product::where('kind',Product::NEW_PRODUCT)->limit(5)->get();
-        $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(1);
+        $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(3);
        //dd($product);
         return view('user.page.search', compact('product','new_products'));
     }
