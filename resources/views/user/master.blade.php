@@ -190,6 +190,7 @@
             $().UItoTop({
                easingType: 'easeOutQuart'
             });
+           
          
          });
       </script>

@@ -89,6 +89,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('checkout/', 'IndexController@checkOut')->name('home.checkout');
 	Route::get('search/', 'IndexController@searchProduct')->name('home.search');
 
+
 	Route::group(['prefix'=>'user','middleware'=>['is.login']],function(){
 		Route::get('{id}/cart/', 'IndexController@cart')->name('users.cart');
 		Route::post('order', 'IndexController@orderdetail')->name('users.orderdetail');	
