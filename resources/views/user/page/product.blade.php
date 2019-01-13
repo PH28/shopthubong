@@ -276,10 +276,7 @@
          	});
             $('.color-quality-right').on('click', function(){
                var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
-               var soluong = $('.add-cart').attr('product-quantity');
-
-               console.log("Dong: quantity is: " + quantity);
-               console.log("Dong: product_quantity" + soluong);               
+               var soluong = $('.add-cart').attr('product-quantity');              
                if( quantity > soluong)
                {
                   alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
