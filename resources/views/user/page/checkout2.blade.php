@@ -4,7 +4,7 @@
          <div class="inner_breadcrumb  ml-4">
             <ul class="short_ls">
                <li>
-                  <a href="index.html">Home</a>
+                  <a href="{{route('home.index')}}">Home</a>
                   <span>/ /</span>
                </li>
                <li>Checkout</li>

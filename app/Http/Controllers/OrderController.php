@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 class OrderController extends Controller
 {
     /**
@@ -27,6 +31,26 @@ class OrderController extends Controller
         //
     }
 
+    public function orderDetail($userid,$id)
+    {
+        //
+
+        try {
+            if($userid == Auth::user()->id){
+            $user = User::where('id',$userid)->first();
+            $order=Order::with('orderdetails')->where('user_id',$userid)->where('id',$id)->first() ;
+            $total = 0;
+            foreach ($order->orderdetails as $item) {
+                $total += $item->quantity * $item->unit_price;
+
+            }
+             return view('user.page.orderdetail',compact('order','total','user'));
+            }
+           
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -82,6 +106,22 @@ class OrderController extends Controller
     {
         //
     }
-
+    public function updateStatus($userid,$id)
+    {
+         try {
+            if ($userid == Auth::user()->id) {
+                # code...
+                $status = Order::CANCEL;
+                $order = Order::find($id);
+                $order->status = $status;
+                $order->save();
+                Mail::to($order->email_order)->send(new OrderMail($order,$status));
+                return redirect()->route('home.message')->with('success', 'Đơn hàng đã được hủy');
+            }
+          
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
+        }
+    }
     
 }

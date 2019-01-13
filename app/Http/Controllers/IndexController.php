@@ -107,11 +107,19 @@ class IndexController extends Controller
             ],200);
     }
 
+
     public function listOrder($id)
     {   
-        $orders = Order::where('user_id',$id)->orderBy('id','desc')->paginate(5);
+        $orders = Order::where('user_id',$id)->orderBy('id','desc')->paginate(10);
         $ordersc = Order::where('user_id',$id)->get();
         $count = count($ordersc);
         return view('user.page.checkorder', compact('orders','count'));
+    }
+    public function searchProduct(Request $request)
+    {
+        $new_products = Product::where('kind',Product::NEW_PRODUCT)->limit(5)->get();
+        $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(9);
+       //dd($product);
+        return view('user.page.search', compact('product','new_products'));
     }
 }

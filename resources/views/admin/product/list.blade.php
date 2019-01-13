@@ -98,7 +98,67 @@
               }
             });
 
-       
+            $('#form-add').submit(function(e){
+              e.preventDefault();
+              var formData = new FormData();
+              
+              formData.append('category_id', $('#category_id').val());
+              formData.append('name', $('#name').val());
+              formData.append('quantity', $('#quantity').val());
+              formData.append('price', $('#price').val());
+              formData.append('description', $('#description').val());
+              formData.append('kind', $('#kind').val());
+              if ($('#images')[0].files.length > 0) {
+                  for (var i = 0; i < $('#images')[0].files.length; i++)
+                      formData.append('images[]', $('#images')[0].files[i]);
+              }
+
+              var url = $(this).attr('data-url');
+              console.log(url);
+              $.ajax({
+                type: 'POST',
+                url: url,
+                cache: false,
+                contentType: false,
+                processData:false,
+                 data: formData,
+                success: function(data) {
+                    
+                    html = "";
+                    html = html +
+                           '<tr class="odd gradeX" >' +
+                                '<td>' + data.data.id + '</td>' +
+                                '<td >' + "<img src=\""+"images/"+ data.image + "\"" + "width=\"100\"  height=\"80\" alt=\"\" >" + '</td>' +
+                                '<td >' + data.data.name + '</td>' +
+                                '<td >' + data.data.quantity + '</td>' +
+                                '<td >' + data.data.price + '</td>' +
+                                '<td >' + data.data.kind + '</td>' +
+                                '<td align="center">'+ "<a href=\""+"admin/products/"+data.data.id+"/detail"+"\" >"+'<button type="button" class="btn btn-info btn-circle">'+'<i class="fa fa-eye">'+
+                                '</i>'+'</button>'+'</a>'+'</td>'+
+                                '<td align="center">'+ "<a href=\""+"admin/products/"+data.data.id+"/edit"+"\" >"+'<button type="button" class="btn btn-success btn-circle">'+'<i class="fa fa-pencil ">'+'</i>'+
+                                '</button>'+'</a>'+'</td>'+
+                                '<td align="center">' + "<button  data-id=\""+data.data.id+"\"  type=\"button\" class=\"btn btn-danger btn-circle btn-delete fa fa-trash-o \">" + '</button>' + '</td>' +
+                                
+                                
+                            '</tr>';
+                    $('tbody').prepend(html);
+                    $('#modal-add').modal('hide');
+                    $(".modal-body input").val("");
+                    $(".modal-body textarea").val("");
+                    toastr.success(data.message)
+                    },
+                error: function (data) {
+                    var errors = data.responseJSON;
+                    var errorsHtml = '';
+                    console.log(data.responseJSON);
+                    $.each(errors.errors, function( key, value ) {
+                      errorsHtml =  value[0] ;
+                      toastr.error( errorsHtml)
+                    });
+                    console.log( errorsHtml);
+                }
+              })
+            });
 
             $(document).on('click','td .btn-delete', function() {
                   var id = $(this).data('id');

@@ -19,9 +19,7 @@
                                 <li>
                                     <a href="{{route('products.index')}}">List Product</a>
                                 </li>
-                                <li>
-                                    <a href="{{route('products.create')}}">Add Product</a>
-                                </li>
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

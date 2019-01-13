@@ -4,7 +4,7 @@
             <div class="inner_breadcrumb  ml-4">
                <ul class="short_ls">
                   <li>
-                     <a href="index.html">Home</a>
+                     <a href="{{route('home.index')}}">Home</a>
                      <span>/ /</span>
                   </li>
                   <li>Danh sách đơn hàng</li>
@@ -35,24 +35,17 @@
                            	@foreach($orders as $order)
                               <tr class="rem1">
                                  <td class="invert">{{$i++}}</td>
-                                 <td class="invert-image">{{$order->id}}</td>
+                                 <td class="invert-image"><a href="{{route('users.detail',["userid" => Auth::user()->id, "id" => $order->id])}}" style="color: black;text-decoration: underline">{{$order->id}}</a></td>
                                  <td class="invert">{{$order->date_order}}</td>
                                  <td class="invert">{{number_format($order->total)}} VND</td>
                                  <td class="invert">
-                                 	 @if($order->status == 0)
-                                <button class="btn btn-flat btn-info  " type="button" style="width:100px">
-                                      Approve                       
-                                </button>
-                                @elseif($order->status == 1)
-                                <button class="btn btn-flat btn-info btn-danger " type="button"  style="width:100px">
-                                      Unapprove
-                                </button>
-                                @else
-                                <button class="btn btn-flat btn-info btn-warning " type="button" style="width:100px" >
-                                      Cancel
-                                </button>
-                                @endif
-
+                                    @if($order->status == 0)
+                                      Đã duyệt
+                                    @elseif($order->status == 1)
+                                      Đang chờ duyệt
+                                    @else
+                                         Đã hủy 
+                                    @endif
                                  </td>
 
                               </tr>

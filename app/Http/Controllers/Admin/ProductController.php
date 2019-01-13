@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         //
-        
+
         try {
             $array = [];
              $data = $request->all();
@@ -73,7 +73,19 @@ class ProductController extends Controller
                             'url' => $item
                         ]);
             }
-            return back()->with('success',('Tạo sản phẩm mới thành công'));
+            if (!empty($product->getFirstImageAttribute()->image)) {
+                    $image =$product->getFirstImageAttribute()->image;
+            }
+            else
+            {
+                $image =  "";
+            }
+            
+            return response()->json([
+                'data'=>$product,
+                'message'=>'Thêm sản phẩm thành công',
+                'image' => $image,
+            ],200);
         } 
         catch (\Exception $e) {
             return back()->with('fail',$e->getMessage());

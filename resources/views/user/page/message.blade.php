@@ -9,7 +9,7 @@
                <p class="mb-3"> {{session('success')}}
                </p>
                @endif
-                <p>Trở về  <a href="{{route('home.index')}}" style="color:black" >Trang chủ </a></p>
+                <p>Trở về  <a href="{{route('home.index')}}" style="color:black; text-decoration: underline;" >Trang chủ </a></p>
             </div>
                         
          </div>
