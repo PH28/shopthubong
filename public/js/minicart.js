@@ -68,8 +68,8 @@ function print_shopping(data = "") {
                     + '<td>'+val.name+'</td>'
                     + '<td> <img src="'+ val.image+'" width=40 height=40></td>'
                     + '<td>'+val.qtt+'</td>'
-                    + '<td>'+val.price+'</td>'
-                    + '<td>'+val.subtotal * val.qtt+'</td>'
+                    + '<td>'+val.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'
+                    + '<td>'+(val.subtotal * val.qtt).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'
                     + '<td>'
                         + '<button name="delete" class="btn btn-danger btn-xs delete" id="'+index+"\">Remove</button></td>"
                 + '</tr>';
