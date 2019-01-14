@@ -33,7 +33,7 @@
    </table>
    <div id="tongtien">
       <span class="text-danger">Total: </span>
-      <span id="totalcheckout"></span> <sup>đ</sup>
+      <span id="totalcheckout"></span>
    </div>
    
    <div id="orderError">

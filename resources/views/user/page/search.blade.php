@@ -3,12 +3,16 @@
 <section class="contact py-lg-4 py-md-3 py-sm-3 py-3">
          <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
             <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Toys Shop</h3>
+            @if(count($product) != 0)
+                <h6 style="text-align: center;">Tìm được {{count($product)}} sản phẩm</h6>
+            @endif
             <div class="row">
                <div class="side-bar col-lg-3">
                   <!-- //reviews -->
                   <!-- deals -->
                   <div class="deal-leftmk left-side">
                      <h3 class="agileits-sear-head">New Products</h3>
+
                      @foreach($new_products as $item)
                         <div class="row special-sec1">
                         <div class="col-xs-4 img-deals">
@@ -34,6 +38,9 @@
                
                <div class="left-ads-display col-lg-9">
                   <div class="row">
+                     @if(count($product)==0)
+                        <h6 style="text-indent: 50px">Không tìm được sản phẩm</h6>
+                     @else
                      @foreach($product as $item)
                      <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">
                         <div class="product-toys-info">
@@ -77,6 +84,8 @@
                         </div>
                      </div>
                      @endforeach
+
+                     @endif
                   </div>
            
                   <div class="col-lg-4 col-md-6 col-sm-6 product-men women_two">

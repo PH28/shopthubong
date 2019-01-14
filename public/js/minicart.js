@@ -7,7 +7,8 @@ if (JSON.parse(localStorage.getItem('cart'))) {
 //khi click vào mua sản phẩm sẽ lưu vào local storages
 print_shopping(cart);
 $('.add-cart').on('click',  function(event)  {
-    console.log(cart);
+
+    console.log("dong add gio hang");
     event.preventDefault();
     var id = $(this).attr('id');
     var subtotal = 0;
@@ -18,15 +19,20 @@ $('.add-cart').on('click',  function(event)  {
     var image1 = $(this).attr('data-image');
    // console.log(image);
     var action = 'add';
+
     var quantity_input=$(this).attr('data-quantity');
     var qtt  ;
     if (typeof quantity_input == "undefined") {
+        console.log("case 1");
         qtt =  1;
+         subtotal = qtt * price;
     } else {
+        console.log("case 2");
         qtt = quantity_input;
+         console.log("case 2 qtt = " + qtt );
+          subtotal = qtt * price;
     }
-    console.log("Dong: "+ qtt);
-    subtotal = qtt * price;
+   
     var data = {
         id: id,
         name: name,
@@ -36,13 +42,18 @@ $('.add-cart').on('click',  function(event)  {
         qtt: qtt,
         subtotal: subtotal
     };
-
     var ext = false;
     if (cart.length > 0) {
         $.each(cart, function(index, val) {
             if (val.id == data.id) {
+                console.log("val.qtt " + val.qtt);
                 console.log('cong qtt len 1');
-                val.qtt++;
+                if(typeof quantity_input == "undefined")
+                {
+                    val.qtt++;
+                } else {
+                    val.qtt = parseInt(val.qtt) + parseInt(data.qtt);
+                }
                 ext = true;
                 return false;
             } 
@@ -75,8 +86,8 @@ function print_shopping(data = "") {
                     + '<td> <img src="'+ val.image+'" width=40 height=40></td>'
 
                     + '<td>'+val.qtt+'</td>'
-                    + '<td>'+val.price+'</td>'
-                    + '<td>'+val.subtotal * val.qtt+'</td>'
+                    + '<td>'+val.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'
+                    + '<td>'+(val.subtotal * val.qtt).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'
                     + '<td>'
                         + '<button name="delete" class="btn btn-danger btn-xs delete" id="'+index+"\">Remove</button></td>"
                 + '</tr>';

@@ -51,6 +51,7 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" name="searchKey">
                         <button class="btn" type="submit">Search</button>
                      </form>
+
                   </div>
                   <div class="col-lg-4 col-md-3 right-side-cart">
                      <div class="cart-icons">

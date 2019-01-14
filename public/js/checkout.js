@@ -12,14 +12,14 @@ function printorder(data) {
 	var totalc = 0;
 	if (data.length > 0) {
 		$.each(data, function(index, val) {
-		totalc += val.subtotal;
+		totalc += (val.price * val.qtt);
 		checkhtml += '<tr>'
 			+ '<td>' + val.name + '</td>'
 
 			+ '<td> <img src="'+ val.image+'" width=40 height=40></td>'
-			+ '<td> ' + val.price + '</td>'
+			+ '<td> ' + val.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+ " VND" + '</td>'
 			+ "<td id=\"soluong\">" + "<input type=\"number\" name=\"quantity\" class=\"soluong\" data_qtt=\""+val.qtt+"\" id=\""+val.id+"\" value=\""+val.qtt+"\">" + '</td>'
-			+ '<td id="subtotal">' + val.subtotal + '</td>'
+			+ '<td id="subtotal">' + (val.price * val.qtt).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+" VND" + '</td>'
 			+ '<td>' + '<button name="delete" class="btn btn-danger btn-xs remove" id="'+index+"\">Remove</button></td>"
 			+ '</tr>'; 
 		
@@ -33,7 +33,7 @@ function printorder(data) {
 	} 
 	$('tbody').html(checkhtml);
 	var total_money  = totalc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-	$('#totalcheckout').html(total_money);
+	$('#totalcheckout').html(total_money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+ " VND");
 }
 
 
