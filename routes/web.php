@@ -98,5 +98,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('{id}/cart/', 'IndexController@cart')->name('users.cart');
 		Route::post('order', 'IndexController@orderdetail')->name('users.orderdetail');	
 		Route::get('{userid}/list-order/{id}/order-detail/', 'OrderController@orderDetail')->name('users.detail');
+		Route::post('product/{id}/review', 'ReviewController@store')->name('users.review');
 		Route::post('{userid}/list-order/{id}/action/', 'OrderController@updateStatus')->name('users.cancel');
 	});

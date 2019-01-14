@@ -85,18 +85,17 @@
                            </div>
                            <!--//tab_one-->
                            <div class="tab2">
-                              <div class="single_page">
+                              <div class="single_page" style="width: 100%">
                                  <div class="bootstrap-tab-text-grids">
+                                    <h4>Bình luận</h4>
                                     @foreach($product->reviews as $review)
                                     <div class="bootstrap-tab-text-grid">
-                                       <div class="bootstrap-tab-text-grid-left">
-                                          <img src="user_asset/images/team1.jpg" alt=" " class="img-fluid">
-                                       </div>
-                                       <div class="bootstrap-tab-text-grid-right">
-                                          <ul>
-                                             <li><a href="#">{{ $review->user->fullname}}</a></li>
-                                          </ul>
-                                          <p>{{$review->review_text}}
+                                       <div class="">
+                                          <span>{{ $review->user->fullname}}
+                                          </span>
+                                          <span style="font-size: 10px;"> {{ $review->created_at}}
+                                          </span> 
+                                          <p style="margin-top: 0px">{{$review->review_text}}
                                           </p>
                                        </div>
                                        <div class="clearfix"> </div>
@@ -104,12 +103,20 @@
                                     @endforeach
                                     @if(Auth::check()) 
                                     <div class="add-review">
-                                       <h4>add a review</h4>
-                                       <form action="#" method="post">
-                                          <textarea name="Message" required=""></textarea>
+                                       <h4><p>Bình luận dành cho sản phẩm này
+                                    </p></h4>
+                                       <form action="{{route('users.review',$product->id)}}" method="post">
+                                          @csrf
+                                          <textarea name="review_text" required=""></textarea>
+                                          @if($errors->has('review_text'))
+                                        <p class="text-danger">{{$errors->first('review_text')}}</p>
+                                @endif
                                           <input type="submit" value="SEND">
                                        </form>
                                     </div>
+                                    @else
+                                    Bạn cần phải đăng nhập để bình luận
+      <button type="button" data-toggle="modal"   class="btn btn-primary" data-target="#exampleModal"> Đăng nhập</button>
                                     @endif
                                  </div>
                               </div>

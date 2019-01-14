@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use Illuminate\Http\Request;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReviewRequest;
 class ReviewController extends Controller
 {
     /**
@@ -33,9 +35,16 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         //
+        $data= $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $data['product_id'] = $id;
+        $data['status'] = 1;
+        $review= Review::create($data);
+        return redirect()->route('home.product',$id);
+
     }
 
     /**
