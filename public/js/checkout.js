@@ -32,8 +32,11 @@ function printorder(data) {
                 +'</tr>';
 	} 
 	$('tbody').html(checkhtml);
-	$('#totalcheckout').html(totalc);
+	var total_money  = totalc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+	$('#totalcheckout').html(total_money);
 }
+
+
 
 $(document).on('click', '.remove',function() {
 	if (confirm("Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng không?")) {

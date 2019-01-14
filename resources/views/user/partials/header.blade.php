@@ -1,5 +1,4 @@
-
-         <div class="header-bar">
+<div class="header-bar">
             <div class="info-top-grid">
                <div class="info-contact-agile">
                   <ul>
@@ -131,6 +130,9 @@
                               <input type="password" placeholder="password" name="password" required="">
                            </div>
                            <button type="submit" class="btn subscrib-btnn">Login</button>
+                           <div class="styled-input">
+                            <p>Chưa có tài khoản? <a  href="{{route('users.showregister')}}" style="color:black; text-decoration: underline;" >Đăng kí</a></p>
+                            </div>
                         </div>
                      </form>
                   </div>
@@ -141,4 +143,3 @@
             </div>
          </div>
       </div>
-      

@@ -27,6 +27,7 @@ class ProductRequest extends FormRequest
             //
             'name'=>'required|unique:products|min:8|max:32',
             'category_id'=>'required',
+            'images'=>'required',
             'quantity'=>'required|numeric',
             'price'=>'required|numeric',
             'description'=>'required',
@@ -41,6 +42,7 @@ class ProductRequest extends FormRequest
          'name.max' => 'Tên chỉ được tối đa 32 kí tự',
          'category_id.required'=>'Chưa chọn danh mục',
          'quantity.required'=>'Chưa nhập số lượng',
+         "images.required" => "Chưa chọn ảnh sản phẩm",
          'price.required'=>'Chưa nhập giá',
          'description.required'=>'Chưa nhập mô tả',
          "quantity.numeric" => "Số lượng phải là số",

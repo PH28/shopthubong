@@ -13,7 +13,7 @@ use App\Order;
 use App\OrderDetail;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
-
+use App\Http\Requests\OrderRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
@@ -61,7 +61,7 @@ class IndexController extends Controller
         return view('user.page.checkout');
     }
 
-    public function orderdetail(Request $request)
+    public function orderdetail( OrderRequest $request)
     {
 
         $dt = Carbon::now('Asia/Ho_Chi_Minh');
@@ -73,9 +73,9 @@ class IndexController extends Controller
 
             'date_order' => $dt->toDateString(),
 
-            'email_order' => $request->email,
-            'phone_order' => $request->phone,
-            'address_order' => $request->address,
+            'email_order' => $request->email_order,
+            'phone_order' => $request->phone_order,
+            'address_order' => $request->address_order,
             'status' => Order::UNAPPROVE,
             'total' => 0,
             'payment' => 1,
@@ -97,7 +97,8 @@ class IndexController extends Controller
         $order->save();
         Session::flash('success', 'Đặt hàng thành công');
         return response()->json([
-                'response' => '0'
+                'response' => '0',
+                'data' => $order,
             ],200);
         }
 
@@ -118,7 +119,9 @@ class IndexController extends Controller
     public function searchProduct(Request $request)
     {
         $new_products = Product::where('kind',Product::NEW_PRODUCT)->limit(5)->get();
-        $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(9);
+
+        $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(3);
+
        //dd($product);
         return view('user.page.search', compact('product','new_products'));
     }

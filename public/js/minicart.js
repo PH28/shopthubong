@@ -56,6 +56,7 @@ $('.add-cart').on('click',  function(event)  {
     print_shopping(cart);
 });
 print_shopping();
+
 function print_shopping(data = "") {
     var html = '';
     var htmltotal = '';
