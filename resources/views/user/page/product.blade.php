@@ -48,7 +48,7 @@
                      <div class="color-quality">
                         <div class="color-quality-right">
                             <h5>Quantity :</h5>
-                              <input type="number" class="qtt" name="" min=1 max=20 step="1" value="1" onchange="Changeproduct(this)" >
+                              <input type="number" class="input-text qty text qtt" step="1" min="1" max="" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="">
                         </div>
                      </div>
                      <div class="occasional">
@@ -285,23 +285,25 @@
 
                $('.add-cart').attr('data-quantity', quantity);
             });
-            //  $('.color-quality-right').on('change', function(){
-            //    var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
-            //    var soluong = $('.add-cart').attr('product-quantity');
 
-            //    console.log("Dong: quantity is: " + quantity);
-            //    console.log("Dong: product_quantity" + soluong);               
-            //    if( quantity > soluong)
-            //    {
-            //       //alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
-            //       //$('.qtt').val(soluong);
-            //       alert("call vao");
-            //    }
-             
-            //    $('.add-cart').attr('data-quantity', quantity);
-            //  //  alert("chane");
+             $('.color-quality-right').on('change', function(){
+               var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
+               var soluong = $('.add-cart').attr('product-quantity');
+               if(parseInt(quantity) < 0)
+               {
+                  alert("Giá trị không hợp lệ");
+                   $('.qtt').val(1);   
+                  quantity = 1;  
+               }
+               if(parseInt(quantity) >parseInt(soluong))
+               {
+                  alert("số lượng sản phẩm phải lớn hơn 0 và bé hơn " + soluong);
+                  $('.qtt').val(soluong);   
+                  quantity = soluong;       
+               }
+                   $('.add-cart').attr('data-quantity', quantity);
  
-            // })
+            })
 
             
          });

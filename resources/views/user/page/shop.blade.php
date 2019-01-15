@@ -16,7 +16,7 @@
                             @if(!empty($item->getFirstImageAttribute()->image))
                            <img src="images/{{$item->getFirstImageAttribute()->image}}" style="width: 90px; height: 90px; " alt="" class="img-fluid">
                             @else
-                                   <img src="" style="width: 90px; height: 90px; " alt=""> 
+                                   <img src="images/gau_bong_to.PNG" style="width: 90px; height: 90px; " alt=""> 
                               @endif
                         </div>
                         <div class="col-xs-8 img-deal1">

@@ -8,7 +8,7 @@
                      </li>
                      <li>
                         <span class="fas fa-envelope"></span>
-                        <p><a href="mailto:info@example.com">info@example1.com</a></p>
+                        <p><a href="mailto:info@example.com">92 Quang Trung,Hải Châu,Đà Nẵng</a></p>
                      </li>
                      <li>
                      </li>
