@@ -11,16 +11,37 @@
                         <p><a href="mailto:info@example.com">92 Quang Trung,Hải Châu,Đà Nẵng</a></p>
                      </li>
                      <li>
-                     </li>
-                     
-                    @if(Auth::check()) 
-                        <li style="float: right">
-                        <p><a href="{{route('users.logout')}}">Logout</a></p>
-                        </li>
-                        <li style="float: right; margin-right: 5px "><span></span></li>
-                        <li style="float: right; margin-right: 5px ">Xin chào,{{ Auth::user()->fullname }}</li>
+                        <a data-toggle="modal"  class="btn " ><span class="fas fa-envelope"></span>
+                        <p>info@example1.com</p></a>
                         
-                    @endif  
+                     </li>
+
+               
+                    @if(Auth::check()) 
+
+                        <li style="float: right; margin-right: 5px ">
+                        <div class="dropdown" style="float:right;">
+
+                          <div class="dropbtn "><i class="fa fa-caret-down" style="margin-right: 5px "></i>{{ Auth::user()->fullname }}</div>
+                          <div class="dropdown-content">
+                           <a href="{{route('users.listorder', Auth::user()->id)}}"><i class="fa fa-th-list " style="margin-right: 5px "></i>Xem đơn hàng</a>
+                            <a href="{{route('users.logout')}}"><i class="fa fa-sign-out-alt" style="margin-right: 5px "></i>Logout</a>
+                          </div>
+                        </div>
+                        </li>
+
+                        
+                    @else
+
+                    <li style="float: right; margin-right: 5px ">
+                          <a  href="{{route('users.showregister')}}"  class="btn" style="color: black"><i class="fa fa-pencil-alt " style="margin-right: 5px; "></i><i class="fa">Đăng kí</i></a>
+                     </li>
+
+                     <li style="float: right; margin-right: 5px ">
+                          <a data-toggle="modal"  class="btn " data-target="#exampleModal"><i class="far fa-user " style="margin-right: 5px"></i><i class="fa">Đăng nhập</i></a>
+                     </li>
+                      
+                    @endif 
                 
                   </ul>
                </div>
@@ -40,18 +61,10 @@
                   <div class="col-lg-4 col-md-3 right-side-cart">
                      <div class="cart-icons">
                         <ul>
-                           @if(Auth::check()) 
-                           <li></li>
-                              
-                           
-                           @else
-                           <li>
-                           <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
-                           </li>
-                           @endif 
                            <li class="toyscart toyscart2 cart cart box_1">
                                
                                 <span class="fas fa-cart-arrow-down badge" id="cart-popover" data-toggle="popover"  data-placement="bottom" title="Shopping Cart"></span>
+
                                  <div id="popover_content_wrapper" style="display: none">
                                    <span id="cart_details"></span>
                                    <div align="right" style="margin-top: 5px;">
@@ -123,6 +136,9 @@
                               <input type="password" placeholder="password" name="password" required="">
                            </div>
                            <button type="submit" class="btn subscrib-btnn">Login</button>
+                           <div class="styled-input">
+                            <p>Chưa có tài khoản? <a  href="{{route('users.showregister')}}" style="color:black; text-decoration: underline;" >Đăng kí</a></p>
+                            </div>
                         </div>
                      </form>
                   </div>

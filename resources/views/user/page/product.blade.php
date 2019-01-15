@@ -49,6 +49,7 @@
                         <div class="color-quality-right">
                             <h5>Quantity :</h5>
                               <input type="number" class="input-text qty text qtt" step="1" min="1" max="" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" aria-labelledby="">
+
                         </div>
                      </div>
                      <div class="occasional">
@@ -56,7 +57,9 @@
                      </div>
                      <div class="occasion-cart">
                         <div class="toys single-item hvr-outline-out">
+
                                <button class="toys-cart ptoys-cart add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}" data-image="{{$image->image}}" data-quantity = 1 product-quantity="{{$product->quantity}}">
+
                                           <i class="fas fa-cart-plus"></i>
                                </button>
                         </div>
@@ -81,18 +84,17 @@
                            </div>
                            <!--//tab_one-->
                            <div class="tab2">
-                              <div class="single_page">
+                              <div class="single_page" style="width: 100%">
                                  <div class="bootstrap-tab-text-grids">
+                                    <h4>Bình luận</h4>
                                     @foreach($product->reviews as $review)
                                     <div class="bootstrap-tab-text-grid">
-                                       <div class="bootstrap-tab-text-grid-left">
-                                          <img src="user_asset/images/team1.jpg" alt=" " class="img-fluid">
-                                       </div>
-                                       <div class="bootstrap-tab-text-grid-right">
-                                          <ul>
-                                             <li><a href="#">{{ $review->user->fullname}}</a></li>
-                                          </ul>
-                                          <p>{{$review->review_text}}
+                                       <div class="">
+                                          <span>{{ $review->user->fullname}}
+                                          </span>
+                                          <span style="font-size: 10px;"> {{ $review->created_at}}
+                                          </span> 
+                                          <p style="margin-top: 0px">{{$review->review_text}}
                                           </p>
                                        </div>
                                        <div class="clearfix"> </div>
@@ -100,12 +102,20 @@
                                     @endforeach
                                     @if(Auth::check()) 
                                     <div class="add-review">
-                                       <h4>add a review</h4>
-                                       <form action="#" method="post">
-                                          <textarea name="Message" required=""></textarea>
+                                       <h4><p>Bình luận dành cho sản phẩm này
+                                    </p></h4>
+                                       <form action="{{route('users.review',$product->id)}}" method="post">
+                                          @csrf
+                                          <textarea name="review_text" required=""></textarea>
+                                          @if($errors->has('review_text'))
+                                        <p class="text-danger">{{$errors->first('review_text')}}</p>
+                                @endif
                                           <input type="submit" value="SEND">
                                        </form>
                                     </div>
+                                    @else
+                                    Bạn cần phải đăng nhập để bình luận
+      <button type="button" data-toggle="modal"   class="btn btn-primary" data-target="#exampleModal"> Đăng nhập</button>
                                     @endif
                                  </div>
                               </div>
@@ -274,6 +284,7 @@
          	$().UItoTop({
          		easingType: 'easeOutQuart'
          	});
+
             $('.color-quality-right').on('click', function(){
                var quantity = $('input[type=number]').val(); // so luong ma nguoi dung nhap vao
                var soluong = $('.add-cart').attr('product-quantity');              
@@ -306,6 +317,7 @@
             })
 
             
+
          });
           function Changeproduct(e)
             {

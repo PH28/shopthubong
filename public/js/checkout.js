@@ -15,6 +15,7 @@ function printorder(data) {
 		totalc += (val.price * val.qtt);
 		checkhtml += '<tr>'
 			+ '<td>' + val.name + '</td>'
+
 			+ '<td> <img src="'+ val.image+'" width=40 height=40></td>'
 			+ '<td> ' + val.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+ " VND" + '</td>'
 			+ "<td id=\"soluong\">" + "<input type=\"number\" name=\"quantity\" class=\"soluong\" data_qtt=\""+val.qtt+"\" id=\""+val.id+"\" value=\""+val.qtt+"\">" + '</td>'

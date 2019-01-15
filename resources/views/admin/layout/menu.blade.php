@@ -19,9 +19,7 @@
                                 <li>
                                     <a href="{{route('products.index')}}">List Product</a>
                                 </li>
-                                <li>
-                                    <a href="{{route('products.create')}}">Add Product</a>
-                                </li>
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -40,9 +38,6 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{route('users.index')}}">List User</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('users.create')}}">Add User</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -11,6 +11,9 @@ use App\Cart;
 use App\User;
 use App\Order;
 use App\OrderDetail;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
@@ -48,21 +51,31 @@ class IndexController extends Controller
         return view('user.page.checkout2', compact('user'));
     }
 
+    public function message()
+    {
+        return view('user.page.message');
+    }
+
     public function checkOut()
     {
         return view('user.page.checkout');
     }
 
-    public function orderdetail(Request $request)
+    public function orderdetail( OrderRequest $request)
     {
+
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+
         if(!empty($request->cart))
         {
         $data_order = [
             'user_id' => $request->id,
-            'date_order' => '2018/1/1',
-            'email_order' => $request->email,
-            'phone_order' => $request->phone,
-            'address_order' => $request->address,
+
+            'date_order' => $dt->toDateString(),
+
+            'email_order' => $request->email_order,
+            'phone_order' => $request->phone_order,
+            'address_order' => $request->address_order,
             'status' => Order::UNAPPROVE,
             'total' => 0,
             'payment' => 1,
@@ -82,9 +95,10 @@ class IndexController extends Controller
         }
         $order->total = $total;
         $order->save();
+        Session::flash('success', 'Đặt hàng thành công');
         return response()->json([
                 'response' => '0',
-                'message'=>'Tạo đơn hàng thành công'
+                'data' => $order,
             ],200);
         }
 
@@ -93,10 +107,21 @@ class IndexController extends Controller
                 'message'=>'Giỏ hàng không có sản phẩm'
             ],200);
     }
+
+
+    public function listOrder($id)
+    {   
+        $orders = Order::where('user_id',$id)->orderBy('id','desc')->paginate(10);
+        $ordersc = Order::where('user_id',$id)->get();
+        $count = count($ordersc);
+        return view('user.page.checkorder', compact('orders','count'));
+    }
     public function searchProduct(Request $request)
     {
         $new_products = Product::where('kind',Product::NEW_PRODUCT)->limit(5)->get();
+
         $product = Product::where('name', 'like', '%'.$request->searchKey.'%')->orWhere('price',$request->searchKey)->paginate(3);
+
        //dd($product);
         return view('user.page.search', compact('product','new_products'));
     }

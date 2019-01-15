@@ -14,6 +14,8 @@ $('.add-cart').on('click',  function(event)  {
     var subtotal = 0;
     var name = $(this).attr('data-name');
     var price = $(this).attr('data-price');
+
+
     var image1 = $(this).attr('data-image');
    // console.log(image);
     var action = 'add';
@@ -34,12 +36,12 @@ $('.add-cart').on('click',  function(event)  {
     var data = {
         id: id,
         name: name,
+
         image:'images/'+image1,
         price: price,
         qtt: qtt,
         subtotal: subtotal
     };
-    console.log("data.qtt = " + data.qtt );
     var ext = false;
     if (cart.length > 0) {
         $.each(cart, function(index, val) {
@@ -71,14 +73,18 @@ function print_shopping(data = "") {
     var htmltotal = '';
     var itemc = 0;
     var total = 0.00;
+
     html = '<div class="table-responsive" id="order_table"><table class="table table-bordered table-striped"><tr><th width="40%">Product Name</th><th width="40%">Image</th><th width="10%">Quantity</th><th width="20%">Price</th><th width="15%">SubTotal</th><th width="5%">Action</th></tr>';
+
         if (data != null) {
             $.each(data, function(index, val) {
                 itemc++;
                 total += val.subtotal;
                 html +='<tr id="table-cart">'
                     + '<td>'+val.name+'</td>'
+
                     + '<td> <img src="'+ val.image+'" width=40 height=40></td>'
+
                     + '<td>'+val.qtt+'</td>'
                     + '<td>'+val.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'
                     + '<td>'+(val.subtotal * val.qtt).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</td>'

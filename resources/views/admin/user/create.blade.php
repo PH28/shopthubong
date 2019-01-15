@@ -83,8 +83,6 @@
                             @if($errors->has('phone'))
                                         <p class="text-danger">{{$errors->first('phone')}}</p>
                             @endif
-                            <input type="hidden" name="status" value="2">
-                            <input type="hidden" name="password" value="$2y$10$TKh8H1.">
                              
                             <button type="submit" class="btn btn-default">User Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>

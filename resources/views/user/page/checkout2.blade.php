@@ -4,7 +4,7 @@
          <div class="inner_breadcrumb  ml-4">
             <ul class="short_ls">
                <li>
-                  <a href="index.html">Home</a>
+                  <a href="{{route('home.index')}}">Home</a>
                   <span>/ /</span>
                </li>
                <li>Checkout</li>
@@ -29,16 +29,28 @@
 				<div class="row">
 					<input type="hidden" name="user_id" id="id-add" value="{{$user->id}}">
 					<div class="col-sm-6 form-group">
-						<input type="text" name="yourname"  id="name-add" value="{{$user->fullname}}" class="form-control">
+						<input type="text" name="fullname"  id="name-add" value="{{$user->fullname}}" class="form-control">
+             @if($errors->has('username'))
+                     <p class="text-danger">{{$errors->first('fullname')}}</p>
+            @endif
 					</div>
 					<div class="col-sm-6 form-group">
 						<input type="email" name="email_order"  id="email-add" value="{{$user->email}}" class="form-control">
+            @if($errors->has('username'))
+                     <p class="text-danger">{{$errors->first('email_order')}}</p>
+            @endif
 					</div>				
 					<div class="col-sm-6 form-group">
 						<input type="phone" name="phone_order"  id="phone-add" value="{{$user->phone}}" class="form-control">
+            @if($errors->has('username'))
+                     <p class="text-danger">{{$errors->first('phone_order')}}</p>
+            @endif
 					</div>
 					<div class="col-sm-6 form-group">
 						<input type="text" name="address_order"  id="address-add" value="{{$user->address}}" class="form-control">
+            @if($errors->has('username'))
+                     <p class="text-danger">{{$errors->first('address_order')}}</p>
+            @endif
 					</div>
 				</div>
 			</div>
@@ -47,7 +59,7 @@
 					<span>Thông tin giỏ hàng</span>
 				</div>
 				<div id="table">
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped timetable_sub">
 						<thead>
 							<th>Name</th>
               <th>Image</th>
@@ -133,6 +145,8 @@
 <script type="text/javascript" src="{{ url('user_asset/js/bootstrap.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ url('js/checkout.js') }}"></script>
+
+       <script src="admin_asset/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$.ajaxSetup({
@@ -151,24 +165,30 @@
                 dataType: 'json',
                 data:{
                   id: $('#id-add').val(),
-                  email: $('#email-add').val(),
-                  phone: $('#phone-add').val(),
-                  address: $('#address-add').val(),
+                  email_order: $('#email-add').val(),
+                  phone_order: $('#phone-add').val(),
+                  address_order: $('#address-add').val(),
                   cart : cart,
                 },
                 success: function(data) {
                       if(data.response == 0){
                           cart = [];
                           localStorage.setItem('cart',JSON.stringify(cart));
-                          window.location.href = "{{route('home.index')}}";
-                          alert(data.message);
+                          window.location.href = "{{route('home.message')}}";
                       }
                       if(data.response == 1){
-                         alert(data.message);
+                         toastr.error( data.message)
                       }
                     },
-                error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(jqXHR.responseText);
+                error: function (data) {
+                        var errors = data.responseJSON;
+                        var errorsHtml = '';
+                        console.log(data.responseJSON);
+                        $.each(errors.errors, function( key, value ) {
+                          errorsHtml =  value[0] ;
+                          toastr.error( errorsHtml)
+                        });
+                        console.log( errorsHtml);
                     }
               })
             });

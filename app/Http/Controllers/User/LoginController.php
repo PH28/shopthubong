@@ -47,13 +47,13 @@ class LoginController extends Controller
 
             {  
                
-        		return redirect()->route('home.index')->with('fail', 'Vui lòng xác thực email');;
+        		return redirect()->route('home.index')->with('fail', 'Vui lòng xác thực email');
             }
             if(Auth::user()->status == User::ACTIVE)
 
             {
                 $userLogin = true;
-                return redirect()->route('home.index')->with('success', 'Đăng nhập thành công');;
+                return redirect()->route('home.message')->with('success', 'Đăng nhập thành công');
 
             }
 
@@ -64,7 +64,7 @@ class LoginController extends Controller
     }
 
     public function getRegister(){
-        return view('page.signup');
+        return view('user.page.signup');
     }
 
     public function postRegister(RegisterRequest $request)
@@ -83,8 +83,7 @@ class LoginController extends Controller
             'status' => User::NOTACTIVE
         ];
         User::create($data);
-        $request->session()->flash('success', 'Đăng ký thành công!');
-        return redirect()->route('pageusers.index');
+        return redirect()->route('home.message')->with('success', 'Đăng kí thành công');
     }
 
     public function getVerify($token){
@@ -92,8 +91,7 @@ class LoginController extends Controller
         
         $user->status = User::ACTIVE;
         $user->update();
-
-        return redirect()->route('pageusers.index');
+        return redirect()->route('home.message')->with('success', 'Xác thực thành công');
 
     }
     public function logout()

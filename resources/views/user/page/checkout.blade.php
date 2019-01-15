@@ -4,7 +4,7 @@
          <div class="inner_breadcrumb  ml-4">
             <ul class="short_ls">
                <li>
-                  <a href="index.html">Home</a>
+                  <a href="{{route('home.index')}}">Home</a>
                   <span>/ /</span>
                </li>
                <li>Cart</li>
@@ -17,7 +17,7 @@
                   <div class="privacy about">
                      <h1>List Order:</h1>
    <hr>
-   <table class="table table-bordered table-striped">
+   <table class="table table-bordered table-striped timetable_sub">
       <thead>
          <tr>
             <th>Name</th>
@@ -45,6 +45,7 @@
       <a href="{{route('users.cart', Auth::user()->id)}}" class="btn btn-info">Tiến hành thanh toán</a>
       @else
       Bạn cần phải đăng nhập thì mới thanh toán được đơn hàng
+      <button type="button" data-toggle="modal"   class="btn btn-primary" data-target="#exampleModal"> Đăng nhập</button>
       @endif
    </div>
                   </div>

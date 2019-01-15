@@ -57,6 +57,7 @@ class CategoryController extends Controller
         //
         try {
 
+
              $category=Category::create($request->all());
             return response()->json([
                 'data'=>$category,

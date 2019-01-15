@@ -8,7 +8,7 @@ class Review extends Model
 {
     
       protected $fillable=[
-    	'review_text','status','option_id','user_id', 'product_id'
+    	'review_text','status','user_id', 'product_id'
     ];
     public function product()
     {
