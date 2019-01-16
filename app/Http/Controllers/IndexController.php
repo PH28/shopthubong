@@ -45,7 +45,7 @@ class IndexController extends Controller
     	return view('user.page.product_category', compact('products','other_products'));
     }
 
-    public function cart($id)
+    public function cart()
     {
         $user = Auth::user();
         return view('user.page.checkout2', compact('user'));
@@ -69,7 +69,7 @@ class IndexController extends Controller
         if(!empty($request->cart))
         {
         $data_order = [
-            'user_id' => $request->id,
+            'user_id' => Auth::user()->id,
 
             'date_order' => $dt->toDateString(),
 
@@ -109,12 +109,57 @@ class IndexController extends Controller
     }
 
 
-    public function listOrder($id)
+    public function listOrder(Request $request)
     {   
-        $orders = Order::where('user_id',$id)->orderBy('id','desc')->paginate(10);
-        $ordersc = Order::where('user_id',$id)->get();
-        $count = count($ordersc);
-        return view('user.page.checkorder', compact('orders','count'));
+        if (empty($request->action)) {
+            $orders = Order::where('user_id',Auth::user()->id)->paginate(10);
+            $ordersc = Order::where('user_id',Auth::user()->id)->get();
+            $count = count($ordersc);
+            return view('user.page.checkorder', compact('orders','count'));
+        }
+        switch ($request->action) {
+
+            case 'id':
+                $orders = Order::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->get();
+                $count = count($ordersc);
+                $action = 'id';
+                break;
+            case 'date':
+                $orders = Order::where('user_id',Auth::user()->id)->orderBy('date_order', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->get();
+                $count = count($ordersc);
+                $action = 'date';
+                break;
+            case 'total':
+                $orders = Order::where('user_id',Auth::user()->id)->orderBy('total', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->get();
+                $count = count($ordersc);
+                $action = 'total';
+                break;
+            case 'approve':
+                $orders = Order::where('user_id',Auth::user()->id)->where('status',Order::APPROVE)->orderBy('date_order', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->where('status',Order::APPROVE)->get();
+                $count = count($ordersc);
+                $action = 'approve';
+                break;
+            case 'unapprove':
+                $orders = Order::where('user_id',Auth::user()->id)->where('status',Order::UNAPPROVE)->orderBy('date_order', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->where('status',Order::UNAPPROVE)->get();
+                $count = count($ordersc);
+                $action= 'unapprove';
+                break;
+            case 'cancel':
+                $orders = Order::where('user_id',Auth::user()->id)->where('status',Order::CANCEL)->orderBy('date_order', 'desc')->paginate(10);
+                $ordersc = Order::where('user_id',Auth::user()->id)->where('status',Order::CANCEL)->get();
+                $count = count($ordersc);
+                $action='cancel';
+                break;
+            default:
+                # code...
+                break;
+        }
+        return view('user.page.checkorder', compact('orders','action','count'));
     }
     public function searchProduct(Request $request)
     {

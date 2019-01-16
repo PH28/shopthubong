@@ -10,7 +10,7 @@
                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Aenean commodo ligula eget dolorL orem ipsum dolor sit amet eget dolor</p>
                               </div>
                               <div class="outs_more-buttn">
-                                 <a href="about.html">Read More</a>
+                                 <a href="{{route('home.shop')}}">Shop Now</a>
                               </div>
                            </div>
                         </div>
@@ -25,7 +25,7 @@
                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Aenean commodo ligula eget dolorL orem ipsum dolor sit amet eget dolor</p>
                               </div>
                               <div class="outs_more-buttn">
-                                 <a href="about.html">Read More</a>
+                                 <a href="{{route('home.shop')}}">Shop Now</a>
                               </div>
                            </div>
                         </div>
@@ -40,7 +40,7 @@
                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Aenean commodo ligula eget dolorL orem ipsum dolor sit amet eget dolor</p>
                               </div>
                               <div class="outs_more-buttn">
-                                 <a href="about.html">Read More</a>
+                                 <a href="{{route('home.shop')}}">Shop Now</a>
                               </div>
                            </div>
                         </div>

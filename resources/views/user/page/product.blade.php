@@ -5,7 +5,7 @@
             <ul class="short_ls">
                <li>
                   <a href="{{route('home.index')}}">Home</a>
-                  <span>/ /</span>
+                  <span>/ <a href="{{route('home.shop')}}">Shop</a> /</span>
                </li>
                <li>Single Page</li>
             </ul>
