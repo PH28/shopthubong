@@ -83,6 +83,6 @@ class ReviewController extends Controller
         //
         $review=Review::find($id);
         $review->delete();
-        return redirect()->route('products.index');
+         return back()->with('success', ('Xóa bình luận thành công!'));
     }
 }

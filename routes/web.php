@@ -58,6 +58,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('users/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
 		Route::put('users/{user}', 'Admin\UserController@update')->name('users.update');
 		Route::delete('users/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
+		Route::get('users/{id}/userdetail', 'Admin\UserController@userDetail')->name('users.userdetail');
 	
 });
 

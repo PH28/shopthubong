@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">{{$cates->name}}
-                            <small>List</small>
+                        <h1 class="page-header">Danh mục: {{$cates->name}}
                         
                         </h1>
                     </div>
@@ -32,16 +31,18 @@
                         </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-12" style="margin-bottom: 10px">
-                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Add Category</a>
+                        @if($cates->parent_id == 0)
+                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Thêm danh mục</a>
+                        @endif
                     </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Tên danh mục</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,17 +72,17 @@
                     <form action="" data-url="{{route('categories.store')}}" id="form-add" method="POST" role="form">
                         @csrf
                         <div class="modal-header">
-                            <h4 class="modal-title">Add Category</h4>
+                            <h4 class="modal-title">Thêm danh mục</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
 
                             <div class="form-group "  >
-                                        <label >Category Parent: {{$cates->name}}</label>
+                                        <label >Danh mục cha: {{$cates->name}}</label>
                                         <input class="form-control" type="hidden" id="parent-add"  value="{{$cates->id}}" />
                                     </div>
                                     <div class="form-group required">
-                                        <label for="">Category Name </label>
+                                        <label for="">Tên danh mục </label>
                                         <input class="form-control" id="name-add" placeholder="Please Enter Category Name" " />
                                         @if($errors->has('name'))
                                                 <p class="text-danger">{{$errors->first('name')}}</p>
@@ -89,7 +90,7 @@
 
                                     </div>
                                     <div class="form-group required">
-                                        <label>Category Description </label>
+                                        <label>Mô tả </label>
                                         <textarea class="form-control" rows="3" id="description-add" value=""></textarea>
                                         @if($errors->has('description'))
                                                 <p class="text-danger">{{$errors->first('description')}}</p>

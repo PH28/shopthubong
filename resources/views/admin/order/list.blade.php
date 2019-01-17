@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Order
-                            <small>List</small>
+                        <h1 class="page-header">Danh sách đơn hàng
                         </h1>
                     </div>
                     <div class="col-lg-7" >
@@ -35,13 +34,13 @@
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>Customer Name</th>
-                                <th>Phone Order</th>
-                                <th>Date Order</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Detail</th>
-                                <th>Edit</th>
+                                <th>Khách hàng</th>
+                                <th>SĐT</th>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Chi tiết</th>
+                                <th>Sửa</th>
                                 
                             </tr>
                         </thead>
@@ -53,25 +52,24 @@
                                 <td>{{$item->phone_order}}</td>
                                 <td>{{$item->date_order}}</td>
                                 <td>{{number_format($item->total)}} VND</td>
-                                <td><div class="dropdown">
+                                <td align="center"><div class="dropdown">
                                  @if($item->status == 0)
-                                <button class="btn btn-flat btn-info  dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:100px" disabled>
-                                      Approve                       
-                                </button>
+                                <span class="btn btn-flat btn-info " style="width:120px" >
+                                      Đã duyệt                     
+                                </span>
                                 @elseif($item->status == 1)
-                                <button class="btn btn-flat btn-info btn-danger dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:100px">
-                                      Unapprove
-                                    <span class="caret"></span>
+                                <button class="btn btn-flat btn-info btn-danger dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:120px">
+                                      Đang chờ duyệt
                                 </button>
                                 @else
-                                <button class="btn btn-flat btn-info btn-warning dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="width:100px" disabled>
-                                      Cancel
-                                </button>
+                                <span class="btn btn-flat btn-info btn-warning" style="width:120px">
+                                      Đã hủy
+                                </span>
                                 @endif
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                    @if($item->status == 1)
-                                   <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'0']) }}">Approve</a></li>
-                                   <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'2']) }}">Cancel</a></li>
+                                   <li role="presentation"><a role="menuitem" onclick="return confirm('Bạn muốn duyệt đơn hàng này ?');" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'0']) }}">Duyệt đơn hàng</a></li>
+                                   <li role="presentation"><a role="menuitem" onclick="return confirm('Bạn muốn hủy đơn hàng này ?');" tabindex="-1" href="{{ route('orders.status',['id'=>$item->id,'status'=>'2']) }}">Hủy đơn hàng</a></li>
                                    @endif
                                 </ul>
                                 </div></td>

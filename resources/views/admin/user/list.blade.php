@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">User
-                            <small>List</small>
+                        <h1 class="page-header">Danh sách người dùng
                         </h1>
                     </div>
                     <div class="col-lg-12">
@@ -31,20 +30,20 @@
                      </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-12" style="margin-bottom: 10px">
-                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Add User</a>
+                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Thêm người dùng</a>
                     </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>User Name</th>
-                                <th>Full Name</th>
-                                <th>Gender</th>
-                                <th>Role</th>
+                                <th>Tên người dùng</th>
+                                <th>Giới tính</th>
+                                <th>Quyền hạn</th>
                                 <th>Email</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Trạng thái</th>
+                                <th>Chi tiết</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +52,6 @@
                             <tr class="odd gradeX" >
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->username}}</td>
-                                <td>{{$item->fullname}}</td>
                                 @if($item->gender == 0)
                                 <td>Khác</td>
                                 @elseif($item->gender == 1)
@@ -65,10 +63,12 @@
                                 <td>{{$item->email}}</td>
                                 
                                 @if($item->status == 1)
-                                <td>Active</td>
+                                <td>Đã xác thực</td>
                                 @else
-                                <td>Not active</td>
+                                <td>Chưa xác thực</td>
                                 @endif
+                                <td align="center"><a href="{{route('users.userdetail',$item->id)}}"><button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye">
+                                </i></button></a></td>
                                 <td align="center"><a href="{{route('users.edit',$item->id)}}""><button type="button" class="btn btn-success btn-circle"><i class="fa fa-pencil "></i>
                                 </button></a></td>
                                 <td align="center"><button  data-id="{{$item->id}}" type="button" class="btn btn-danger btn-circle btn-delete fa fa-trash-o "></button></td>
@@ -122,8 +122,8 @@
                     if (data.data.gender == 0) {gender = "Khác";};
                     if (data.data.gender == 1) {gender = "Nam";};
                     if (data.data.gender == 2) {gender = "Nữ";};
-                    if (data.data.status == 1) {status = "Active";};
-                    if (data.data.status == 2) {status = "Not Active";};
+                    if (data.data.status == 1) {status = "Đã xác thực";};
+                    if (data.data.status == 2) {status = "Chưa xác thực";};
                     $('#modal-add').modal('hide');
                     $(".modal-body input").val("");
                     $(".modal-body textarea").val("");
@@ -132,11 +132,11 @@
                            '<tr class="odd gradeX" >' +
                                 '<td>' + data.data.id + '</td>' +
                                 '<td >' + data.data.username + '</td>' +
-                                '<td >' + data.data.fullname + '</td>' +
                                 '<td >' + gender + '</td>' +
                                 '<td >' + data.role + '</td>' +
                                 '<td >' + data.data.email + '</td>' +
                                 '<td >' + status + '</td>' +
+                                '<td align="center">'+ "<a href=\""+"admin/users/"+data.data.id+"/userdetail"+"\" >"+'<button type="button" class="btn btn-info btn-circle">'+'<i class="fa fa-eye">'+
                                 '<td align="center">'+ "<a href=\""+"admin/users/"+data.data.id+"/edit"+"\" >"+'<button type="button" class="btn btn-success btn-circle">'+'<i class="fa fa-pencil ">'+'</i>'+
                                 '</button>'+'</a>'+'</td>'+
                                 '<td align="center">' + "<button  data-id=\""+data.data.id+"\"  type=\"button\" class=\"btn btn-danger btn-circle btn-delete fa fa-trash-o \">" + '</button>' + '</td>' +

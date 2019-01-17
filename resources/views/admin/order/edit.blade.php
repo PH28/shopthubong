@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Order No.{{$order->id}} of customer {{$order->user->fullname}}                            <small>Edit</small>
+                        <h1 class="page-header">Cập nhật thông tin đơn hàng {{$order->id}} 
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -32,18 +32,18 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label>Phone Number</label>
+                                <label>Số điện thoại</label>
                                 <input class="form-control" name="phone_order" value="{{$order->phone_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Address Order</label>
+                                <label>Địa chỉ giao hàng</label>
                                 <input class="form-control" name="address_order" value="{{$order->address_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Email Order</label>
+                                <label>Email đặt hàng</label>
                                 <input class="form-control" name="email_order" value="{{$order->email_order}}" />
                             </div>
-                            <button type="submit" class="btn btn-default">Order Edit</button>
+                            <button type="submit" class="btn btn-default">Cập nhật</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>

@@ -4,9 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12"> 
-                        <h1 class="page-header"> Order No.{{$order->id}} 
-                            <small>Detail</small>
-                            <small><i class="fa fa-pencil fa-fw"></i> <a href="{{route('orders.edit',$order->id)}}">Edit</a></small>
+                        <h1 class="page-header">Mã đơn hàng: {{$order->id}} 
 
                         </h1>
                         
@@ -33,41 +31,50 @@
                                 </ul>
                             </div>
                         @endif
+                        <div class="dropdown">
+                                 @if($order->status == 0)
+                                <span class="btn btn-flat btn-info " style="margin-bottom: 10px" >
+                                      Đơn hàng đã được duyệt                    
+                                </span>
+                                @elseif($order->status == 1)
+                                <button class="btn btn-flat btn-info btn-danger dropdown-toggle" type="button" id="dropdownMenu1" name="action" data-toggle="dropdown" style="margin-bottom: 10px ">
+                                      Đơn hàng đang chờ duyệt
+                                </button>
+                                @else
+                                <span class="btn btn-flat btn-info btn-warning" style="margin-bottom: 10px">
+                                      Đơn hàng đã được hủy
+                                </span>
+                                @endif
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                   @if($order->status == 1)
+                                   <li role="presentation"><a role="menuitem" onclick="return confirm('Bạn muốn duyệt đơn hàng này ?');" tabindex="-1" href="{{ route('orders.status',['id'=>$order->id,'status'=>'0']) }}">Duyệt đơn hàng</a></li>
+                                   <li role="presentation"><a role="menuitem" onclick="return confirm('Bạn muốn hủy đơn hàng này ?');" tabindex="-1" href="{{ route('orders.status',['id'=>$order->id,'status'=>'2']) }}">Hủy đơn hàng</a></li>
+                                   @endif
+                                </ul>
+                                </div>
                      	<div class="form-group" >
-                                <label>Customer Name</label>
+                                <label>Tên khách hàng </label>
                                 <input class="form-control" name="name" value="{{$order->user->fullname}}" />
                         </div>
                             <div class="form-group">
-                                <label>Phone Number</label>
+                                <label>SĐT </label>
                                 <input class="form-control" name="name" value="{{$order->phone_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Address Order</label>
+                                <label>Địa chỉ </label>
                                 <input class="form-control" name="quantity" value="{{$order->address_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Email Order</label>
+                                <label>Email </label>
                                 <input class="form-control" name="quantity" value="{{$order->email_order}}" />
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                 <select class="form-control" name="parent_id">
-                                  @if($order->status == 0 )
-                                  <option  selected="seleted" disabled >Approve</option>
-                                  @else
-                                  <option  selected="seleted" disabled >Unapprove</option>
-                                  @endif
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Payment</label>
-                                 <select class="form-control" name="parent_id">
-                                  @if($order->payment == 1 )
-                                  <option  selected="seleted" disabled >ATM</option>
-                                  @else
-                                  <option  selected="seleted" disabled >CoD</option>
-                                  @endif
-                                </select>
+                                <label>Phương thức thanh toán: </label>
+                                 @if($order->payment == 1 )
+                                 <input class="form-control" name="fullname"  value="Ví điện tử" >
+                                @else
+                                 <input class="form-control" name="fullname"  value="CoD" >
+                                @endif
                             </div>
                             
                             
@@ -79,8 +86,7 @@
 
             <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header">Orderdetail of Order No.{{$order->id}} 
-                            <small>List</small>
+                        <h4 class="page-header">Các sản phẩm đang được đặt: 
                         </h4>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -88,10 +94,10 @@
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
                                
                                 
                             </tr>
@@ -114,7 +120,7 @@
                             </tr>
                             @endforeach
                             <tr >
-                                <th style="border-right: none">Total</th>
+                                <th style="border-right: none">Tổng tiền: </th>
                                 <td style="border-right: none;"></th>
                                 <th style="border-right: none"></th>
                                 <th></th>

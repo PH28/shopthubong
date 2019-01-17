@@ -5,8 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>List</small>
+                        <h1 class="page-header">Danh sách danh mục
                         </h1>
                     </div>
                     <div class="col-lg-7" >
@@ -33,17 +32,17 @@
                     <!-- /.col-lg-12 -->
                     
                     <div class="col-lg-12" style="margin-bottom: 10px">
-                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Add Category</a>
+                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Thêm danh mục</a>
                     </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Sub category</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Tên</th>
+                                <th>Danh mục con</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
                                 
                             </tr>
                         </thead>

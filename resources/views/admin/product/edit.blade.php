@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">{{$product->name}} 
-                            <small>Edit</small>
+                        <h1 class="page-header">Cập nhật sản phẩm: {{$product->name}} 
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -33,7 +32,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group" >
-                                <label>Category </label>
+                                <label>Danh mục </label>
                                 <select class="form-control" name="category_id">
                                 @foreach ($categoryIds as $key => $value)
                                    @if($key == $product->category_id )
@@ -45,44 +44,44 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Product Name</label>
+                                <label>Tên sản phẩm</label>
                                 <input class="form-control" name="name" value="{{$product->name}}" />
                             </div>
                             <div class="form-group">
-                                <label>Product Quantity</label>
+                                <label>Số lượng</label>
                                 <input class="form-control" name="quantity" value="{{$product->quantity}}" />
                             </div>
                             <div class="form-group">
-                                <label>Product Price</label>
+                                <label>Giá</label>
                                 <input class="form-control" name="price" value="{{$product->price}}  "/>
                             </div>
                             <div class="form-group">
-                                <label>Product Description</label>
+                                <label>Mô tả</label>
                                 <textarea class="form-control" rows="3" name="description" >{{$product->description}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label>Product Kind</label>
+                                <label>Loại</label>
                                 @if($product->kind == 1)
                                 <label class="radio-inline">
-                                    <input name="kind" value="1" checked="" type="radio">New
+                                    <input name="kind" value="1" checked="" type="radio">Mới
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="kind" value="0" type="radio">Old
+                                    <input name="kind" value="0" type="radio">Cũ
                                 </label>
                                 @else
                                 <label class="radio-inline">
-                                    <input name="kind" value="1"  type="radio">New
+                                    <input name="kind" value="1"  type="radio">Mới
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="kind" value="0" checked="" type="radio">Old
+                                    <input name="kind" value="0" checked="" type="radio">Cũ
                                 </label>
                                 @endif
                                 <div class="form-group">
-                                            <label>Image</label>
+                                            <label>Hình ảnh</label>
                                             <input type="file"  name="images[]" multiple>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-default">Product Edit</button>
+                            <button type="submit" class="btn btn-default">Cập nhật</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>

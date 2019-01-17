@@ -30,7 +30,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">Đăng nhập</h3>
                     </div>
                     <div class="panel-body">
                          @if(session('success'))
@@ -56,11 +56,11 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Đăng nhập</button>
                             </fieldset>
                         </form>
                         <a class="btn btn-link" href="{{route('password.request')}}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('Quên mật khẩu ?') }}
                                 </a>
                     </div>
                 </div>

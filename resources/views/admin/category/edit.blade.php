@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>Edit</small>
+                        <h1 class="page-header">Cập nhập danh mục: {{$category->name}}
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -34,7 +33,7 @@
                             @method('PUT')
                             <div class="form-group" >
                                 @if($category->parent_id != 0 )
-                                <label>Category Parent</label>
+                                <label>Danh mục cha</label>
                                 <select class="form-control" name="parent_id">
                                 
                                 @foreach ($categoryIds as $key => $value)
@@ -50,15 +49,15 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Category Name</label>
+                                <label>Tên danh mục</label>
                                 <input class="form-control" name="name" value="{{$category->name}}" />
                             </div>
            
                             <div class="form-group">
-                                <label>Category Description</label>
+                                <label>Mô tả</label>
                                 <textarea class="form-control" rows="3" name="description">{{$category->description}}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-default">Category Edit</button>
+                            <button type="submit" class="btn btn-default">Cập nhật</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>

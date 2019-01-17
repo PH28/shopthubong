@@ -4,8 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Product
-                            <small>List</small>
+                        <h1 class="page-header">Danh sách sản phẩm
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -31,20 +30,20 @@
                         @endif
                         </div>
                     <div class="col-lg-12" style="margin-bottom: 10px">
-                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Add Product</a>
+                        <a href="#" class="btn btn-success btn-add" data-target="#modal-add" data-toggle="modal">Thêm sản phẩm</a>
                     </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Kind</th>
-                                <th>Detail</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Loại</th>
+                                <th>Chi tiết</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
                                 
                             </tr>
                         </thead>
@@ -63,9 +62,9 @@
                                 <td>{{$item->quantity}}</td>
                                 <td>{{number_format($item->price)}} VND</td>
                                 @if($item->kind == 1)
-                                <td>New</td>
+                                <td>Mới</td>
                                 @else
-                                <td>Old</td>
+                                <td>Cũ</td>
                                 @endif
                                 <td align="center"><a href="{{route('products.detail',$item->id)}}"><button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye">
                                 </i></button></a></td>
