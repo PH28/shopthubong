@@ -188,7 +188,8 @@ class ProductController extends Controller
         try {
             if($product->orders_count==0)
              {
-
+                    $product->reviews()->delete();
+                    $product->images()->delete();
                     $product->delete();
                       return response()->json([
                         'response'=>'0',

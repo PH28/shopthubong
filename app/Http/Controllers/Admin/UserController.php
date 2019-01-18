@@ -116,6 +116,7 @@ class UserController extends Controller
              if($user->orders_count== 0)
 
                {
+                    $user->reviews()->delete();
                     $user->delete();
                     return response()->json([
                     'response'=>'0',
