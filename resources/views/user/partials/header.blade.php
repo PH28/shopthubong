@@ -89,7 +89,10 @@
                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                   <ul class="navbar-nav ">
                      <li class="nav-item active">
-                        <a class="nav-link" href="{{route('home.index')}}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('home.index')}}">Trang chủ <span class="sr-only">(current)</span></a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{route('home.about')}}" class="nav-link">Về Chúng Tôi</a>
                      </li>
 
                      <li class="nav-item">

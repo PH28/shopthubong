@@ -80,6 +80,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('user/register', 'User\LoginController@getRegister')->name('users.showregister');
 	Route::post('user/register', 'User\LoginController@postRegister')->name('users.register');
 	Route::get('user/verify/{token}', 'User\LoginController@getVerify')->name('users.verify');
+
 	Route::get('logout','User\LoginController@logout')->name('users.logout');
 
 	Route::get('/', 'IndexController@index')->name('home.index');
@@ -92,6 +93,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::get('message/', 'IndexController@message')->name('home.message');
 
 	Route::get('search/', 'IndexController@searchProduct')->name('home.search');
+	Route::get('about/', 'IndexController@getAbout')->name('home.about');
+
 
 
 	Route::group(['prefix'=>'user','middleware'=>['is.login']],function(){

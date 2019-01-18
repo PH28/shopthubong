@@ -171,5 +171,9 @@ class IndexController extends Controller
        //dd($product);
         return view('user.page.search', compact('product','new_products'));
     }
+    public function getAbout()
+    {
+        return view('user.page.about');
+    }
    
 }
