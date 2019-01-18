@@ -32,6 +32,7 @@
                         <form action="{{route('users.update', $user->id)}}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input class="form-control" type="hidden" name="id" value="{{$user->id}}" />
                             <div class="form-group" >
                                 <label>Quyền hạn</label>
                                 <select class="form-control" name="role_id">
@@ -46,11 +47,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Tên người dùng</label>
-                                <input class="form-control" name="username" value="{{$user->username}}"  required />
+                                <input class="form-control" name="username" value="{{$user->username}}"   />
                             </div>
                             <div class="form-group">
                                 <label>Tên đầy đủ</label>
-                                <input class="form-control" name="fullname"  value="{{$user->fullname}}" required/>
+                                <input class="form-control" name="fullname"  value="{{$user->fullname}}" />
                             </div>
                             <div class="form-group">
                                 <label>Giới tính</label>
@@ -75,23 +76,23 @@
 
                             <div class="form-group">
                                 <label>Ngày sinh</label>
-                                <input class="form-control" type="date" name="dob" value="{{$user->dob}}" required />
+                                <input class="form-control" type="date" name="dob" value="{{$user->dob}}"  />
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input class="form-control" name="email"  value="{{$user->email}}" required />
+                                <input class="form-control" name="email"  value="{{$user->email}}"  />
                             </div>
                             <div class="form-group">
                                 <label>Địa chỉ</label>
-                                <input class="form-control" name="address" value="{{$user->address}}" required />
+                                <input class="form-control" name="address" value="{{$user->address}}"  />
                             </div>
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input class="form-control" name="phone"  value="{{$user->phone}}" required/>
+                                <input class="form-control" name="phone"  value="{{$user->phone}}" />
                             </div>
                              
                             <button type="submit" class="btn btn-default">Cập nhật</button>
-                  
+                            <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdateUserRequest;
 class UserController extends Controller
 {
     /**
@@ -79,7 +80,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         try{
               $data = $request->all();
@@ -115,6 +116,7 @@ class UserController extends Controller
              if($user->orders_count== 0)
 
                {
+                    $user->reviews()->delete();
                     $user->delete();
                     return response()->json([
                     'response'=>'0',

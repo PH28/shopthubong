@@ -172,8 +172,10 @@
                 },
                 success: function(data) {
                       if(data.response == 0){
+                          console.log(data.cate);
                           cart = [];
                           localStorage.setItem('cart',JSON.stringify(cart));
+                          localStorage.setItem('checkcart',JSON.stringify(cart));
                           window.location.href = "{{route('home.message')}}";
                       }
                       if(data.response == 1){
