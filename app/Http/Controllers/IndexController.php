@@ -99,6 +99,7 @@ class IndexController extends Controller
         return response()->json([
                 'response' => '0',
                 'data' => $order,
+                'cate' => count($data),
             ],200);
         }
 

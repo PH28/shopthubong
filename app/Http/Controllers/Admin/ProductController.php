@@ -9,6 +9,7 @@ use App\Category;
 use App\Review;
 use App\Image;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Lang;
 class ProductController extends Controller
 {
@@ -135,7 +136,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         //
        

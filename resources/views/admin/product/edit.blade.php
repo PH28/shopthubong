@@ -31,6 +31,7 @@
                         <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input class="form-control" type="hidden" name="id" value="{{$product->id}}" />
                             <div class="form-group" >
                                 <label>Danh mục </label>
                                 <select class="form-control" name="category_id">

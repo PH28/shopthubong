@@ -31,6 +31,7 @@
                         <form action="{{route('categories.update',$category->id)}}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input class="form-control" type="hidden" name="id" value="{{$category->id}}" />
                             <div class="form-group" >
                                 @if($category->parent_id != 0 )
                                 <label>Danh mục cha</label>
