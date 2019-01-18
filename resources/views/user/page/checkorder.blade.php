@@ -5,7 +5,7 @@
                <ul class="short_ls">
                   <li>
                      <a href="{{route('home.index')}}">Home</a>
-                     <span>/ /</span>
+                     <span>/ <a href="{{route('home.shop')}}">Shop</a> /</span>
                   </li>
                   <li>Danh sách đơn hàng</li>
                </ul>
@@ -19,11 +19,75 @@
                   <div class="privacy about">
                      <h3>Danh sách các đơn hàng</h3>
                      <div class="checkout-right">
+                        <h4>Sắp xếp theo</h4>
+                        <form method="GET" action="/user/list-order">
+                        <select class="form-control"  name="action">
+                            @if(!empty($action) )
+                                    @switch($action)
+                                @case('id')
+                                    <option value="id" selected>Mã đơn hàng</option>
+                                     <option value="date">Ngày</option>
+                                     <option value="total">Tổng tiền</option>
+                                     <option value="approve">Đã duyệt</option>
+                                     <option value="unapprove">Đang chờ duyệt</option>
+                                     <option value="cancel">Đã hủy</option>
+                                    @break
+                                @case('date')
+                                    <option value="id">Mã đơn hàng</option>
+                                     <option value="date" selected>Ngày</option>
+                                     <option value="total">Tổng tiền</option>
+                                     <option value="approve">Đã duyệt</option>
+                                     <option value="unapprove">Đang chờ duyệt</option>
+                                     <option value="cancel">Đã hủy</option>      
+                                    @break
+                                @case('total')
+                                    <option value="id">Mã đơn hàng</option>
+                                     <option value="date">Ngày</option>
+                                     <option value="total" selected>Tổng tiền</option>
+                                     <option value="approve">Đã duyệt</option>
+                                     <option value="unapprove">Đang chờ duyệt</option>
+                                     <option value="cancel">Đã hủy</option>  
+                                    @break;
+                                 @case('approve')
+                                    <option value="id">Mã đơn hàng</option>
+                                     <option value="date">Ngày</option>
+                                     <option value="total">Tổng tiền</option>
+                                     <option value="approve" selected>Đã duyệt</option>
+                                     <option value="unapprove">Đang chờ duyệt</option>
+                                     <option value="cancel">Đã hủy</option>  
+                                    @break;
+                                 @case('unapprove')
+                                    <option value="id">Mã đơn hàng</option>
+                                     <option value="date">Ngày</option>
+                                     <option value="total">Tổng tiền</option>
+                                     <option value="approve">Đã duyệt</option>
+                                     <option value="unapprove" selected>Đang chờ duyệt</option>
+                                     <option value="cancel">Đã hủy</option>  
+                                    @break;
+                                 @case('cancel')
+                                    <option value="id">Mã đơn hàng</option>
+                                     <option value="date">Ngày</option>
+                                     <option value="total">Tổng tiền</option>
+                                     <option value="approve">Đã duyệt</option>
+                                     <option value="unapprove">Đang chờ duyệt</option>
+                                     <option value="cancel" selected>Đã hủy</option>  
+                                    @break;
+                              @endswitch
+                           @else
+                           <option value="#" selected>Chọn kiểu sắp xếp</option>
+                            <option value="id">Mã đơn hàng</option>
+                            <option value="date">Ngày</option>
+                            <option value="total">Tổng tiền</option>
+                            <option value="approve">Đã duyệt</option>
+                            <option value="unapprove">Đang chờ duyệt</option>
+                            <option value="cancel">Đã hủy</option>
+                            @endif
+                        </select>
+                        </form>
                         <h4>Bạn có: <span>{{$count}} đơn hàng</span></h4>
                         <table class="timetable_sub">
                            <thead>
                               <tr>
-                                 <th>SL No.</th>
                                  <th>Mã đơn hàng</th>
                                  <th>Ngày đặt hàng</th>
                                  <th>Tổng tiền</th>
@@ -31,11 +95,9 @@
                               </tr>
                            </thead>
                            <tbody>
-                           	@php ($i = 1)
                            	@foreach($orders as $order)
                               <tr class="rem1">
-                                 <td class="invert">{{$i++}}</td>
-                                 <td class="invert-image"><a href="{{route('users.detail',["userid" => Auth::user()->id, "id" => $order->id])}}" style="color: black;text-decoration: underline">{{$order->id}}</a></td>
+                                 <td class="invert-image"><a href="{{route('users.detail', $order->id)}}" style="color: black;text-decoration: underline">{{$order->id}}</a></td>
                                  <td class="invert">{{$order->date_order}}</td>
                                  <td class="invert">{{number_format($order->total)}} VND</td>
                                  <td class="invert">
@@ -58,7 +120,7 @@
                      </div>
                      <center>
                         	<div style="margin-top: 10px; float: right;">
-                        		{!! $orders->links() !!}
+                        		{!! $orders->appends(\Input::except('page'))->render() !!}
                         	</div>                        
                       </center>
                   </div>
@@ -114,6 +176,11 @@
       </script>
       <!-- //here ends scrolling icon -->
       <!--bootstrap working-->
+      <script>
+      $('form select').on('change', function(){
+               $(this).closest('form').submit();
+          });
+      </script>         
 <script type="text/javascript" src="{{ url('user_asset/js/bootstrap.min.js') }}"></script>
 
 @endsection

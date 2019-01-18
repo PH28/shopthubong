@@ -31,21 +31,19 @@ class OrderController extends Controller
         //
     }
 
-    public function orderDetail($userid,$id)
+    public function orderDetail($id)
     {
         //
 
         try {
-            if($userid == Auth::user()->id){
-            $user = User::where('id',$userid)->first();
-            $order=Order::with('orderdetails')->where('user_id',$userid)->where('id',$id)->first() ;
+            $user = User::where('id',Auth::user()->id)->first();
+            $order=Order::with('orderdetails')->where('user_id',Auth::user()->id)->where('id',$id)->first() ;
             $total = 0;
             foreach ($order->orderdetails as $item) {
                 $total += $item->quantity * $item->unit_price;
 
             }
              return view('user.page.orderdetail',compact('order','total','user'));
-            }
            
         } catch (\Exception $e) {
              return back()->with('fail',$e->getMessage());

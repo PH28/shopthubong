@@ -95,6 +95,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function userDetail($id)
+    {
+        //
+        try {
+        $user=User::with('orders')->where('id',$id)->first() ;
+        return view('admin.user.detail',compact('user'));
+        } catch (\Exception $e) {
+             return back()->with('fail',$e->getMessage());
+        }
+    } 
     public function destroy($id)
     {
         $user=User::withCount('orders')->where('id',$id)->first() ;

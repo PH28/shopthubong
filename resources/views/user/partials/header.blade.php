@@ -24,7 +24,7 @@
 
                           <div class="dropbtn "><i class="fa fa-caret-down" style="margin-right: 5px "></i>{{ Auth::user()->fullname }}</div>
                           <div class="dropdown-content">
-                           <a href="{{route('users.listorder', Auth::user()->id)}}"><i class="fa fa-th-list " style="margin-right: 5px "></i>Xem đơn hàng</a>
+                           <a href="{{route('users.listorder')}}"><i class="fa fa-th-list " style="margin-right: 5px "></i>Xem đơn hàng</a>
                             <a href="{{route('users.logout')}}"><i class="fa fa-sign-out-alt" style="margin-right: 5px "></i>Logout</a>
                           </div>
                         </div>

@@ -4,9 +4,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">{{$product->name}}
-                            <small>Detail</small>
-                            <small><i class="fa fa-pencil fa-fw page-header"></i> <a href="{{route('products.edit',$product->id)}}"  >Edit</a></small>
+                        <h1 class="page-header">Tên sản phẩm: {{$product->name}}
+                            <small><i class="fa fa-pencil fa-fw page-header"></i> <a href="{{route('products.edit',$product->id)}}"  >Chỉnh sửa</a></small>
 
                         </h1>
                         
@@ -34,45 +33,45 @@
                             </div>
                         @endif
                         <div class="form-group" >
-                                <label>Category Name</label>
+                                <label>Danh mục</label>
                                 <input class="form-control" name="name" value="{{$product->category->name}}" />
                         </div>
                             <div class="form-group">
-                                <label>Product Name</label>
+                                <label>Tên sản phẩm</label>
                                 <input class="form-control" name="name" value="{{$product->name}}" />
                             </div>
                             <div class="form-group">
-                                <label>Product Quantity</label>
+                                <label>Số lượng</label>
                                 <input class="form-control" name="quantity" value="{{$product->quantity}}" />
                             </div>
                             <div class="form-group">
-                                <label>Product Price</label>
+                                <label>Giá</label>
                                 <input class="form-control" name="price" value="{{number_format($product->price)}} VND "/>
                             </div>
                             <div class="form-group">
-                                <label>Product Description</label>
+                                <label>Mô tả</label>
                                 <textarea class="form-control" rows="3" name="description" >{{$product->description}}</textarea>
                             </div>
                             <div class="form-group">
-                            <label>Product Kind</label>
+                            <label>Loại</label>
                                 @if($product->kind == 1)
                                 <label class="radio-inline">
-                                    <input name="kind" value="1" checked="" type="radio">New
+                                    <input name="kind" value="1" checked="" type="radio">Mới
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="kind" value="0" type="radio" disabled="">Old
+                                    <input name="kind" value="0" type="radio" disabled="">Cũ
                                 </label>
                                 @else
                                 <label class="radio-inline">
-                                    <input name="kind" value="1"  type="radio" disabled="">New
+                                    <input name="kind" value="1"  type="radio" disabled="">Mới
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="kind" value="0" checked="" type="radio">Old
+                                    <input name="kind" value="0" checked="" type="radio">Cũ
                                 </label>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Image</label>
+                                <label>Hình ảnh</label>
                             </div>
                             <div class="form-group">
                                 @foreach($product->images as $item)
@@ -86,8 +85,7 @@
 
             <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="page-header">Review of {{$product->name}} 
-                            <small>List</small>
+                        <h4 class="page-header">Bình luận: {{$product->name}} 
                         </h4>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -95,10 +93,10 @@
                         <thead>
                             <tr >
                                 <th>ID</th>
-                                <th>User Name</th>
-                                <th>Review Content</th>
-                                <th>Status</th>
-                                <th>Delete</th>
+                                <th>Tên người dùng</th>
+                                <th>Nội dung</th>
+                                <th>Trạng thái</th>
+                                <th>Xóa</th>
                                 
                             </tr>
                         </thead>

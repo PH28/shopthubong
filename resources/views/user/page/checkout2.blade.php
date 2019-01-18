@@ -5,7 +5,7 @@
             <ul class="short_ls">
                <li>
                   <a href="{{route('home.index')}}">Home</a>
-                  <span>/ /</span>
+                  <span>/ <a href="{{route('home.shop')}}">Shop</a> /</span>
                </li>
                <li>Checkout</li>
             </ul>
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 			<div class="text-center">
-				<input type="submit" value="Đồng ý đặt hàng" class="btn btn-primary btn-submit" id="submit">
+				<input type="submit" onclick="return confirm('Bạn muốn đặt hàng những sản phẩm này ?');" class="btn btn-flat btn-info btn-warning " value="Đồng ý đặt hàng" class="btn btn-primary btn-submit" id="submit">
 			</div>			
 		</form>
 	</div>

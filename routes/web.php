@@ -58,6 +58,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 		Route::get('users/{user}/edit', 'Admin\UserController@edit')->name('users.edit');
 		Route::put('users/{user}', 'Admin\UserController@update')->name('users.update');
 		Route::delete('users/{user}/delete', 'Admin\UserController@destroy')->name('users.destroy');
+		Route::get('users/{id}/userdetail', 'Admin\UserController@userDetail')->name('users.userdetail');
 	
 });
 
@@ -78,7 +79,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 	Route::post('user/login', 'User\LoginController@postLogin')->name('users.login');
 	Route::get('user/register', 'User\LoginController@getRegister')->name('users.showregister');
 	Route::post('user/register', 'User\LoginController@postRegister')->name('users.register');
-	Route::get('user/{token}', 'User\LoginController@getVerify')->name('users.verify');
+	Route::get('user/verify/{token}', 'User\LoginController@getVerify')->name('users.verify');
 	Route::get('logout','User\LoginController@logout')->name('users.logout');
 
 	Route::get('/', 'IndexController@index')->name('home.index');
@@ -94,10 +95,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','is.admin']],function(){
 
 
 	Route::group(['prefix'=>'user','middleware'=>['is.login']],function(){
-		Route::get('{id}/list-order/', 'IndexController@listOrder')->name('users.listorder');
-		Route::get('{id}/cart/', 'IndexController@cart')->name('users.cart');
+		Route::get('list-order', 'IndexController@listOrder')->name('users.listorder');
+		Route::get('cart/', 'IndexController@cart')->name('users.cart');
 		Route::post('order', 'IndexController@orderdetail')->name('users.orderdetail');	
-		Route::get('{userid}/list-order/{id}/order-detail/', 'OrderController@orderDetail')->name('users.detail');
+		Route::get('list-order/{id}/order-detail/', 'OrderController@orderDetail')->name('users.detail');
 		Route::post('product/{id}/review', 'ReviewController@store')->name('users.review');
 		Route::post('{userid}/list-order/{id}/action/', 'OrderController@updateStatus')->name('users.cancel');
 	});

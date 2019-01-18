@@ -5,7 +5,7 @@
             <ul class="short_ls">
                <li>
                   <a href="{{route('home.index')}}">Home</a>
-                  <span>/ /</span>
+                  <span>/ <a href="{{route('home.shop')}}">Shop</a> /</span>
                </li>
                <li>Cart</li>
             </ul>
@@ -42,7 +42,7 @@
    <div id="checkout">
       <br>
       @if(Auth::check()) 
-      <a href="{{route('users.cart', Auth::user()->id)}}" class="btn btn-info">Tiến hành thanh toán</a>
+      <a href="{{route('users.cart')}}" class="btn btn-info">Tiến hành thanh toán</a>
       @else
       Bạn cần phải đăng nhập thì mới thanh toán được đơn hàng
       <button type="button" data-toggle="modal"   class="btn btn-primary" data-target="#exampleModal"> Đăng nhập</button>

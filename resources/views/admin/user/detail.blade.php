@@ -4,12 +4,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Cập nhật người dùng: {{$user->fullname}}
+                        <h1 class="page-header">Tên người dùng: {{$user->fullname}}
                         </h1>
                     </div>
                   
                     <!-- /.col-lg-12 -->
-                    <div class="col-lg-7" style="padding-bottom:120px">
+                    <div class="col-lg-7" >
                      @if(session('success'))
                         <div class="alert alert-success">     
                             {{session('success')}}
@@ -34,15 +34,7 @@
                             @method('PUT')
                             <div class="form-group" >
                                 <label>Quyền hạn</label>
-                                <select class="form-control" name="role_id">
-                                @foreach ($role_id as $key => $value)                            
-                                  @if($key == $user->role_id )
-                                  <option value="{{$key}}" selected="seleted">{{$value}}</option>
-                                  @else
-                                  <option value="{{$key}}" >{{$value}}</option>
-                                  @endif
-                                @endforeach
-                                </select>
+                               <input class="form-control" name="username" value="{{$user->role->name}}"  required />
                             </div>
                             <div class="form-group">
                                 <label>Tên người dùng</label>
@@ -54,23 +46,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Giới tính</label>
-                                <select class="form-control" name="gender">
                                     @if($user->gender == 0)
-                                    <td>Khác</td>
-                                    <option value="1"> Nam  </option>
-                                    <option value="2"> Nữ</option>
-                                    <option value="0" selected> Khác</option>
+                                    <input class="form-control" name="fullname"  value="Khác" >
                                     @elseif($user->gender == 1)
-                                    <option value="1" selected> Nam  </option>
-                                    <option value="2"> Nữ</option>
-                                    <option value="0" > Khác</option>
+                                    <input class="form-control" name="fullname"  value="Nam" >
                                     @else
-                                    <option value="1" > Nam  </option>
-                                    <option value="2" selected> Nữ</option>
-                                    <option value="0" > Khác</option>
+                                    <input class="form-control" name="fullname"  value="Nữ" >
                                     @endif
                                       
-                                </select>
                             </div>
 
                             <div class="form-group">
@@ -89,11 +72,63 @@
                                 <label>Số điện thoại</label>
                                 <input class="form-control" name="phone"  value="{{$user->phone}}" required/>
                             </div>
-                             
-                            <button type="submit" class="btn btn-default">Cập nhật</button>
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                	@if($user->status == 1)
+	                                <input class="form-control" name="fullname"  value="Đã xác thực" >
+	                                @else
+	                                <input class="form-control" name="fullname"  value="Chưa xác thực" >
+	                                @endif
+                            </div>
                   
                         <form>
                     </div>
+                   	<div class="col-lg-12">
+                   		<h4 class="page-header">Danh sách đơn hàng của {{$user->fullname}}
+                        </h4>
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        
+                        <thead>
+                            <tr >
+                                <th>ID</th>
+                                <th>SĐT đặt</th>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Chi tiết</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($user->orders as $item)
+                            <tr class="odd gradeX" >
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->phone_order}}</td>
+                                <td>{{$item->date_order}}</td>
+                                <td>{{number_format($item->total)}} VND</td>
+                                <td align="center"><div class="dropdown">
+                                 @if($item->status == 0)
+                                <span class="btn btn-flat btn-info " style="width:120px" >
+                                      Đã duyệt                     
+                                </span>
+                                @elseif($item->status == 1)
+                                <span class="btn btn-flat btn-info btn-danger"  style="width:120px">
+                                      Đang chờ duyệt
+                                </span>
+                                @else
+                                <span class="btn btn-flat btn-info btn-warning" style="width:120px">
+                                      Đã hủy
+                                </span>
+                                @endif
+                                </div></td>
+                                <td align="center"><a href="{{route('orders.orderdetail',$item->id)}}"><button type="button" class="btn btn-info btn-circle"><i class="fa fa-eye">
+                                </i></button></a></td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 </div>
                 <!-- /.row -->
             </div>
